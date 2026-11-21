@@ -1,0 +1,13 @@
+# Keep Graphify on high-signal sources. Adjust after the monorepo lands.
+**/node_modules/**
+**/dist/**
+**/build/**
+**/.next/**
+**/coverage/**
+**/playwright-report/**
+**/test-results/**
+**/graphify-out/cache/**
+**/*.lock
+**/pnpm-lock.yaml
+**/*.min.js
+**/*.map
