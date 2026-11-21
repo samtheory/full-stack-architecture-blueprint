@@ -75,27 +75,29 @@ Suggested order is also listed in the blueprint under **Learning path**.
 
 ## Graphify (less token loss)
 
-This Docs tree is shaped for [Graphify](https://docs.graphify.com/open-source/overview): query the knowledge graph instead of re-reading every Markdown file.
+Local Graphify CLI is set up for this repo. Query the graph instead of re-reading every Markdown file.
 
-**Needs verification on your machine:** package name `graphifyy` on PyPI, `graphify install` platforms, and Cursor skill registration. Follow current Graphify docs if any command differs.
+**Status:** `graphifyy` 0.9.114 installed · Cursor rule at `.cursor/rules/graphify.mdc` · initial graph in `graphify-out/` (158 nodes from Docs). Details: [Docs/.brain/GRAPHIFY-SETUP.md](Docs/.brain/GRAPHIFY-SETUP.md).
 
-```bash
-# Install CLI (verify against https://docs.graphify.com/open-source/quickstart)
-uv tool install graphifyy
-# or: pipx install graphifyy
+```powershell
+# PATH for new PowerShell sessions
+$env:Path = "$env:USERPROFILE\.local\bin;$env:Path"
 
-graphify install
+graphify query "Dependency Inversion Hono"
+graphify explain "Vertical Slice"
+graphify god-nodes --top 8
 
-# From repo root, in your coding agent:
-# /graphify .
-
-# Useful follow-ups:
-# /graphify query "how does the API talk to the database adapters"
-# /graphify path "Dependency Inversion" "Hono backend"
-# /graphify explain "Database Adapter"
+# Open graphify-out/graph.html in a browser
+# After Docs change: /graphify . --update  (in Cursor)
+# After code lands:  graphify update .
 ```
 
-Index of concepts and explicit links lives in `Docs/.brain/` so Graphify (and humans) can traverse hubs without loading the full tree.
+Fresh machine install (if needed):
+
+```powershell
+uv tool install graphifyy
+graphify install --project --platform cursor
+```
 
 ## How to run (planned)
 

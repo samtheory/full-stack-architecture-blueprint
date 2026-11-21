@@ -1,6 +1,6 @@
 # 16 — CI and Graphify
 
-Status: not started
+Status: partial — Graphify CLI + Cursor rule + initial `graphify-out/` graph done; CI workflow still not started
 
 ## Goal
 

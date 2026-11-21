@@ -14,6 +14,7 @@ WHY: Agents and humans should enter through a small index instead of loading eve
 | Full project blueprint | [../tech-space/project-blueprint.md](../tech-space/project-blueprint.md) |
 | Step-by-step build | [../walkthrough/README.md](../walkthrough/README.md) |
 | First build step (monorepo) | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
+| Graphify setup status | [GRAPHIFY-SETUP.md](GRAPHIFY-SETUP.md) |
 
 ## Docs map (communities)
 
