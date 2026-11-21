@@ -10,6 +10,7 @@ These docs are written so a human can learn in order, and so [Graphify](https://
 |--------|---------|
 | [`.brain/`](.brain/INDEX.md) | Indexing brain: concept registry, explicit links, glossary, query recipes |
 | [`tech-space/`](tech-space/README.md) | Project architecture, technical design, ADRs, blueprint |
+| [`walkthrough/`](walkthrough/README.md) | Step-by-step build manual (one folder per step, commands + why) |
 | [`knowledge/`](knowledge/README.md) | Explain principles, styles, patterns — with good/bad practice and when-to-use |
 | [`examples/`](examples/README.md) | Cross-cutting use cases that will map to web, mobile, API, and DB |
 
@@ -17,9 +18,10 @@ These docs are written so a human can learn in order, and so [Graphify](https://
 
 1. **Orient** — [`.brain/INDEX.md`](.brain/INDEX.md)
 2. **Plan** — [`tech-space/project-blueprint.md`](tech-space/project-blueprint.md)
-3. **Learn concepts** — [`knowledge/`](knowledge/README.md)
-4. **Follow a story** — [`examples/vertical-slice-todo/`](examples/vertical-slice-todo/README.md)
-5. **Decide** — [`tech-space/decisions/`](tech-space/decisions/README.md) before writing code
+3. **Build** — [`walkthrough/`](walkthrough/README.md) (implement one numbered step at a time)
+4. **Learn concepts** — [`knowledge/`](knowledge/README.md)
+5. **Follow a story** — [`examples/vertical-slice-todo/`](examples/vertical-slice-todo/README.md)
+6. **Decide** — [`tech-space/decisions/`](tech-space/decisions/README.md) before writing code
 
 ## Document template (knowledge + examples)
 

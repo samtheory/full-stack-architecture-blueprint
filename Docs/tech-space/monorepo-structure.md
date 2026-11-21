@@ -44,5 +44,5 @@ domain
 ## Related
 
 - [project-blueprint.md](project-blueprint.md)
-- [../knowledge/solid/dip.md](../knowledge/solid/dip.md)
+- [../knowledge/solid/05-D.md](../knowledge/solid/05-D.md)
 - [decisions/](decisions/README.md)

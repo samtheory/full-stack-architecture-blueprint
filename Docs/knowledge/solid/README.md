@@ -2,13 +2,15 @@
 
 SOLID is five design guidelines for maintainable object-oriented (and modular) code. None is absolute; each has costs when over-applied.
 
-| Letter | Principle | Page |
-|--------|-----------|------|
-| S | Single Responsibility | [srp.md](srp.md) |
-| O | Open-Closed | [ocp.md](ocp.md) |
-| L | Liskov Substitution | [lsp.md](lsp.md) |
-| I | Interface Segregation | [isp.md](isp.md) |
-| D | Dependency Inversion | [dip.md](dip.md) |
+| Order | Letter | Principle | Page |
+|-------|--------|-----------|------|
+| 01 | S | Single Responsibility | [01-S.md](01-S.md) |
+| 02 | O | Open-Closed | [02-O.md](02-O.md) |
+| 03 | L | Liskov Substitution | [03-L.md](03-L.md) |
+| 04 | I | Interface Segregation | [04-I.md](04-I.md) |
+| 05 | D | Dependency Inversion | [05-D.md](05-D.md) |
+
+Each principle page includes **when to use**, **Hono worst/best**, **React worst/best**, and a side-by-side table.
 
 **Interview tip:** explain a violation you fixed and the trade-off — not a memorized acronym list.
 

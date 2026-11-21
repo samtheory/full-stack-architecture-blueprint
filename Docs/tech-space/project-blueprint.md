@@ -141,14 +141,15 @@ packages/db           →  createDb(config) factory
 
 1. Root [README.md](../../README.md) + [Docs/.brain/INDEX.md](../.brain/INDEX.md)
 2. This blueprint + [monorepo-structure.md](monorepo-structure.md)
-3. [knowledge/solid/](../knowledge/solid/README.md) (especially DIP)
-4. One style: start [layered](../knowledge/architecture-styles/layered.md), then [hexagonal](../knowledge/architecture-styles/hexagonal.md)
-5. [design-patterns/](../knowledge/design-patterns/README.md) — Adapter, Repository, DI
-6. [react-rendering/modern-lifecycle.md](../knowledge/react-rendering/modern-lifecycle.md) (legacy only for contrast)
-7. [examples/vertical-slice-todo/](../examples/vertical-slice-todo/README.md)
-8. Backend + DB docs → run the slice when code exists
-9. Auth / multi-db / optimistic UI examples
-10. Interview cheat-sheet (to be added): “why this boundary?” questions
+3. **Build in order:** [walkthrough/](../walkthrough/README.md) (step folders with commands and decisions)
+4. [knowledge/solid/](../knowledge/solid/README.md) (especially DIP)
+5. One style: start [layered](../knowledge/architecture-styles/layered.md), then [hexagonal](../knowledge/architecture-styles/hexagonal.md)
+6. [design-patterns/](../knowledge/design-patterns/README.md) — Adapter, Repository, DI
+7. [react-rendering/modern-lifecycle.md](../knowledge/react-rendering/modern-lifecycle.md) (legacy only for contrast)
+8. [examples/vertical-slice-todo/](../examples/vertical-slice-todo/README.md)
+9. Backend + DB docs → run the slice when code exists
+10. Auth / multi-db / optimistic UI examples
+11. Interview cheat-sheet (to be added): “why this boundary?” questions
 
 ---
 

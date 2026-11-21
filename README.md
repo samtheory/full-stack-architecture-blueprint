@@ -25,6 +25,7 @@ Open-source, interview-ready learning monorepo. It teaches software architecture
 ├── Docs/                     # Learning docs, architecture, examples, knowledge
 │   ├── .brain/               # Graphify-friendly index (concepts, links, query guide)
 │   ├── tech-space/           # Project + technical architecture and ADRs
+│   ├── walkthrough/          # Step-by-step build (monorepo → slice → adapters → CI)
 │   ├── knowledge/            # SOLID, architecture styles, patterns, React lifecycle
 │   └── examples/             # Cross-layer use cases (web, mobile, API, DB)
 ├── .graphifyignore           # Keep Graphify focused on high-signal sources
@@ -47,6 +48,7 @@ packages/*        # Shared domain, contracts, DB adapters, UI, config
 | [Docs/README.md](Docs/README.md) | How to read the docs | Docs entry |
 | [Docs/.brain/INDEX.md](Docs/.brain/INDEX.md) | Agent/human index for low-token navigation | Graphify index |
 | [Docs/tech-space/project-blueprint.md](Docs/tech-space/project-blueprint.md) | Full blueprint (structure, tooling, API, DB, plan) | Architecture plan |
+| [Docs/walkthrough/](Docs/walkthrough/README.md) | Ordered build steps with commands and decisions | Implementation manual |
 | [Docs/knowledge/](Docs/knowledge/README.md) | Principles, styles, patterns, React model | Concepts |
 | [Docs/examples/](Docs/examples/README.md) | Features that span UI → API → DB | Hands-on path |
 
@@ -63,10 +65,11 @@ Each knowledge topic uses a consistent shape:
 
 1. Read [Docs/tech-space/project-blueprint.md](Docs/tech-space/project-blueprint.md) for scope and decisions.
 2. Skim [Docs/.brain/CONCEPTS.md](Docs/.brain/CONCEPTS.md) so terms stay consistent.
-3. Study [Docs/knowledge/solid/](Docs/knowledge/solid/README.md) and one architecture style that matches your current problem.
-4. Walk [Docs/examples/vertical-slice-todo/](Docs/examples/vertical-slice-todo/README.md) as the first end-to-end story.
-5. Compare patterns in [Docs/knowledge/design-patterns/](Docs/knowledge/design-patterns/README.md) against the same example.
-6. After the monorepo lands: run the vertical slice locally, then read tests.
+3. Build with [Docs/walkthrough/](Docs/walkthrough/README.md) — one numbered step at a time (start at `01-monorepo-setup`).
+4. Study [Docs/knowledge/solid/](Docs/knowledge/solid/README.md) and one architecture style that matches your current problem.
+5. Walk [Docs/examples/vertical-slice-todo/](Docs/examples/vertical-slice-todo/README.md) as the first end-to-end story.
+6. Compare patterns in [Docs/knowledge/design-patterns/](Docs/knowledge/design-patterns/README.md) against the same example.
+7. After the monorepo lands: run the vertical slice locally, then read tests.
 
 Suggested order is also listed in the blueprint under **Learning path**.
 

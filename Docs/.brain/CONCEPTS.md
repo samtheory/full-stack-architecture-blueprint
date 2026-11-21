@@ -13,6 +13,8 @@ Status: `doc` = documented only; `planned` = will appear in code; `code` = imple
 | Monorepo Structure | doc | [../tech-space/monorepo-structure.md](../tech-space/monorepo-structure.md) |
 | Tooling Stack | doc | [../tech-space/tooling.md](../tech-space/tooling.md) |
 | Learning Path | doc | Blueprint § Learning path |
+| Walkthrough | doc | [../walkthrough/README.md](../walkthrough/README.md) |
+| Monorepo Setup Step | doc | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
 | Vertical Slice | doc | [../examples/vertical-slice-todo/README.md](../examples/vertical-slice-todo/README.md) |
 
 ## Applications (planned)
@@ -39,11 +41,11 @@ Status: `doc` = documented only; `planned` = will appear in code; `code` = imple
 
 | Concept | Status | Primary doc |
 |---------|--------|-------------|
-| Single Responsibility | doc | [../knowledge/solid/srp.md](../knowledge/solid/srp.md) |
-| Open-Closed | doc | [../knowledge/solid/ocp.md](../knowledge/solid/ocp.md) |
-| Liskov Substitution | doc | [../knowledge/solid/lsp.md](../knowledge/solid/lsp.md) |
-| Interface Segregation | doc | [../knowledge/solid/isp.md](../knowledge/solid/isp.md) |
-| Dependency Inversion | doc | [../knowledge/solid/dip.md](../knowledge/solid/dip.md) |
+| Single Responsibility | doc | [../knowledge/solid/01-S.md](../knowledge/solid/01-S.md) |
+| Open-Closed | doc | [../knowledge/solid/02-O.md](../knowledge/solid/02-O.md) |
+| Liskov Substitution | doc | [../knowledge/solid/03-L.md](../knowledge/solid/03-L.md) |
+| Interface Segregation | doc | [../knowledge/solid/04-I.md](../knowledge/solid/04-I.md) |
+| Dependency Inversion | doc | [../knowledge/solid/05-D.md](../knowledge/solid/05-D.md) |
 
 ## Design patterns (in scope)
 

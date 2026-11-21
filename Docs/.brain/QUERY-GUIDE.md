@@ -27,6 +27,8 @@ Outputs land in `graphify-out/` (`graph.json`, `graph.html`, `GRAPH_REPORT.md`).
 | Contrast styles | `/graphify query "Modular Monolith vs Microservices trade-offs in this repo"` |
 | Find bad-practice guidance | `/graphify query "bad practice Repository pattern"` |
 | React lifecycle | `/graphify query "React Modern Rendering Model vs Legacy Class Lifecycle"` |
+| How to build the monorepo | `/graphify query "Walkthrough Monorepo Setup Step commands"` |
+| Next implementation step | `/graphify query "Walkthrough step after Hono API"` |
 
 ## Token-saving habits
 

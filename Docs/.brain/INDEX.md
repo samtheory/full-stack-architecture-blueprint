@@ -12,12 +12,15 @@ WHY: Agents and humans should enter through a small index instead of loading eve
 | Shared vocabulary | [GLOSSARY.md](GLOSSARY.md) |
 | Graphify query recipes | [QUERY-GUIDE.md](QUERY-GUIDE.md) |
 | Full project blueprint | [../tech-space/project-blueprint.md](../tech-space/project-blueprint.md) |
+| Step-by-step build | [../walkthrough/README.md](../walkthrough/README.md) |
+| First build step (monorepo) | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
 
 ## Docs map (communities)
 
 ```text
 .brain          → indexing, vocabulary, query recipes
 tech-space      → blueprint, monorepo, API, DB, ADRs
+walkthrough     → ordered implementation steps (commands + why)
 knowledge       → SOLID, architecture styles, patterns, React
 examples        → vertical slices and cross-layer stories
 ```
@@ -28,6 +31,7 @@ examples        → vertical slices and cross-layer stories
 - `Repository` vs `Adapter` in this project
 - React modern rendering vs legacy class lifecycle
 - Vertical slice Todo across web / mobile / API / DB
+- Walkthrough step monorepo setup commands
 
 ## Maintenance rules
 

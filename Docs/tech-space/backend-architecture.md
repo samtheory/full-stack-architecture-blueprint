@@ -64,4 +64,4 @@ const app = createApp({ notes, logger, clock })
 
 - [database-abstraction.md](database-abstraction.md)
 - [../knowledge/design-patterns/dependency-injection.md](../knowledge/design-patterns/dependency-injection.md)
-- [../knowledge/solid/dip.md](../knowledge/solid/dip.md)
+- [../knowledge/solid/05-D.md](../knowledge/solid/05-D.md)

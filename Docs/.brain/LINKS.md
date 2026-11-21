@@ -13,6 +13,9 @@ Relation types: `teaches`, `uses`, `implements`, `contrasts`, `contains`, `depen
 | Project Blueprint | contains | Hono Backend API | Validation, DI, errors, logging |
 | Project Blueprint | contains | Database Adapter Package | libSQL / MariaDB / PostgreSQL |
 | Learning Path | uses | Vertical Slice | First runnable story |
+| Learning Path | uses | Walkthrough | Ordered implementation steps |
+| Walkthrough | contains | Monorepo Setup Step | Step 01 |
+| Walkthrough | demonstrates | Monorepo Structure | Built in steps 01–02 |
 | Vertical Slice | demonstrates | Dependency Inversion | Domain independent of Hono/UI/DB |
 | Vertical Slice | demonstrates | Adapter | DB vendor adapters |
 | Vertical Slice | demonstrates | Repository | Optional persistence port |
