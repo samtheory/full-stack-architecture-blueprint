@@ -9,8 +9,8 @@ These pages are concept hubs for Graphify. Deep examples live under [`../example
 | Folder | Contents |
 |--------|----------|
 | [solid/](solid/README.md) | SRP, OCP, LSP, ISP, DIP |
-| [architecture-styles/](architecture-styles/README.md) | Layered, hexagonal, clean, modular monolith, microservices |
-| [design-patterns/](design-patterns/README.md) | Repository, adapter, strategy, factory, observer, DI |
+| [architecture-styles/](architecture-styles/README.md) | 20 architecture styles/patterns plus combination guide, stack recommendations, and enforceable rules for React + Next.js + Hono |
+| [design-patterns/](design-patterns/README.md) | GoF-style catalog (Creational / Structural / Behavioral) + Repository & DI — Persian notes, Hono + React examples |
 | [react-rendering/](react-rendering/README.md) | Modern model + legacy comparison |
 
 ## How to use
