@@ -288,9 +288,9 @@
     "semantic_hash": ""
   },
   "Docs/walkthrough/01-monorepo-setup/README.md": {
-    "mtime": 1795255992.913072,
-    "seen": 1795337019.671439,
-    "ast_hash": "c8a21248b9a0a8914d5887cba548a55f",
+    "mtime": 1795423790.0998118,
+    "seen": 1795441014.0952804,
+    "ast_hash": "11d44800da25aa264647b2b3b1323e69",
     "semantic_hash": ""
   },
   "Docs/walkthrough/02-typescript-tooling/README.md": {
@@ -384,15 +384,15 @@
     "semantic_hash": ""
   },
   "Docs/walkthrough/README.md": {
-    "mtime": 1795255968.8164768,
-    "seen": 1795337019.67145,
-    "ast_hash": "4dd554d2f32b9153209e4be8f44a4eee",
+    "mtime": 1795440983.7118518,
+    "seen": 1795441014.0952947,
+    "ast_hash": "1b6bc907b23ca72b7f3e504076e5cb17",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795275684.359251,
-    "seen": 1795337019.6714506,
-    "ast_hash": "e25b33bf91f5201fdf0169aa31cf6d7d",
+    "mtime": 1795423790.1028116,
+    "seen": 1795441014.0952983,
+    "ast_hash": "e590093390246f191c3f3af05beedefa",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/api-gateway.md": {
@@ -624,9 +624,117 @@
     "semantic_hash": ""
   },
   "Docs/thinking/marketplace-fa-en-architecture.md": {
-    "mtime": 1795357840.9104555,
-    "seen": 1795357845.93302,
-    "ast_hash": "297a0c32d41d80e94f231a1716eb901f",
+    "mtime": 1795440990.8261094,
+    "seen": 1795441014.0952795,
+    "ast_hash": "903fcc5588e58b4dfb0853c72fc05f8c",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1795423790.1040797,
+    "seen": 1795441014.0951898,
+    "ast_hash": "14697ddb7f227f27c9c2e04a2c8864b9",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1795423790.1028116,
+    "seen": 1795441014.0951915,
+    "ast_hash": "a9860db67333bd04350cc2184a5537c8",
+    "semantic_hash": ""
+  },
+  "turbo.json": {
+    "mtime": 1795423790.1050806,
+    "seen": 1795441014.0951927,
+    "ast_hash": "2a72799d7358503fe87a9e5402684551",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/hono-server-setup/README.md": {
+    "mtime": 1795423790.1040797,
+    "seen": 1795441014.095296,
+    "ast_hash": "2089f89cd08cedd40ccc161892044796",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/package-setup/README.md": {
+    "mtime": 1795423790.0998118,
+    "seen": 1795441014.0952969,
+    "ast_hash": "6cc6c3b30ce225e70e3a98bc92a8196a",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/react-app-setup/README.md": {
+    "mtime": 1795423790.0998118,
+    "seen": 1795441014.0952976,
+    "ast_hash": "8cd225f7ca4a85fb35bd836cc5850ca7",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/package.json": {
+    "mtime": 1795424594.4051309,
+    "seen": 1795441014.0951803,
+    "ast_hash": "0dcd626cb04742688f56a392873974df",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/index.ts": {
+    "mtime": 1795424608.8411236,
+    "seen": 1795441014.0951843,
+    "ast_hash": "170025b4ec734e526e2a89b113d7f838",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/tsconfig.json": {
+    "mtime": 1795424586.5725868,
+    "seen": 1795441014.0951865,
+    "ast_hash": "d8c28edcdb3e7996c7f9671ffefab509",
+    "semantic_hash": ""
+  },
+  "infra/docker-compose.yml": {
+    "mtime": 1795440980.924499,
+    "seen": 1795441014.0951874,
+    "ast_hash": "e7592324532197d990c0f0f33a0a3e15",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/README.md": {
+    "mtime": 1795440886.5999963,
+    "seen": 1795441014.095202,
+    "ast_hash": "293dd40c673b391ac27ff09f1d8d4cae",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/01-folder-structure.md": {
+    "mtime": 1795440916.4371202,
+    "seen": 1795441014.095203,
+    "ast_hash": "701eee460737e53bc3b2c403bd1a4868",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/02-postgres-docker.md": {
+    "mtime": 1795440932.5773454,
+    "seen": 1795441014.0952036,
+    "ast_hash": "32a6aafd795142126db0723c5bbfd014",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/03-drizzle-setup.md": {
+    "mtime": 1795440952.3120694,
+    "seen": 1795441014.0952046,
+    "ast_hash": "b826ef80aa361921def401cd5dd7b105",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/04-listing-slice.md": {
+    "mtime": 1795440966.3511565,
+    "seen": 1795441014.0952053,
+    "ast_hash": "bf6e27b8c58a3c53f8c5fdb8a839c156",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/README.md": {
+    "mtime": 1795440896.9084477,
+    "seen": 1795441014.0952063,
+    "ast_hash": "0172b76f3b4fc12bc9f3f40507ae83cc",
+    "semantic_hash": ""
+  },
+  "infra/README.md": {
+    "mtime": 1795440978.7571354,
+    "seen": 1795441014.095299,
+    "ast_hash": "76cf64633fdc95037a0c92d9d4d9f6b8",
+    "semantic_hash": ""
+  },
+  "pnpm-lock.yaml": {
+    "mtime": 1795424594.4028628,
+    "seen": 1795441014.0953002,
+    "ast_hash": "448fa7775d1dbae8ffbc2251d9c7ad68",
     "semantic_hash": ""
   }
 }

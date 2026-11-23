@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Docs/knowledge/design-patterns/dependency-injection.md",
+                "file": "Docs/clouds/market-place-server/01-folder-structure.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "dependency-injection"
+              "title": "01-folder-structure"
             }
           }
         ]
@@ -190,17 +190,28 @@
   },
   "active": "2e65ab924283310c",
   "lastOpenFiles": [
-    "clouds/market-place-server/package.json.3839784033",
-    "pnpm-lock.yaml.123059599",
-    "clouds/market-place-server/node_modules/@types",
-    "_tmp_17620_99c75e6a634150dd8e530ef0a013ed34",
-    "clouds/market-place-server/tsconfig.json",
-    "_tmp_10704_7302aae3ead8d8fb689e96945d702db9",
-    "clouds/market-place-server/src/index.ts",
-    "clouds/market-place-server/node_modules",
-    "_tmp_6272_8919defd89c9720fc2dd32810a8edce7",
-    "clouds/market-place-server/package.json",
-    "clouds/market-place-server/package.json.2960368966",
+    "clouds/market-place-server/src/middleware/cors.ts",
+    "clouds/market-place-server/src/middleware",
+    "clouds/market-place-server/src/modules/listing/shared",
+    "clouds/market-place-server/src/modules/listing/create-listing/create-listing.ts",
+    "clouds/market-place-server/src/modules/listing/create-listing/create-listing.handler.ts",
+    "clouds/market-place-server/src/modules/listing/create-listing/create-listing.route.ts",
+    "clouds/market-place-server/src/modules/listing/create-listing",
+    "clouds/market-place-server/src/modules/listing/list-listings/list-listings.ts",
+    "clouds/market-place-server/src/modules/listing/list-listings/list-listings.handler.ts",
+    "clouds/market-place-server/src/modules/listing/list-listings/list-listings.route.ts",
+    "clouds/market-place-server/src/modules/listing/list-listings",
+    "Docs/knowledge/architecture-styles/hexagonal.md",
+    "Docs/knowledge/architecture-styles/vertical-slice.md",
+    "Docs/knowledge/architecture-styles/modular-monolith.md",
+    "Docs/clouds/market-place-server/01-folder-structure.md",
+    "Docs/knowledge/design-patterns/dependency-injection.md",
+    "infra/README.md",
+    "Docs/clouds/market-place-server/04-listing-slice.md",
+    "Docs/clouds/market-place-server/03-drizzle-setup.md",
+    "Docs/clouds/market-place-server/02-postgres-docker.md",
+    "Docs/clouds/market-place-server/README.md",
+    "Docs/clouds/README.md",
     "graphify-out/2026-11-23/GRAPH_REPORT.md",
     "Docs/walkthrough/package-setup/README.md",
     "Docs/walkthrough/hono-server-setup/README.md",
@@ -214,17 +225,6 @@
     "Docs/knowledge/architecture-styles/strangler-fig.md",
     "Docs/knowledge/architecture-styles/api-gateway.md",
     "Docs/knowledge/architecture-styles/modular-frontend.md",
-    "Docs/knowledge/architecture-styles/monorepo.md",
-    "Docs/knowledge/architecture-styles/self-contained-systems.md",
-    "Docs/knowledge/architecture-styles/soa.md",
-    "Docs/knowledge/architecture-styles/plugin-microkernel.md",
-    "Docs/knowledge/architecture-styles/bff.md",
-    "Docs/knowledge/architecture-styles/serverless.md",
-    "Docs/knowledge/architecture-styles/event-sourcing.md",
-    "Docs/knowledge/architecture-styles/cqrs.md",
-    "Docs/knowledge/architecture-styles/event-driven.md",
-    "Docs/knowledge/architecture-styles/domain-driven-design.md",
-    "Docs/knowledge/architecture-styles/feature-sliced-design.md",
-    "Docs/knowledge/architecture-styles/vertical-slice.md"
+    "Docs/knowledge/architecture-styles/monorepo.md"
   ]
 }

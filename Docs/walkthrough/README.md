@@ -33,6 +33,9 @@ packages/
 
 Product architecture notes: [../thinking/marketplace-fa-en-architecture.md](../thinking/marketplace-fa-en-architecture.md)
 
+**After Hono health-check works**, continue the server build here:  
+[Docs/clouds/market-place-server](../clouds/market-place-server/README.md) (folder structure → Postgres in `infra/` → Drizzle → listing slice).
+
 ---
 
 ## Blueprint teaching path (reference)

@@ -1,17 +1,17 @@
-# Graph Report - full-stack-architecture-blueprint  (2026-11-22)
+# Graph Report - full-stack-architecture-blueprint  (2026-11-23)
 
 ## Corpus Check
-- 105 files · ~66,263 words
+- 122 files · ~71,183 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 2 file(s) not represented in the graph (top: (none) 2)
+- Unclassified: 7 file(s) not represented in the graph (top: (none) 4, .example 3)
 
 ## Summary
-- 829 nodes · 843 edges · 65 communities (45 shown, 20 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.87)
+- 1048 nodes · 1140 edges · 77 communities (56 shown, 21 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `33468937`
+- Built from commit: `01661056`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -20,7 +20,7 @@
 - Blueprint backend and DB
 - Architecture concepts registry
 - react-next-hono-recommendations.md
-- Auth security and OCP
+- Optimistic UI sync example
 - Combination Deep Dives
 - API Gateway Architecture
 - Event Sourcing
@@ -80,30 +80,45 @@
 - Visitor pattern
 - marketplace-fa-en-architecture.md
 - Marketplace (FA + EN) — React + Hono Monorepo Suggestion
+- Package setup — shared `packages/*`
+- Hono server setup — `clouds/market-place-server` (Bun or Node.js)
+- React app setup — `apps/market-place-app`
+- tasks
+- package.json
+- pnpm-workspace.yaml
+- 02 — Postgres with Docker (`infra/`)
+- postgres
+- market-place-server/package.json
+- 03 — Drizzle + Postgres
+- 01 — Folder structure + composition root
+- compilerOptions
 
 ## God Nodes (most connected - your core abstractions)
-1. `Combination Deep Dives` - 21 edges
-2. `Serverless / Function-Oriented Architecture` - 15 edges
-3. `Service-Oriented Architecture (SOA)` - 15 edges
-4. `Strangler Fig Migration Pattern` - 15 edges
+1. `Design patterns` - 23 edges
+2. `Combination Deep Dives` - 21 edges
+3. `Architecture styles` - 21 edges
+4. `API Gateway Architecture` - 15 edges
 5. `Backend for Frontend (BFF)` - 15 edges
 6. `CQRS (Command Query Responsibility Segregation)` - 15 edges
 7. `Domain-Driven Design (DDD)` - 15 edges
 8. `Event-Driven Architecture` - 15 edges
-9. `Feature-Sliced Design (FSD)` - 15 edges
-10. `Plugin / Microkernel Architecture` - 15 edges
+9. `Event Sourcing` - 15 edges
+10. `Feature-Sliced Design (FSD)` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `TodoReader port` --semantically_similar_to--> `Repository pattern`  [INFERRED] [semantically similar]
   Docs/knowledge/solid/04-I.md → Docs/knowledge/design-patterns/repository.md
+- `Full-Stack Architecture Blueprint` --references--> `Walkthrough construction manual`  [EXTRACTED]
+  README.md → Docs/walkthrough/README.md
 - `Graphify knowledge graph workflow` --conceptually_related_to--> `Step 16 GitHub Actions CI and Graphify`  [INFERRED]
   README.md → Docs/walkthrough/16-ci-and-graphify/README.md
 - `Adapter` --semantically_similar_to--> `Adapter`  [INFERRED] [semantically similar]
   Docs/.brain/GLOSSARY.md → Docs/.brain/CONCEPTS.md
 - `Vertical slice` --semantically_similar_to--> `Vertical Slice`  [INFERRED] [semantically similar]
   Docs/.brain/GLOSSARY.md → Docs/.brain/CONCEPTS.md
-- `Strategy pattern` --semantically_similar_to--> `Adapter pattern`  [INFERRED] [semantically similar]
-  Docs/knowledge/design-patterns/strategy.md → Docs/knowledge/design-patterns/repository.md
+
+## Import Cycles
+- None detected.
 
 ## Hyperedges (group relationships)
 - **Architecture styles in this repo** — docs_knowledge_architecture_styles_layered_concept, docs_knowledge_architecture_styles_hexagonal_concept, docs_knowledge_architecture_styles_clean_concept, docs_knowledge_architecture_styles_modular_monolith_concept, docs_knowledge_architecture_styles_microservices_concept [EXTRACTED 1.00]
@@ -116,11 +131,11 @@
 - **SOLID five principles** — docs_knowledge_solid_01_s_single_responsibility_principle, docs_knowledge_solid_02_o_open_closed_principle, docs_knowledge_solid_03_l_liskov_substitution_principle, docs_knowledge_solid_04_i_interface_segregation_principle, docs_knowledge_solid_05_d_dependency_inversion_principle [EXTRACTED 1.00]
 - **Core hexagonal packages** — docs_tech_space_project_blueprint_packages_domain, docs_tech_space_project_blueprint_packages_application, docs_walkthrough_05_config_and_contracts_readme_zod_contracts, docs_tech_space_project_blueprint_packages_db, docs_walkthrough_06_hono_api_readme_create_app [INFERRED 0.85]
 
-## Communities (65 total, 20 thin omitted)
+## Communities (77 total, 21 thin omitted)
 
 ### Community 0 - "SOLID and design patterns"
-Cohesion: 0.10
-Nodes (34): Observer pattern, Optimistic UI Sync Example, Adapter pattern, Repository pattern, Strategy pattern, Legacy class lifecycle, Client Components, React modern rendering model (+26 more)
+Cohesion: 0.06
+Nodes (56): Auth Session Example, Concept registry, Open-Closed, Security & observability, Strategy, Glossary, God node, Commands (from repo root) (+48 more)
 
 ### Community 1 - "Blueprint backend and DB"
 Cohesion: 0.08
@@ -134,13 +149,13 @@ Nodes (29): Adapter, API Validation, Clean Architecture, Database Adapter Packag
 Cohesion: 0.12
 Nodes (17): 1. Small MVP, 2. Growing SaaS, 3. Marketplace / booking platform, 4. Large multi-team product, 5. Platform with plugins, automations, and integrations, Async, Cross-Cutting Stack Rules, Data (+9 more)
 
-### Community 4 - "Auth security and OCP"
-Cohesion: 0.10
-Nodes (22): Auth Session Example, Concept registry, Legacy Class Lifecycle, Microservices, Modular Monolith, Observer, Open-Closed, Optimistic UI Sync Example (+14 more)
+### Community 4 - "Optimistic UI sync example"
+Cohesion: 0.47
+Nodes (5): Legacy Class Lifecycle, Observer, Optimistic UI Sync Example, React Modern Rendering Model, Separation of UI and Domain
 
 ### Community 5 - "Combination Deep Dives"
-Cohesion: 0.10
-Nodes (21): BFF + Next.js, Clean + DDD, Clean + Hexagonal, Combination Deep Dives, CQRS + Event Sourcing, CQRS without Event Sourcing, DDD + CQRS, DDD + Event-Driven (+13 more)
+Cohesion: 0.08
+Nodes (26): Architecture Combination Guide, BFF + Next.js, Clean + DDD, Clean + Hexagonal, Combination Deep Dives, Compatibility Matrix, CQRS + Event Sourcing, CQRS without Event Sourcing (+18 more)
 
 ### Community 6 - "API Gateway Architecture"
 Cohesion: 0.10
@@ -151,7 +166,7 @@ Cohesion: 0.10
 Nodes (19): 1. React frontend, 2. Next.js App Router frontend, 3. Hono backend, 4. Monorepo, Best Fit by Application Type, Common Mistakes, Core Rules, Dependency Diagram (+11 more)
 
 ### Community 8 - "Modular Frontend Architecture"
-Cohesion: 0.11
+Cohesion: 0.10
 Nodes (19): 1. React frontend, 2. Next.js App Router frontend, 3. Hono backend, 4. Monorepo (optional package-per-module), Best Fit by Application Type, Common Mistakes, Core Rules, Dependency Diagram (+11 more)
 
 ### Community 9 - "Web and mobile apps"
@@ -291,32 +306,76 @@ Cohesion: 0.13
 Nodes (14): Backend (Hono), Bad / worst practice, Frontend (React), Good practice, Real example — Operations over Notion block tree, Related concepts, Side-by-side, Trade-offs (+6 more)
 
 ### Community 63 - "marketplace-fa-en-architecture.md"
-Cohesion: 0.12
-Nodes (9): Architecture Combination Guide, Compatibility Matrix, Practical Default Stack (Combination), Separate Concerns First, What Not to Combine at the Same Boundary, Project blueprint, Thinking, Walkthrough construction manual (+1 more)
+Cohesion: 0.19
+Nodes (5): Microservices, Modular Monolith, Architecture styles, Thinking, Walkthrough construction manual
 
 ### Community 64 - "Marketplace (FA + EN) — React + Hono Monorepo Suggestion"
 Cohesion: 0.09
 Nodes (23): 10. One-sentence summary, 1. Verdict (what to build), 2. System shape, 3. Monorepo layout (marketplace-shaped), 4.1 Architecture style, 4.2 Suggested `apps/web` shape, 4.3 Multilingual (FA + EN) — treat as a first-class product concern, 4.4 React “fast development” habits (+15 more)
 
+### Community 65 - "Package setup — shared `packages/*`"
+Cohesion: 0.10
+Nodes (21): 1. Scaffold folder, 2. `packages/contracts/package.json`, 3. Minimal files, 4. Install and link, 5. Depend from app and server, 6. Use it, Acceptance criteria, Agent prompt (+13 more)
+
+### Community 66 - "Hono server setup — `clouds/market-place-server` (Bun or Node.js)"
+Cohesion: 0.10
+Nodes (20): 1. Clear the placeholder (optional), 2. Create the package, 3A. Node.js path, 3B. Bun path, 4. Reinstall at root, 5. Verify, Acceptance criteria, Agent prompt (+12 more)
+
+### Community 67 - "React app setup — `apps/market-place-app`"
+Cohesion: 0.11
+Nodes (19): 1. Clear the placeholder (optional), 2. Scaffold with Vite (recommended), 3. Set the package name, 4. Install workspace deps, 5. Run the app, 6. Smoke check against the future API, Acceptance criteria, Agent prompt (+11 more)
+
+### Community 68 - "tasks"
+Cohesion: 0.13
+Nodes (14): dependsOn, outputs, cache, persistent, $schema, tasks, build, dev (+6 more)
+
+### Community 69 - "package.json"
+Cohesion: 0.17
+Nodes (12): devDependencies, turbo@^2.6.1, name, packageManager, private, scripts, build, dev (+4 more)
+
+### Community 71 - "02 — Postgres with Docker (`infra/`)"
+Cohesion: 0.05
+Nodes (36): 02 — Postgres with Docker (`infra/`), 1. Prerequisites, 2. Create local env, 3. Start Postgres, 4. Point the Hono server at Postgres, 5. Optional connectivity smoke test, Acceptance, Bad practice (+28 more)
+
+### Community 72 - "postgres"
+Cohesion: 0.11
+Nodes (18): POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER, interval, retries, test, timeout, container_name (+10 more)
+
+### Community 73 - "market-place-server/package.json"
+Cohesion: 0.13
+Nodes (16): dependencies, hono@^4.13.20, devDependencies, @types/bun@^1.4.5, typescript@^7.0.2, name, private, scripts (+8 more)
+
+### Community 74 - "03 — Drizzle + Postgres"
+Cohesion: 0.13
+Nodes (15): 03 — Drizzle + Postgres, 1. Install deps (from repo root), 2. Add Drizzle config, 3. Create client + schema, 4. Scripts in `package.json`, 5. Generate + migrate, 6. Wire db into `createApp` (composition root), Acceptance (+7 more)
+
+### Community 75 - "01 — Folder structure + composition root"
+Cohesion: 0.14
+Nodes (14): 01 — Folder structure + composition root, 1. Create folders, 2. Add `create-app.ts`, 3. Add listing stub, 4. Slim `index.ts`, 5. Run and verify, Acceptance, Bad practice (+6 more)
+
+### Community 76 - "compilerOptions"
+Cohesion: 0.20
+Nodes (9): compilerOptions, module, moduleResolution, noEmit, skipLibCheck, strict, target, types (+1 more)
+
 ## Knowledge Gaps
-- **64 isolated node(s):** `Observer pattern`, `Client Components`, `Separation of UI and Domain`, `Server Components`, `TodoRepository (SRP teaching port)` (+59 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 651 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **63 isolated node(s):** `Open-Closed`, `Security & observability`, `God node`, `Observer pattern`, `Client Components` (+58 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 786 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Walkthrough construction manual` connect `marketplace-fa-en-architecture.md` to `Blueprint backend and DB`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **What connects `Observer pattern`, `Client Components`, `Separation of UI and Domain` to the rest of the system?**
-  _64 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `Design patterns` connect `SOLID and design patterns` to `Abstract Factory pattern`, `Bridge pattern`, `Builder pattern`, `Chain of Responsibility pattern`, `Command pattern`, `Composite pattern`, `Decorator pattern`, `Facade pattern`, `Factory Method pattern`, `Flyweight pattern`, `Iterator pattern`, `Mediator pattern`, `Memento pattern`, `Prototype pattern`, `Proxy pattern`, `Singleton pattern`, `State pattern`, `Template Method pattern`, `Visitor pattern`?**
+  _High betweenness centrality (0.434) - this node is a cross-community bridge._
+- **What connects `Open-Closed`, `Security & observability`, `God node` to the rest of the system?**
+  _63 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `SOLID and design patterns` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
-- **Why does `Step 09 web API application libSQL vertical slice` connect `Blueprint backend and DB` to `marketplace-fa-en-architecture.md`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+  _Cohesion score 0.06327683615819209 - nodes in this community are weakly interconnected._
+- **Why does `Architecture styles` connect `marketplace-fa-en-architecture.md` to `Service-Oriented Architecture (SOA)`, `Strangler Fig Migration Pattern`, `Architecture concepts registry`, `SOLID and design patterns`, `API Gateway Architecture`, `Event Sourcing`, `Modular Frontend Architecture`, `Self-Contained Systems (SCS)`, `Serverless / Function-Oriented Architecture`?**
+  _High betweenness centrality (0.378) - this node is a cross-community bridge._
 - **Should `Blueprint backend and DB` be split into smaller, more focused modules?**
   _Cohesion score 0.07671957671957672 - nodes in this community are weakly interconnected._
-- **Why does `Architecture Combination Guide` connect `marketplace-fa-en-architecture.md` to `Combination Deep Dives`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Why does `Knowledge` connect `SOLID and design patterns` to `marketplace-fa-en-architecture.md`?**
+  _High betweenness centrality (0.220) - this node is a cross-community bridge._
 - **Should `Architecture concepts registry` be split into smaller, more focused modules?**
   _Cohesion score 0.08108108108108109 - nodes in this community are weakly interconnected._

@@ -44,5 +44,12 @@
   "67": "React app setup — `apps/market-place-app`",
   "68": "tasks",
   "69": "package.json",
-  "70": "pnpm-workspace.yaml"
+  "70": "pnpm-workspace.yaml",
+  "71": "02 — Postgres with Docker (`infra/`)",
+  "72": "postgres",
+  "73": "market-place-server/package.json",
+  "74": "03 — Drizzle + Postgres",
+  "75": "01 — Folder structure + composition root",
+  "76": "compilerOptions",
+  "77": "04 — Listing vertical slice"
 }

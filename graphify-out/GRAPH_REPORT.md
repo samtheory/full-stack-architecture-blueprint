@@ -1,17 +1,17 @@
 # Graph Report - full-stack-architecture-blueprint  (2026-11-23)
 
 ## Corpus Check
-- 111 files · ~68,757 words
+- 122 files · ~71,882 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 5 file(s) not represented in the graph (top: (none) 5)
+- Unclassified: 6 file(s) not represented in the graph (top: (none) 4, .example 2)
 
 ## Summary
-- 928 nodes · 1013 edges · 71 communities (50 shown, 21 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.87)
+- 1054 nodes · 1149 edges · 78 communities (57 shown, 21 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6556fc60`
+- Built from commit: `01661056`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -86,30 +86,37 @@
 - tasks
 - package.json
 - pnpm-workspace.yaml
+- 02 — Postgres with Docker (`infra/`)
+- postgres
+- market-place-server/package.json
+- 03 — Drizzle + Postgres
+- 01 — Folder structure + composition root
+- compilerOptions
+- 04 — Listing vertical slice
 
 ## God Nodes (most connected - your core abstractions)
 1. `Design patterns` - 23 edges
 2. `Combination Deep Dives` - 21 edges
 3. `Architecture styles` - 21 edges
-4. `API Gateway Architecture` - 15 edges
-5. `Backend for Frontend (BFF)` - 15 edges
-6. `CQRS (Command Query Responsibility Segregation)` - 15 edges
-7. `Domain-Driven Design (DDD)` - 15 edges
-8. `Event-Driven Architecture` - 15 edges
-9. `Event Sourcing` - 15 edges
-10. `Feature-Sliced Design (FSD)` - 15 edges
+4. `Vertical Slice Architecture` - 15 edges
+5. `Serverless / Function-Oriented Architecture` - 15 edges
+6. `Service-Oriented Architecture (SOA)` - 15 edges
+7. `Strangler Fig Migration Pattern` - 15 edges
+8. `Backend for Frontend (BFF)` - 15 edges
+9. `CQRS (Command Query Responsibility Segregation)` - 15 edges
+10. `Domain-Driven Design (DDD)` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `TodoReader port` --semantically_similar_to--> `Repository pattern`  [INFERRED] [semantically similar]
   Docs/knowledge/solid/04-I.md → Docs/knowledge/design-patterns/repository.md
+- `Full-Stack Architecture Blueprint` --references--> `Walkthrough construction manual`  [EXTRACTED]
+  README.md → Docs/walkthrough/README.md
 - `Graphify knowledge graph workflow` --conceptually_related_to--> `Step 16 GitHub Actions CI and Graphify`  [INFERRED]
   README.md → Docs/walkthrough/16-ci-and-graphify/README.md
 - `Adapter` --semantically_similar_to--> `Adapter`  [INFERRED] [semantically similar]
   Docs/.brain/GLOSSARY.md → Docs/.brain/CONCEPTS.md
 - `Vertical slice` --semantically_similar_to--> `Vertical Slice`  [INFERRED] [semantically similar]
   Docs/.brain/GLOSSARY.md → Docs/.brain/CONCEPTS.md
-- `Full-Stack Architecture Blueprint` --references--> `Walkthrough construction manual`  [EXTRACTED]
-  README.md → Docs/walkthrough/README.md
 
 ## Import Cycles
 - None detected.
@@ -125,7 +132,7 @@
 - **SOLID five principles** — docs_knowledge_solid_01_s_single_responsibility_principle, docs_knowledge_solid_02_o_open_closed_principle, docs_knowledge_solid_03_l_liskov_substitution_principle, docs_knowledge_solid_04_i_interface_segregation_principle, docs_knowledge_solid_05_d_dependency_inversion_principle [EXTRACTED 1.00]
 - **Core hexagonal packages** — docs_tech_space_project_blueprint_packages_domain, docs_tech_space_project_blueprint_packages_application, docs_walkthrough_05_config_and_contracts_readme_zod_contracts, docs_tech_space_project_blueprint_packages_db, docs_walkthrough_06_hono_api_readme_create_app [INFERRED 0.85]
 
-## Communities (71 total, 21 thin omitted)
+## Communities (78 total, 21 thin omitted)
 
 ### Community 0 - "SOLID and design patterns"
 Cohesion: 0.06
@@ -300,8 +307,8 @@ Cohesion: 0.13
 Nodes (14): Backend (Hono), Bad / worst practice, Frontend (React), Good practice, Real example — Operations over Notion block tree, Related concepts, Side-by-side, Trade-offs (+6 more)
 
 ### Community 63 - "marketplace-fa-en-architecture.md"
-Cohesion: 0.19
-Nodes (5): Microservices, Modular Monolith, Architecture styles, Thinking, Walkthrough construction manual
+Cohesion: 0.10
+Nodes (15): Microservices, Modular Monolith, How to use, Map to code, market-place-server — build guide, Path, Status legend, Why Postgres lives in `infra/`, not under `clouds/` (+7 more)
 
 ### Community 64 - "Marketplace (FA + EN) — React + Hono Monorepo Suggestion"
 Cohesion: 0.09
@@ -320,32 +327,60 @@ Cohesion: 0.11
 Nodes (19): 1. Clear the placeholder (optional), 2. Scaffold with Vite (recommended), 3. Set the package name, 4. Install workspace deps, 5. Run the app, 6. Smoke check against the future API, Acceptance criteria, Agent prompt (+11 more)
 
 ### Community 68 - "tasks"
-Cohesion: 0.14
-Nodes (13): dependsOn, outputs, cache, persistent, $schema, tasks, build, dev (+5 more)
+Cohesion: 0.13
+Nodes (14): dependsOn, outputs, cache, persistent, $schema, tasks, build, dev (+6 more)
 
 ### Community 69 - "package.json"
 Cohesion: 0.17
 Nodes (12): devDependencies, turbo@^2.6.1, name, packageManager, private, scripts, build, dev (+4 more)
 
+### Community 71 - "02 — Postgres with Docker (`infra/`)"
+Cohesion: 0.13
+Nodes (15): 02 — Postgres with Docker (`infra/`), 1. Prerequisites, 2. Create local env, 3. Start Postgres, 4. Point the Hono server at Postgres, 5. Optional connectivity smoke test, Acceptance, Bad practice (+7 more)
+
+### Community 72 - "postgres"
+Cohesion: 0.11
+Nodes (18): POSTGRES_DB, POSTGRES_PASSWORD, POSTGRES_USER, interval, retries, test, timeout, container_name (+10 more)
+
+### Community 73 - "market-place-server/package.json"
+Cohesion: 0.13
+Nodes (16): dependencies, hono@^4.13.20, devDependencies, @types/bun@^1.4.5, typescript@^7.0.2, name, private, scripts (+8 more)
+
+### Community 74 - "03 — Drizzle + Postgres"
+Cohesion: 0.13
+Nodes (15): 03 — Drizzle + Postgres, 1. Install deps (from repo root), 2. Add Drizzle config, 3. Create client + schema, 4. Scripts in `package.json`, 5. Generate + migrate, 6. Wire db into `createApp` (composition root), Acceptance (+7 more)
+
+### Community 75 - "01 — Folder structure + composition root"
+Cohesion: 0.10
+Nodes (20): 01 — Folder structure + composition root, 1. Create folders, 2. List-listings slice (stub), 3. Create-listing slice (stub), 4. Module public API, 5. Composition root, 6. Boot file only, 7. Verify (+12 more)
+
+### Community 76 - "compilerOptions"
+Cohesion: 0.20
+Nodes (9): compilerOptions, module, moduleResolution, noEmit, skipLibCheck, strict, target, types (+1 more)
+
+### Community 77 - "04 — Listing vertical slice"
+Cohesion: 0.18
+Nodes (11): 04 — Listing vertical slice, Acceptance, After this, Bad practice, Do this (outline), Example curl, Goal, Good practice (+3 more)
+
 ## Knowledge Gaps
-- **63 isolated node(s):** `Observer pattern`, `Client Components`, `Separation of UI and Domain`, `Server Components`, `TodoRepository (SRP teaching port)` (+58 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 702 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **63 isolated node(s):** `Open-Closed`, `Security & observability`, `God node`, `Observer pattern`, `Client Components` (+58 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 791 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Design patterns` connect `SOLID and design patterns` to `Abstract Factory pattern`, `Bridge pattern`, `Builder pattern`, `Chain of Responsibility pattern`, `Command pattern`, `Composite pattern`, `Decorator pattern`, `Facade pattern`, `Factory Method pattern`, `Flyweight pattern`, `Iterator pattern`, `Mediator pattern`, `Memento pattern`, `Prototype pattern`, `Proxy pattern`, `Singleton pattern`, `State pattern`, `Template Method pattern`, `Visitor pattern`?**
-  _High betweenness centrality (0.479) - this node is a cross-community bridge._
-- **What connects `Observer pattern`, `Client Components`, `Separation of UI and Domain` to the rest of the system?**
+  _High betweenness centrality (0.447) - this node is a cross-community bridge._
+- **What connects `Open-Closed`, `Security & observability`, `God node` to the rest of the system?**
   _63 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `SOLID and design patterns` be split into smaller, more focused modules?**
   _Cohesion score 0.06327683615819209 - nodes in this community are weakly interconnected._
 - **Why does `Architecture styles` connect `marketplace-fa-en-architecture.md` to `Service-Oriented Architecture (SOA)`, `Strangler Fig Migration Pattern`, `Architecture concepts registry`, `SOLID and design patterns`, `API Gateway Architecture`, `Event Sourcing`, `Modular Frontend Architecture`, `Self-Contained Systems (SCS)`, `Serverless / Function-Oriented Architecture`?**
-  _High betweenness centrality (0.430) - this node is a cross-community bridge._
+  _High betweenness centrality (0.352) - this node is a cross-community bridge._
 - **Should `Blueprint backend and DB` be split into smaller, more focused modules?**
   _Cohesion score 0.07671957671957672 - nodes in this community are weakly interconnected._
 - **Why does `Knowledge` connect `SOLID and design patterns` to `marketplace-fa-en-architecture.md`?**
-  _High betweenness centrality (0.272) - this node is a cross-community bridge._
+  _High betweenness centrality (0.219) - this node is a cross-community bridge._
 - **Should `Architecture concepts registry` be split into smaller, more focused modules?**
   _Cohesion score 0.08108108108108109 - nodes in this community are weakly interconnected._

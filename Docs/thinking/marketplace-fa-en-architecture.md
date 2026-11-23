@@ -312,6 +312,7 @@ Order that teaches architecture **and** ships marketplace value:
 | Phase | Ship | Learn |
 |-------|------|-------|
 | **0** | Monorepo skeleton + `ui` tokens + `i18n` fa/en hello | pnpm/turbo boundaries |
+| **0b** | Hono structure + Postgres (`infra/`) + Drizzle + listing API | Follow [Docs/clouds/market-place-server](../clouds/market-place-server/README.md) |
 | **1** | Listing CRUD + localized fields + public listing page | Next RSC + Hono vertical slice + contracts |
 | **2** | Identity (buyer/seller) + host dashboard shell | Auth port, modular frontend |
 | **3** | Cart + order place/cancel + outbox email | Domain state machine, worker |

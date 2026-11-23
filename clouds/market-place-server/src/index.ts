@@ -1,19 +1,9 @@
-import { Hono } from "hono";
-import { cors } from "hono/cors";
+import { createApp } from "./create-app";
 
 const port = Number(process.env.PORT ?? 3000);
 const corsOrigin = process.env.CORS_ORIGIN ?? "http://localhost:5173";
 
-const app = new Hono();
-
-app.use(
-  "*",
-  cors({
-    origin: [corsOrigin],
-  }),
-);
-
-app.get("/health", (c) => c.json({ ok: true, service: "market-place-server" }));
+const app = createApp({ corsOrigin });
 
 export default {
   port,
