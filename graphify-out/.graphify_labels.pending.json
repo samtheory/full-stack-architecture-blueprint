@@ -1,5 +1,6 @@
 {
   "3": "react-next-hono-recommendations.md",
+  "4": "Optimistic UI sync example",
   "5": "Combination Deep Dives",
   "6": "API Gateway Architecture",
   "7": "Event Sourcing",
@@ -37,5 +38,11 @@
   "61": "Template Method pattern",
   "62": "Visitor pattern",
   "63": "marketplace-fa-en-architecture.md",
-  "64": "Marketplace (FA + EN) — React + Hono Monorepo Suggestion"
+  "64": "Marketplace (FA + EN) — React + Hono Monorepo Suggestion",
+  "65": "Package setup — shared `packages/*`",
+  "66": "Hono server setup — `clouds/market-place-server` (Bun or Node.js)",
+  "67": "React app setup — `apps/market-place-app`",
+  "68": "tasks",
+  "69": "package.json",
+  "70": "pnpm-workspace.yaml"
 }

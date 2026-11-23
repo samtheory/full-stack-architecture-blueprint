@@ -1,24 +1,46 @@
 # Walkthrough
 
-Step-by-step build guide for **Full-Stack Architecture Blueprint**.
-
-Use this when you (or an agent) implement the repo: **one step → one folder → do only that step**.
-
-Unlike [`../tech-space/`](../tech-space/README.md) (architecture *why* at the system level) and [`../knowledge/`](../knowledge/README.md) (concepts), this folder is an **ordered construction manual**: commands, decisions, files, and acceptance checks.
+Step-by-step build guide. Prefer the **Marketplace path** below for the current product. Older numbered blueprint steps remain as a teaching reference.
 
 ## How to use
 
-1. Finish open ADRs in [`../tech-space/decisions/`](../tech-space/decisions/README.md) if the step depends on them.
-2. Open the next numbered folder.
-3. Read **Goal → Why → Commands → Acceptance**.
-4. Implement only that step (or ask the agent: *“Implement walkthrough step NN”*).
-5. Check the acceptance list before moving on.
+1. Open the next step folder.
+2. Read **Goal → Why → Commands → Acceptance**.
+3. Run the commands yourself (or ask an agent to implement **only** that step).
+4. Check the acceptance list before moving on.
 
-## Step index
+---
+
+## Marketplace path (current)
+
+| Step | Folder | You do | Builds |
+|------|--------|--------|--------|
+| 01 | [01-monorepo-setup](01-monorepo-setup/README.md) | Done in repo | pnpm + Turborepo; `apps/` + `clouds/` + `packages/` |
+| 02 | [react-app-setup](react-app-setup/README.md) | Manual | Vite React app → `apps/market-place-app` |
+| 03 | [hono-server-setup](hono-server-setup/README.md) | Manual | Hono on Bun or Node → `clouds/market-place-server` |
+| 04 | [package-setup](package-setup/README.md) | Manual | First shared package `@marketplace/contracts` |
+
+### Target layout
+
+```text
+apps/
+  market-place-app/          # React client
+clouds/
+  market-place-server/       # Hono API (cloud deployable)
+packages/
+  contracts/                 # shared Zod DTOs (after package-setup)
+```
+
+Product architecture notes: [../thinking/marketplace-fa-en-architecture.md](../thinking/marketplace-fa-en-architecture.md)
+
+---
+
+## Blueprint teaching path (reference)
+
+Earlier learning sequence for the architecture blueprint (todo slice, multi-DB adapters, etc.). Use when studying the teaching curriculum — not required to start the marketplace.
 
 | Step | Folder | Builds |
 |------|--------|--------|
-| 01 | [01-monorepo-setup](01-monorepo-setup/README.md) | pnpm workspace + Turborepo skeleton |
 | 02 | [02-typescript-tooling](02-typescript-tooling/README.md) | Shared TS / ESLint / Prettier / scripts |
 | 03 | [03-domain-package](03-domain-package/README.md) | Pure domain (`packages/domain`) |
 | 04 | [04-application-layer](04-application-layer/README.md) | Use cases + ports |
@@ -34,6 +56,10 @@ Unlike [`../tech-space/`](../tech-space/README.md) (architecture *why* at the sy
 | 14 | [14-auth-session](14-auth-session/README.md) | Auth session example |
 | 15 | [15-optimistic-ui-sync](15-optimistic-ui-sync/README.md) | Optimistic UI sync |
 | 16 | [16-ci-and-graphify](16-ci-and-graphify/README.md) | CI + Graphify refresh |
+
+> Note: marketplace uses `clouds/market-place-server` and `apps/market-place-app`. Blueprint steps that say `apps/api` / `apps/web` are the older teaching names.
+
+---
 
 ## Document template (every step)
 
@@ -53,21 +79,8 @@ Unlike [`../tech-space/`](../tech-space/README.md) (architecture *why* at the sy
 ## Next step
 ```
 
-## Agent usage
-
-Paste the **Agent prompt** from a step folder, or say:
-
-```text
-Implement Docs/walkthrough/01-monorepo-setup only.
-Follow its README. Do not skip ahead.
-```
-
 ## Status legend
 
-Each step README ends with a status line:
-
-- `Status: not started` — no code yet
+- `Status: not started` — you have not done it yet
 - `Status: in progress`
 - `Status: done`
-
-Update the status when you complete a step.

@@ -288,9 +288,9 @@
     "semantic_hash": ""
   },
   "Docs/walkthrough/01-monorepo-setup/README.md": {
-    "mtime": 1795255992.913072,
-    "seen": 1795337019.671439,
-    "ast_hash": "c8a21248b9a0a8914d5887cba548a55f",
+    "mtime": 1795418676.4662406,
+    "seen": 1795418781.5121763,
+    "ast_hash": "11d44800da25aa264647b2b3b1323e69",
     "semantic_hash": ""
   },
   "Docs/walkthrough/02-typescript-tooling/README.md": {
@@ -384,15 +384,15 @@
     "semantic_hash": ""
   },
   "Docs/walkthrough/README.md": {
-    "mtime": 1795255968.8164768,
-    "seen": 1795337019.67145,
-    "ast_hash": "4dd554d2f32b9153209e4be8f44a4eee",
+    "mtime": 1795418754.0875716,
+    "seen": 1795418781.5121908,
+    "ast_hash": "17b29d39a4f6e16cb74bb07d7ec46fb7",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795275684.359251,
-    "seen": 1795337019.6714506,
-    "ast_hash": "e25b33bf91f5201fdf0169aa31cf6d7d",
+    "mtime": 1795418762.8689542,
+    "seen": 1795418781.5121942,
+    "ast_hash": "e590093390246f191c3f3af05beedefa",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/api-gateway.md": {
@@ -627,6 +627,48 @@
     "mtime": 1795357840.9104555,
     "seen": 1795357845.93302,
     "ast_hash": "297a0c32d41d80e94f231a1716eb901f",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1795418654.9662266,
+    "seen": 1795418781.5120862,
+    "ast_hash": "14697ddb7f227f27c9c2e04a2c8864b9",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1795418655.2609193,
+    "seen": 1795418781.5120907,
+    "ast_hash": "a9860db67333bd04350cc2184a5537c8",
+    "semantic_hash": ""
+  },
+  "turbo.json": {
+    "mtime": 1795418656.2805266,
+    "seen": 1795418781.5120924,
+    "ast_hash": "b6fe4852fc5f4e9df50323c05b576707",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/hono-server-setup/README.md": {
+    "mtime": 1795418723.2456765,
+    "seen": 1795418781.5121915,
+    "ast_hash": "2089f89cd08cedd40ccc161892044796",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/package-setup/README.md": {
+    "mtime": 1795418744.4933023,
+    "seen": 1795418781.5121925,
+    "ast_hash": "6cc6c3b30ce225e70e3a98bc92a8196a",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/react-app-setup/README.md": {
+    "mtime": 1795418698.784781,
+    "seen": 1795418781.5121932,
+    "ast_hash": "8cd225f7ca4a85fb35bd836cc5850ca7",
+    "semantic_hash": ""
+  },
+  "pnpm-lock.yaml": {
+    "mtime": 1795418669.0753176,
+    "seen": 1795418781.5121949,
+    "ast_hash": "1cb19c5a3bfa405b4bb15049e0f4c619",
     "semantic_hash": ""
   }
 }

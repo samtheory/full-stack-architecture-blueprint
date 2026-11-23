@@ -2,7 +2,7 @@
 
 Open-source, interview-ready learning monorepo. It teaches software architecture, design patterns, SOLID, and production-quality engineering through **working examples**—not theory alone.
 
-> **Status:** documentation-first. The Docs layer and project blueprint exist; the runnable monorepo (apps/packages) comes next after blueprint approval.
+> **Status:** monorepo skeleton is up (pnpm + Turborepo). Scaffold React (`apps/market-place-app`) and Hono (`clouds/market-place-server`) via the Marketplace walkthrough path.
 
 ## What this repository is
 
@@ -21,24 +21,23 @@ Open-source, interview-ready learning monorepo. It teaches software architecture
 
 ```text
 .
-├── README.md                 # You are here — project overview and how to navigate
-├── Docs/                     # Learning docs, architecture, examples, knowledge
-│   ├── .brain/               # Graphify-friendly index (concepts, links, query guide)
-│   ├── tech-space/           # Project + technical architecture and ADRs
-│   ├── walkthrough/          # Step-by-step build (monorepo → slice → adapters → CI)
-│   ├── knowledge/            # SOLID, architecture styles, patterns, React lifecycle
-│   └── examples/             # Cross-layer use cases (web, mobile, API, DB)
-├── .graphifyignore           # Keep Graphify focused on high-signal sources
+├── README.md
+├── package.json              # pnpm workspace root + turbo scripts
+├── pnpm-workspace.yaml       # apps/* · clouds/* · packages/*
+├── turbo.json
+├── apps/
+│   └── market-place-app/     # React client (scaffold next — see walkthrough)
+├── clouds/
+│   └── market-place-server/  # Hono API (scaffold next — see walkthrough)
+├── packages/                 # Shared libs (start with contracts)
+├── Docs/
+│   ├── thinking/             # Marketplace architecture suggestion
+│   ├── walkthrough/          # Marketplace path + blueprint teaching path
+│   ├── tech-space/
+│   ├── knowledge/
+│   └── examples/
+├── .graphifyignore
 └── .gitignore
-```
-
-Planned after approval (not created yet):
-
-```text
-apps/web          # Next.js web app
-apps/mobile       # Capacitor + React
-apps/api          # Hono API
-packages/*        # Shared domain, contracts, DB adapters, UI, config
 ```
 
 ## Documentation map
@@ -65,7 +64,7 @@ Each knowledge topic uses a consistent shape:
 
 1. Read [Docs/tech-space/project-blueprint.md](Docs/tech-space/project-blueprint.md) for scope and decisions.
 2. Skim [Docs/.brain/CONCEPTS.md](Docs/.brain/CONCEPTS.md) so terms stay consistent.
-3. Build with [Docs/walkthrough/](Docs/walkthrough/README.md) — one numbered step at a time (start at `01-monorepo-setup`).
+3. Build with [Docs/walkthrough/](Docs/walkthrough/README.md) — Marketplace path: monorepo → react-app-setup → hono-server-setup → package-setup.
 4. Study [Docs/knowledge/solid/](Docs/knowledge/solid/README.md) and one architecture style that matches your current problem.
 5. Walk [Docs/examples/vertical-slice-todo/](Docs/examples/vertical-slice-todo/README.md) as the first end-to-end story.
 6. Compare patterns in [Docs/knowledge/design-patterns/](Docs/knowledge/design-patterns/README.md) against the same example.
