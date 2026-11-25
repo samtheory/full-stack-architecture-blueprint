@@ -7,6 +7,7 @@ Full concept depth for architecture/patterns already lives in [`../knowledge/`](
 
 | Doc | Purpose |
 |-----|---------|
+| [`../../resume-architect.md`](../../resume-architect.md) | **Continue on another PC** — progress + setup + prompts |
 | [`PLAN.md`](PLAN.md) | Phased implementation of lessons (what we write next) |
 | [`TRACKS.md`](TRACKS.md) | Study order from foundations → CTO |
 | [`LADDER.md`](LADDER.md) | Dummy → Working → Rich → CTO lesson shape |

@@ -2,6 +2,8 @@
 
 Open-source, interview-ready learning monorepo. It teaches software architecture, design patterns, SOLID, and production-quality engineering through **working examples**—not theory alone.
 
+**Continue on another PC:** see [`resume-architect.md`](resume-architect.md) (progress, pull/push, architect prompts).
+
 > **Status:** monorepo skeleton is up (pnpm + Turborepo). Scaffold React (`apps/market-place-app`) and Hono (`clouds/market-place-server`) via the Marketplace walkthrough path.
 
 ## What this repository is

@@ -16,6 +16,7 @@ Status: `doc` = documented only; `planned` = will appear in code; `code` = imple
 | Architecture Course | doc | [../knowledge/COURSE.md](../knowledge/COURSE.md) |
 | Career Course | doc | [../course/README.md](../course/README.md) |
 | Career Course Plan | doc | [../course/PLAN.md](../course/PLAN.md) |
+| Resume Architect Handoff | doc | [../../resume-architect.md](../../resume-architect.md) |
 | Foundations HTTP | doc | [../course/00-foundations/FD-02-http.md](../course/00-foundations/FD-02-http.md) |
 | TypeScript for Architects | doc | [../course/00-foundations/FD-03-typescript.md](../course/00-foundations/FD-03-typescript.md) |
 | Git Workflows | doc | [../course/00-foundations/FD-05-git.md](../course/00-foundations/FD-05-git.md) |

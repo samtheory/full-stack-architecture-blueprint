@@ -13,6 +13,7 @@ WHY: Agents and humans should enter through a small index instead of loading eve
 | Graphify query recipes | [QUERY-GUIDE.md](QUERY-GUIDE.md) |
 | Full project blueprint | [../tech-space/project-blueprint.md](../tech-space/project-blueprint.md) |
 | Career course (plans → CTO) | [../course/README.md](../course/README.md) |
+| Resume on another PC | [../../resume-architect.md](../../resume-architect.md) |
 | Course implementation phases | [../course/PLAN.md](../course/PLAN.md) |
 | Architecture knowledge tracks | [../knowledge/COURSE.md](../knowledge/COURSE.md) |
 | Step-by-step build | [../walkthrough/README.md](../walkthrough/README.md) |
