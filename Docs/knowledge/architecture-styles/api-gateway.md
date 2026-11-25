@@ -1,14 +1,33 @@
 # API Gateway Architecture
 
-## One-line Definition
+## One-line definition
 
 An API Gateway is a **single entry point** in front of backend services that handles routing, authentication, rate limiting, TLS termination, and cross-cutting policies — without owning core business domain logic.
 
-## Problem It Solves
+## Problem it solves
 
 Clients should not know the internal topology of microservices or SCS backends. A gateway centralizes edge concerns (auth, routing, quotas, request IDs) so each service stays focused on its capability.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Single front door: auth, rate limit, route to services or monolith modules.
+
+```mermaid
+flowchart LR
+  Clients[Web / mobile] --> GW[API Gateway]
+  GW --> API1[Hono API]
+  GW --> API2[Legacy]
+```
+
+**Why it exists:** cross-cutting edge policy without duplicating it in every route file.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Multiple backend services reachable by external clients
 - Need centralized authN/authZ, rate limits, IP allowlists, or WAF policies
@@ -16,14 +35,14 @@ Clients should not know the internal topology of microservices or SCS backends. 
 - Multi-team backend with a shared edge platform
 - Mobile/web clients need a stable external hostname
 
-## When Not to Use It
+### When not
 
 - Single Hono modular monolith — the app itself is the entry point
 - Gateway becomes a second BFF full of business orchestration
 - Tiny MVP where Cloudflare/nginx basics already suffice without “architecture”
 - Using a gateway to hide a distributed monolith’s chatty internals forever
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +55,7 @@ Clients should not know the internal topology of microservices or SCS backends. 
 | Marketplace / booking system | Good | At multi-service scale |
 | Internal admin panel | Medium | Often VPN + one API; gateway optional |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Integration / edge topology**. Not a frontend folder design and not a domain model.
 
@@ -47,7 +66,9 @@ In React + Next.js + Hono:
 - Do not put booking invariants in gateway config plugins
 - Stripe webhooks often bypass generic client gateway paths with dedicated routes
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Gateway handles cross-cutting edge policies, not domain workflows
 - Route by path/host to services; keep path contracts versioned
@@ -57,7 +78,8 @@ In React + Next.js + Hono:
 - Distinguish gateway (edge) from BFF (client-specific aggregation)
 - Observability: correlation IDs injected at the gateway
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart LR
@@ -75,7 +97,8 @@ flowchart LR
   GW --> Identity
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -130,7 +153,8 @@ routes:
     auth: stripe-signature
 ```
 
-## Implementation Example
+### TypeScript
+
 
 Lightweight gateway-ish edge with Hono (for small multi-service setups):
 
@@ -157,7 +181,10 @@ export default app;
 
 Prefer managed gateways (Kong, AWS API Gateway, Cloudflare) as you scale; keep this pattern for clarity of responsibilities.
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** auth middleware and routing rules
 - **Integration:** gateway → stub upstreams
@@ -165,7 +192,16 @@ Prefer managed gateways (Kong, AWS API Gateway, Cloudflare) as you scale; keep t
 - **E2E:** client through gateway to real services in staging
 - **Mocking:** stub upstreams for gateway policy tests; do not “mock away” auth
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Auth only in one service | Gateway JWT validation |
+| Wrong route weight in strangler | Config review + metrics |
+| Rate limit bypass via direct internal URL | Network policy |
+
+### Anti-patterns
+
 
 - Business orchestration in the gateway (checkout saga in Lua/plugins)
 - Double auth confusion — gateway checks JWT but services trust all internal calls blindly without service auth
@@ -173,7 +209,31 @@ Prefer managed gateways (Kong, AWS API Gateway, Cloudflare) as you scale; keep t
 - Exposing every internal path 1:1 forever without an external contract
 - Collapsing BFF and gateway into one unmaintainable layer
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Gateway cost |
+|-----------|--------------|
+| Team | Edge policy centralization |
+| Delivery | Faster security rollout; risk if gateway becomes god-router |
+| Ops | Another tier to monitor; TLS, WAF, rate limits |
+| Evolution | Start with Hono middleware + reverse proxy; managed gateway at scale |
+
+### ADR triggers
+
+Managed gateway vendor · JWT validation at edge · routing to strangler paths.
+
+### Automate
+
+- Infrastructure-as-code for routes
+- Smoke tests through gateway on every deploy
+
+## Migration
+
 
 1. Single Hono API with path prefixes per module
 2. Extract services; keep one hostname via reverse proxy
@@ -181,15 +241,10 @@ Prefer managed gateways (Kong, AWS API Gateway, Cloudflare) as you scale; keep t
 4. Document external `/v1` contracts separately from internal URLs
 5. Introduce BFF only when client aggregation demands it
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Microservices | Natural combination | Standard edge pattern |
-| SOA | Natural combination | Capability routing |
-| BFF | Possible but requires discipline | Complementary, not interchangeable |
-| Serverless | Natural combination | Managed API Gateway + functions |
-| Modular monolith | Usually avoid as required | Optional reverse proxy only |
-| SCS | Possible but requires discipline | Gateway/portal for entry; systems stay autonomous |
-| DDD | Natural combination | Orthogonal — domain inside services |
-| Event-Driven | Possible but requires discipline | Gateway is sync edge; events are async internals |
+[BFF](bff.md) · [Strangler fig](strangler-fig.md) · [Microservices](microservices.md)
+
+## Where in this repo
+
+Edge routing for [strangler-fig.md](strangler-fig.md) and future multi-service deploys.

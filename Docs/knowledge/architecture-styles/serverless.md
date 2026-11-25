@@ -1,14 +1,33 @@
 # Serverless / Function-Oriented Architecture
 
-## One-line Definition
+## One-line definition
 
 Serverless architecture structures the backend as **independently deployable functions** (and managed services) that scale per invocation, with the cloud provider owning servers, often wired through HTTP APIs, queues, and events.
 
-## Problem It Solves
+## Problem it solves
 
 Always-on servers cost money at low traffic and require ops for scaling. Function-oriented design pushes discrete units of work (HTTP handlers, queue consumers, cron) into isolated deployables that scale to zero and bill per use — at the cost of distributed complexity.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Functions + managed services instead of long-running pods. Events or HTTP trigger short-lived handlers.
+
+```mermaid
+flowchart LR
+  Edge[API Gateway / HTTP] --> Fn[Hono on Lambda / Worker]
+  Fn --> DB[(Dynamo / Postgres)]
+  Queue[Queue] --> Fn2[Consumer function]
+```
+
+**Why it exists:** pay per use and scale to zero when traffic is spiky.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Spiky or unpredictable traffic
 - Many discrete async jobs (webhooks, image processing, notifications)
@@ -16,7 +35,7 @@ Always-on servers cost money at low traffic and require ops for scaling. Functio
 - Event-driven integrations with cloud primitives (SQS, EventBridge, Cloudflare Queues)
 - Endpoints that fit short execution time limits
 
-## When Not to Use It
+### When not
 
 - Long-lived WebSocket-heavy workloads without the right platform support
 - Tight transactional workflows across many functions without a monolith boundary
@@ -24,7 +43,7 @@ Always-on servers cost money at low traffic and require ops for scaling. Functio
 - Team without observability for distributed traces and retries
 - Rewriting a coherent modular monolith into dozens of functions prematurely
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -37,7 +56,7 @@ Always-on servers cost money at low traffic and require ops for scaling. Functio
 | Marketplace / booking system | Medium | Good for webhooks/async; core booking often better as long-lived API |
 | Internal admin panel | Medium | Low traffic suits scale-to-zero |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 Primarily a **deployment topology** for backend (and sometimes Next.js hosting). Not a UI folder strategy.
 
@@ -48,7 +67,9 @@ In React + Next.js + Hono:
 - Prefer a modular monolith codebase that **can** deploy as one server *or* as functions — avoid designing business modules as one-file lambdas from day one
 - Postgres/Supabase needs serverless-friendly pooling (e.g. PgBouncer / Supabase pooler)
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Each function has a clear trigger (HTTP, queue, cron) and a single job
 - Share domain logic via packages — do not copy-paste business rules into each function
@@ -58,7 +79,8 @@ In React + Next.js + Hono:
 - Secrets and DB connections configured per platform limits
 - Avoid chatty function-to-function sync call chains (distributed monolith)
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -76,7 +98,8 @@ flowchart TB
   FnHook --> DB
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -121,7 +144,8 @@ packages/booking-domain/
 packages/events/
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // apps/api/src/http/stripe-webhook.ts
@@ -153,7 +177,10 @@ import { app } from "./app";
 export const handler = handle(app);
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** domain/application with fake ports
 - **Integration:** function handler with local queue/DB emulators
@@ -161,7 +188,16 @@ export const handler = handle(app);
 - **E2E:** deploy preview + real managed queue in staging
 - **Mocking:** mock Stripe/SDK at adapter boundary; do not mock the whole handler away from routing tests
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Cold start SLO miss | Provisioned concurrency / keep-warm |
+| VPC DB connection storm | Pooler / connection limits |
+| Function timeout on batch | Split job or queue worker |
+
+### Anti-patterns
+
 
 - One giant Lambda that is a monolith with worse ops
 - Sync fan-out across many functions for one user request
@@ -169,7 +205,31 @@ export const handler = handle(app);
 - Embedding secrets in code; missing idempotency on webhooks
 - Designing folder structure around vendor triggers instead of business modules
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Serverless cost |
+|-----------|-----------------|
+| Team | Cold starts, vendor limits, local dev friction |
+| Delivery | Fast for event spikes; awkward for long TCP/websockets |
+| Ops | Per-invocation billing; IAM complexity |
+| Evolution | Extract hot path back to long-running Hono when costs spike |
+
+### ADR triggers
+
+Runtime choice (Workers vs Lambda) · VPC to Postgres · max execution time.
+
+### Automate
+
+- IaC for function + queue wiring
+- Load tests on cold-start SLO
+
+## Migration
+
 
 1. Keep modular Hono monolith on a long-lived server
 2. Extract webhook and cron paths to serverless entries first
@@ -177,15 +237,10 @@ export const handler = handle(app);
 4. Share packages for domain logic
 5. Only split core HTTP API if scaling/cost evidence demands it
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Event-Driven | Natural combination | Queues/bus are the backbone |
-| CQRS | Natural combination | Command/query functions + projectors |
-| BFF | Possible but requires discipline | Next.js serverless BFF in front of APIs |
-| Modular monolith | Possible but requires discipline | Code monolith, function deploy entries |
-| Microservices | Possible but requires discipline | Functions ≠ well-bounded services automatically |
-| Plugin architecture | Possible but requires discipline | Plugins as separately deployed functions |
-| Event Sourcing | Possible but requires discipline | Projectors as functions |
-| Heavy always-on monolith only | Usually avoid | Conflicting deploy assumptions if forced everywhere |
+[Event-driven](event-driven.md) · [API gateway](api-gateway.md) · [BFF](bff.md)
+
+## Where in this repo
+
+Contrast with default long-running Hono in [backend-architecture.md](../../tech-space/backend-architecture.md).

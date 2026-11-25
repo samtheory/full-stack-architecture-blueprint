@@ -1,113 +1,266 @@
 # Layered architecture
 
-## What it is
+## One-line definition
 
-Organize code into technical layers (e.g. presentation → application → domain → infrastructure), typically calling **downward**.
+Organize code into **technical layers** (presentation → application → domain → infrastructure). Dependencies call **downward** (or inward toward domain). Folders answer “what *kind* of work is this?” — not “which product feature is this?”
 
-## When to use
+## Problem it solves
 
-- Small/medium apps
-- Team already thinks in controllers/services/repositories
-- Teaching first separation of concerns
+Without layers, HTTP handlers contain SQL, UI components contain business rules, and every change risks breaking unrelated concerns. Layering gives a first, teachable separation of concerns.
 
-## When not to use
+---
 
-- Layers become dumping grounds (`service` does everything)
-- You need multiple entry points with strong domain isolation (consider hexagonal)
+## 1. Dummy — 30-second picture
 
-## Good practice
+Four boxes stacked. The top talks HTTP/UI. The bottom talks SQL/files. Rules live in the middle. Arrows only go down.
 
-- Dependencies point inward/down to domain
-- Keep layers thin; name by responsibility
+```mermaid
+flowchart TB
+  P[Presentation — routes / screens]
+  A[Application — orchestration]
+  D[Domain — rules / invariants]
+  I[Infrastructure — DB / HTTP clients / SDKs]
+  P --> A --> D
+  A --> I
+```
 
-## Bad / worst practice
+**Why it exists:** so “change the status code” and “change the title rule” are not the same edit.
 
-- **Bad:** domain calling UI helpers
-- **Worst:** every feature touches all layers with copy-paste
+---
 
-## Trade-offs
+## 2. When to use / when not
 
-Easy to explain; can encourage anemic “pass-through” services.
+### When to use
 
-## Folder structure
+- Small/medium apps and teaching first separation of concerns
+- Team already thinks in controllers / services / repositories
+- One primary entry point (one API, one UI) and moderate domain depth
 
-Folders are cut by **technical job**. Every feature passes through the same four layers, and a layer calls the one below it. Presentation knows application. Application knows domain and the repository interface it uses. Infrastructure implements storage. Domain knows only its own rules.
+### When not to use
 
-The example is a small Notion-style API and editor: rename a page, and list comments. The product is still one app, so a technical cut is enough.
+- Layers become dumping grounds (`*Service` does everything)
+- Many entry points (web, mobile, CLI, workers) need the same core → prefer [hexagonal](hexagonal.md)
+- Product changes are feature-shaped and reviews hurt across four folders → prefer [vertical slice](vertical-slice.md) inside modules
 
-### Hono
+### Fit by application type
 
-**Why this tree.** A route, a service, a rule, and SQL change for different reasons. Putting them in four folders makes that split visible on day one, which matches how many teams already say “controller, service, repository.”
+| Application type | Fit | Why |
+|------------------|-----|-----|
+| Small React SPA | Good | Clear component / hook / client split |
+| Next.js App Router | OK | Easy to over-layer RSC + hooks + services |
+| Hono API | Good | Route → service → domain → repo is familiar |
+| Background worker | OK | Often one “application” entry + infra |
+| Marketplace | OK early | Outgrows flat layers as modules appear |
+| Admin CRUD | Good | Thin domain; layers stay honest |
+
+### Frontend, backend, or both?
+
+**Both.** Same four *jobs* on API and UI; names differ (route vs screen, repository vs `fetch` client).
+
+---
+
+## 3. Working — folders and a thin example
+
+### Core rules
+
+1. Presentation may call application; never SQL or vendor SDKs.
+2. Application orchestrates; it may depend on domain and on **repository interfaces** (or concrete repos in a first lesson — upgrade to ports later).
+3. Domain has **no** Hono, React, Next, Drizzle, or `fetch`.
+4. Infrastructure implements storage and outbound I/O; it may be constructed only in a composition root (`main.ts` / providers).
+5. A feature change that only touches presentation should not require domain edits.
+
+### Dependency diagram (this monorepo)
+
+```mermaid
+flowchart TB
+  subgraph apps_api["apps/api"]
+    routes[presentation/routes]
+    services[application/services]
+    domain[domain/*]
+    repos[infrastructure/*Repository]
+    routes --> services
+    services --> domain
+    services --> repos
+  end
+
+  subgraph apps_web["apps/web"]
+    ui[presentation/components]
+    hooks[application/hooks]
+    rules[domain/* pure]
+    client[infrastructure/*-client]
+    ui --> hooks
+    hooks --> rules
+    hooks --> client
+  end
+
+  client -->|HTTP| routes
+  repos --> DB[(Postgres)]
+```
+
+### Folder structure — Hono
 
 ```text
 apps/api/src/
   presentation/
-    pages.route.ts                     # PATCH /pages/:id — Zod, status codes
-    comments.route.ts                  # GET /pages/:id/comments
+    pages.route.ts          # PATCH /pages/:id — Zod, status codes
+    comments.route.ts
   application/
-    page.service.ts                    # renamePage orchestrates the rule and the save
+    page.service.ts         # renamePage orchestrates rule + save
     comment.service.ts
   domain/
-    page.ts                            # assertTitle: trimmed title required
+    page.ts                 # assertTitle
     comment.ts
   infrastructure/
     postgres-page.repository.ts
     postgres-comment.repository.ts
-  main.ts                              # infrastructure → services → routes
+  main.ts                   # wire repo → service → routes
 ```
 
-**Example.** `PATCH /pages/p1` with `{ "title": "  " }`. `pages.route.ts` parses the body. `page.service.ts` calls `assertTitle`. The empty title throws in `domain/page.ts`, and the route maps it to `400`. A real title is written in `postgres-page.repository.ts`. `main.ts` is the only file that constructs the repository and hands it to the service.
-
-**Benefits**
-
-- HTTP status codes live in `presentation`. SQL lives in `infrastructure`.
-- `assertTitle` is a unit test with no Hono server and no database.
-- A new hire can answer “where is the route?” and “where is the query?” from the folder names.
-
-**Cost**
-
-- Rename, share, and export all land in `page.service.ts`, so the service becomes the dumping ground.
-- One product change is a horizontal slice across four folders, which makes the review harder to follow.
-- The service often does nothing but forward arguments, because the interesting rule was never written down in `domain`.
-
-### React
-
-**Why this tree.** The same four jobs exist in the editor. The screen renders. A hook runs the submit. A pure function checks the title for fast feedback. An HTTP module owns `fetch`. Familiar aliases: presentation ≈ components, application ≈ hooks, infrastructure ≈ the API client.
+### Folder structure — React
 
 ```text
 apps/web/src/
   presentation/
-    page-editor.tsx                    # title input, error text, save button
+    page-editor.tsx
     comment-list.tsx
   application/
-    use-rename-page.ts                 # pending state, submit, map 400 to a message
+    use-rename-page.ts
     use-comments.ts
   domain/
-    page-title.ts                      # assertTitle for the form, same rule as the API
+    page-title.ts           # same assertTitle idea as API
   infrastructure/
-    page-client.ts                     # fetch PATCH /pages/:id
+    page-client.ts
     comment-client.ts
-  main.tsx
 ```
 
-**Example.** The editor submits `"Launch plan"`. `page-editor.tsx` reads the input and calls `use-rename-page`. The hook calls `assertTitle`, then `page-client.ts`. On `400` the hook sets the error string. The component renders that string next to the input. The API remains the authority for the rule; the copy in `domain/page-title.ts` exists so the field can fail before the round trip.
+### TypeScript — worst vs best (API)
 
-**Benefits**
+```ts
+// ❌ Worst: route owns HTTP + rule + SQL
+app.patch("/pages/:id", async (c) => {
+  const title = (await c.req.json()).title?.trim();
+  if (!title) return c.json({ error: "empty" }, 400);
+  await db.execute("UPDATE pages SET title = ? WHERE id = ?", [title, c.req.param("id")]);
+  return c.json({ ok: true });
+});
 
-- A visual change to the editor stays in `presentation`.
-- The URL and headers stay in `page-client.ts`, so a second screen can rename a page through the same client.
-- `assertTitle` is tested without rendering.
+// ✅ Better: layers own different reasons to change
+// domain/page.ts
+export function assertTitle(raw: string): string {
+  const title = raw.trim();
+  if (!title) throw new DomainError("TITLE_EMPTY");
+  return title;
+}
 
-**Cost**
+// application/page.service.ts
+export function createPageService(pages: PageRepository) {
+  return {
+    async rename(id: string, rawTitle: string) {
+      const title = assertTitle(rawTitle);
+      await pages.saveTitle(id, title);
+      return { id, title };
+    },
+  };
+}
 
-- A one-field form is spread across a component, a hook, a pure function, and a client. The hook often only forwards the click.
-- Comments and pages duplicate the four-folder walk even when they share no rule.
-- Once `page-editor.tsx` imports `page-client.ts` directly, the application layer is a folder nobody calls.
+// presentation/pages.route.ts — parse, call service, map DomainError → 400
+```
+
+### TypeScript — React edge
+
+```tsx
+// ❌ Component fetches + validates + renders
+async function onSave() {
+  if (!title.trim()) { setError("empty"); return; }
+  await fetch(`/api/pages/${id}`, { method: "PATCH", body: JSON.stringify({ title }) });
+}
+
+// ✅ Screen → hook → domain + client
+function PageEditor() {
+  const { title, setTitle, error, save, pending } = useRenamePage(id);
+  return (/* inputs bound to hook only */);
+}
+```
+
+---
+
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing without infra
+
+| Seam | Test without |
+|------|----------------|
+| `assertTitle` | No Hono, no DB |
+| `page.service.rename` with in-memory repo | No Postgres |
+| Route mapping `TITLE_EMPTY` → 400 | Mock service |
+
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Empty title | Domain → `DomainError` |
+| Unknown page id | Repository / application → 404 mapping in presentation |
+| DB down | Infrastructure → 503 mapping; do not catch inside domain |
+| Network error on web | Hook → user-visible retry; do not reimplement tax/rules |
+
+### Anti-patterns
+
+- Anemic `page.service` that only forwards to the repo with zero rules
+- Domain importing `drizzle-orm` “just this once”
+- Presentation importing infrastructure clients on the server *and* embedding SQL
+- Copy-paste of the four folders for every tiny DTO with no rule
+
+### Upgrade path inside this style
+
+When a second DB or Stripe appears, extract **ports** at the application boundary and move to [hexagonal](hexagonal.md) without renaming the whole product.
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Layered cost |
+|-----------|----------------|
+| Team | Easy onboarding; risk of god-services |
+| Delivery | Feature PRs touch many folders (horizontal slices) |
+| Ops | One deployable still fine |
+| Evolution | Cheap early; expensive when modules blur |
+
+### Evolution
+
+1. Start layered for teaching / MVP.
+2. Introduce **vertical slices** inside the API when services bloat.
+3. Introduce **module public APIs** ([modular monolith](modular-monolith.md)).
+4. Harden edges with ports ([hexagonal](hexagonal.md) / [clean](clean.md)).
+
+### ADR triggers
+
+Open an ADR when you: add a second persistence engine; split a god-service into modules; or forbid cross-layer imports via ESLint boundaries.
+
+### Automate
+
+- ESLint `no-restricted-imports`: `domain/**` cannot import `hono` / `react` / ORM
+- CI path filters that fail if `presentation` imports `infrastructure` SQL modules
+
+---
+
+## Common mistakes
+
+1. Naming folders `services/` and putting SQL there.
+2. “Business logic” that is only DTO mapping — still anemic.
+3. Sharing one `AppService` across the whole product.
+
+## Migration
+
+- **From ball-of-mud:** extract domain functions first, then repositories, then thin routes.
+- **To vertical slice:** keep domain pure; move route+handler+repo of one feature into one folder.
+- **To hexagonal:** replace concrete repo types in application with ports; move SQL to adapters.
 
 ## Related concepts
 
-Clean Architecture, SRP
+[Clean](clean.md) · [Hexagonal](hexagonal.md) · [Vertical slice](vertical-slice.md) · [SRP](../solid/01-S.md) · [Repository](../design-patterns/repository.md)
 
 ## Where in this repo
 
-Mental model for early vertical slice before introducing ports language.
+Mental model for early walkthrough steps before ports language. See [`../../tech-space/backend-architecture.md`](../../tech-space/backend-architecture.md) and walkthrough domain/application steps.

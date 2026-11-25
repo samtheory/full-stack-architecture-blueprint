@@ -2,7 +2,15 @@
 
 Patterns used **because an example needs them**, not to fill a catalog.
 
-Each page keeps: what / when / when not / good / bad / trade-offs, a **Persian description**, and a **real example** (Hono API + React UI). Stories: Notion-style editor, marketplace checkout, chat. Snippets teach the pattern — they are not a runnable app.
+Each page follows the **dummy → CTO ladder** (see [`../_PAGE-TEMPLATE.md`](../_PAGE-TEMPLATE.md) and the architecture course [`../COURSE.md`](../COURSE.md)):
+
+1. **Dummy** — Mermaid diagram + one sentence why  
+2. **When / when not · Good · Bad**  
+3. **Working** — Hono worst/best + React worst/best TypeScript  
+4. **Rich** — edge cases · testing seams  
+5. **CTO** — overuse signals · monorepo placement (`apps/` vs `packages/`)
+
+Every page also keeps a **Persian description** (توضیح فارسی) and **enterprise stories**: Notion-style editor, marketplace checkout, chat. Snippets teach the pattern — they are not a runnable app.
 
 GoF groups patterns by intent: **Creational** (how objects are created), **Structural** (how objects are composed), **Behavioral** (how objects communicate and share responsibility). This repo also keeps a short **Data & composition** group for Repository and Dependency Injection, which show up constantly in enterprise apps but are not classic GoF names.
 
@@ -64,5 +72,6 @@ GoF groups patterns by intent: **Creational** (how objects are created), **Struc
 ## How to read
 
 1. Pick the category that matches your problem (create / compose / communicate).
-2. Open the pattern page: English guide + **توضیح فارسی** + Hono / React example.
-3. Prefer patterns that already appear in [`../examples/`](../../examples/README.md) when the monorepo code lands.
+2. On each page: **Dummy** diagram first, then **Working** snippets, then **CTO** placement.
+3. Follow [`../COURSE.md`](../COURSE.md) track A (foundations) and B when patterns tie to architecture styles.
+4. Prefer patterns that already appear in [`../../examples/README.md`](../../examples/README.md) when the monorepo code lands.

@@ -1,14 +1,34 @@
 # Event Sourcing
 
-## One-line Definition
+## One-line definition
 
 Event Sourcing stores the **sequence of domain events** as the source of truth for state; the current state is derived by replaying or projecting those events, rather than only persisting the latest row snapshot.
 
-## Problem It Solves
+## Problem it solves
 
 When you need a complete audit trail, time-travel debugging, rebuildable read models, or complex temporal business questions (“what was the booking state at time T?”), overwriting rows loses history. Event Sourcing keeps every change as an immutable fact.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+No "current row" as truth — append **events**; rebuild state by folding them. Snapshots optional.
+
+```mermaid
+flowchart LR
+  CMD[Command] --> Ev[Append event]
+  Ev --> Stream[(Event stream)]
+  Stream --> Proj[Projection / snapshot]
+  Proj --> Q[Queries]
+```
+
+**Why it exists:** audit, time travel, and multiple read models from one fact log.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Strong audit, compliance, or dispute requirements
 - Need to rebuild projections in multiple shapes from the same history
@@ -16,7 +36,7 @@ When you need a complete audit trail, time-travel debugging, rebuildable read mo
 - Team skilled in versioning, snapshots, and idempotent projections
 - High long-term maintenance budget for infrastructure complexity
 
-## When Not to Use It
+### When not
 
 - Typical SaaS CRUD without audit/replay needs
 - Team new to messaging and eventual consistency
@@ -24,7 +44,7 @@ When you need a complete audit trail, time-travel debugging, rebuildable read mo
 - Low-complexity domains where event versioning will dominate delivery
 - Using ES only because “CQRS is cool”
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -37,7 +57,7 @@ When you need a complete audit trail, time-travel debugging, rebuildable read mo
 | Marketplace / booking system | Medium | Useful for disputes/payments history; costly if blanket |
 | Internal admin panel | Medium | Audit value; often overkill for the whole panel |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Backend / read-write design** (persistence strategy). Frontend consumes projections and sends commands — it does not store event streams.
 
@@ -47,7 +67,9 @@ In React + Next.js + Hono:
 - Workers/projectors build SQL read models for Next.js and TanStack Query
 - Never expose raw event streams as the primary UI API unless building an audit viewer
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Events are immutable; corrections are new events (`BookingCancellationCorrected`)
 - Load aggregate by streaming events for its identity (optionally from snapshot)
@@ -57,7 +79,8 @@ In React + Next.js + Hono:
 - Version events; upcasters or dual-read strategies required for old payloads
 - Domain must not depend on React/Hono/ORM query builders
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -75,7 +98,8 @@ flowchart TB
   Agg -->|load history| Store
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -123,7 +147,8 @@ apps/api/
 apps/worker/
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // domain/events.ts
@@ -179,7 +204,10 @@ export async function confirmBooking(bookingId: string, store: EventStore) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** aggregate decide/apply pure functions; upcasters
 - **Integration:** append/load concurrency (optimistic version checks)
@@ -187,7 +215,16 @@ export async function confirmBooking(bookingId: string, store: EventStore) {
 - **E2E:** command → projection visible in UI
 - **Mocking:** in-memory event store for aggregate tests; real store for projector tests
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Corrupt projection | Rebuild from stream; snapshot checkpoint |
+| Unknown event version | Upcaster in application boot |
+| Unbounded stream growth | Snapshot + archival policy |
+
+### Anti-patterns
+
 
 - Event Sourcing the entire product instead of one bounded context
 - Mutable “updates” to old events
@@ -195,7 +232,37 @@ export async function confirmBooking(bookingId: string, store: EventStore) {
 - No snapshots → aggregates with huge streams become slow
 - Confusing audit logs (append-only table of changes to a row model) with true ES
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | ES cost |
+|-----------|---------|
+| Team | High — versioning, migrations, debugging streams |
+| Delivery | Excellent audit; slower feature iteration |
+| Ops | Stream storage, snapshot jobs, replay tooling |
+| Evolution | Only after DDD aggregate boundaries are stable |
+
+### Evolution
+
+1. Audit/outbox events without making them source of truth.
+2. One aggregate stream + snapshots when replay cost hurts.
+3. Pair with [CQRS](cqrs.md) projections; keep other contexts state-based.
+
+### ADR triggers
+
+Choosing ES for a context · snapshot strategy · GDPR delete on streams.
+
+### Automate
+
+- Upcasters in CI for every event version bump
+- Projection rebuild scripts in staging before prod deploy
+
+## Migration
+
 
 1. Start with audit/outbox events **without** making them the source of truth
 2. Pick one aggregate with real audit needs (Payment, Booking dispute)
@@ -203,14 +270,10 @@ export async function confirmBooking(bookingId: string, store: EventStore) {
 4. Move read APIs to projections
 5. Keep the rest of the system on state-based persistence
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| CQRS | Natural combination | Almost always paired for practical reads |
-| DDD | Natural combination | Aggregates emit/apply events |
-| Event-Driven | Natural combination | Stored events can feed integration |
-| Modular monolith | Possible but requires discipline | ES inside one module only |
-| Microservices | Possible but requires discipline | Per-service event stores; hard ops |
-| Simple CRUD layered | Usually avoid | Conflicts at persistence boundary |
-| CQRS without ES | Natural combination (alternative) | Prefer this unless history requires ES |
+[CQRS](cqrs.md) · [Event-driven](event-driven.md) · [DDD](domain-driven-design.md)
+
+## Where in this repo
+
+Teaching reference only unless walkthrough adds a stream — pair with [cqrs.md](cqrs.md).

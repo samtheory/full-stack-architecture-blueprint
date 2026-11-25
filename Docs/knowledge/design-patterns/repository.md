@@ -8,31 +8,45 @@ Mediates between domain and data mapping; presents a **collection-like interface
 
 **Repository** یک رابط شبیه «مجموعه» برای موجودیت‌ها/تجمع‌ها می‌سازد تا منطق دامنه به SQL، SDK دیتابیس یا HTTP وابسته نباشد. use case فقط `find` / `save` می‌بیند؛ پیاده‌سازی (Postgres، حافظه، IndexedDB) پشت همان قرارداد عوض می‌شود. برای اپ‌های سازمانی مثل ادیتور Notion که باید تعارض ویرایش را یکسان در سرور و تست پوشش دهد، بسیار رایج است.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  UC[applyPageEdits] --> Port[PageRepository]
+  Port --> PG[Postgres adapter]
+  Port --> Mem[Memory fake]
+  Port --> IDB[IndexedDB adapter]
+```
+
+**Why:** one `save` contract for optimistic locking—Postgres, tests, and offline editor share the same rules.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - You want use cases free of SQL/SDK details
 - Multiple data sources behind one contract
 
-## When not to use
+### When not to use
 
 - Single trivial query in a script
 - Generic `Repository<T>` with no domain meaning
 
-## Good practice
+### Good practice
 
 - Methods named in domain language (`listIncompleteTodos`)
 - One repository per aggregate/consistency boundary
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** repository that returns HTTP DTOs and sends emails
 - **Worst:** leaking `DbConnection` through the repository API
 
-## Trade-offs
+**Trade-offs:** Extra layer vs testability and swap-ability.
 
-Extra layer vs testability and swap-ability.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Notion page edits
+### Real example — Notion page edits
 
 A Notion-style editor saves one page at a time: title, blocks, and a revision. Two people can edit the same page. The second save must fail with a conflict, not silently overwrite the first. That rule lives in one use case. Postgres in the API and the in-memory store in editor tests both look like a collection of pages. The HTTP route never sees SQL.
 
@@ -358,10 +372,42 @@ export function PageEditor({
 | Offline editor | A second conflict check inside the component | New `PageRepository` implementation |
 | Test the conflict | Boot Hono and Postgres | Seed `createMemoryPageRepository` and save twice |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-Adapter, ISP, DIP
+**Edge cases**
 
-## Where in this repo
+- **Revision conflict:** `RevisionConflict` must surface from every adapter—409 on API, UI reload prompt.
+- **Offline queue:** IndexedDB adapter uses same `save` signature as HTTP wrapper—no duplicate rules in components.
+- **Aggregate boundary:** one repository per page aggregate—not generic `Repository<T>`.
 
-Todo and notes persistence ports (planned).
+**Testing seams**
+
+- `createMemoryPageRepository(seed)`—conflict test without Postgres.
+- Route tests inject fake repository through `pageRoutes(pages)`.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Repository methods return raw SQL rows or ORM entities to use cases
+- God repository with queries for every screen
+
+### Alternatives
+
+- CQRS read models for heavy listings—keep write repository narrow
+- [Adapter](adapter.md) for vendor SDKs below the repository
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| `PageRepository` port | `packages/application` |
+| Postgres / memory impl | `packages/infrastructure` |
+| HTTP / IndexedDB client repos | `apps/web` |
+| Route wiring | `apps/api` |
+
+## Related · Where in this repo
+
+**Related:** [Adapter](adapter.md), ISP, DIP
+
+**Where:** Todo and notes persistence ports (planned). Course A8 — [COURSE.md](../COURSE.md).

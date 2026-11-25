@@ -1,14 +1,38 @@
 # CQRS (Command Query Responsibility Segregation)
 
-## One-line Definition
+## One-line definition
 
 CQRS separates **write operations (commands)** that change state from **read operations (queries)** that return data, allowing different models, optimizations, and scaling strategies for each side.
 
-## Problem It Solves
+## Problem it solves
 
 A single domain model often becomes awkward for both enforcing invariants and serving rich UI dashboards. Writes need strict validation; reads need joins, denormalization, and speed. CQRS splits those responsibilities.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Two doors on the same product: **commands** change state; **queries** return shaped reads. They may share one DB at first.
+
+```mermaid
+flowchart LR
+  UI[React / Next]
+  CMD[Command API]
+  QRY[Query API]
+  W[Write model]
+  R[Read model / SQL]
+  DB[(Postgres)]
+  UI --> CMD --> W --> DB
+  UI --> QRY --> R --> DB
+```
+
+**Why it exists:** dashboards need joins; writes need invariants — one model struggles at both.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Read shapes differ sharply from write models (dashboards, search, calendars)
 - High read/write asymmetry or independent scaling needs
@@ -16,14 +40,14 @@ A single domain model often becomes awkward for both enforcing invariants and se
 - Team can accept eventual consistency for some views
 - Logical CQRS (separate handlers/models, same DB) is enough for most SaaS
 
-## When Not to Use It
+### When not
 
 - Simple CRUD with the same DTO for read and write
 - Small teams where dual models double maintenance without payoff
 - Immediate strong consistency required on every screen with no lag tolerance
 - Jumping straight to separate read databases without measuring pain
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +60,7 @@ A single domain model often becomes awkward for both enforcing invariants and se
 | Marketplace / booking system | Good | Availability calendars ≠ booking aggregate |
 | Internal admin panel | Medium | Reporting queries often benefit |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 Primarily **read/write design** on the backend; frontend should call distinct command vs query APIs and avoid treating query DTOs as write models.
 
@@ -47,7 +71,9 @@ In React + Next.js + Hono:
 - TanStack Query caches **queries only**; mutations invalidate or update selectively
 - Physical separation (read replica / projection DB) is optional and later
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Commands change state and return limited acknowledgements (ids, status) — not large graphs by default
 - Queries never mutate state
@@ -57,7 +83,8 @@ In React + Next.js + Hono:
 - If projections are async, UI must handle stale reads (refresh, polling, realtime)
 - Frontend forms map to command schemas (Zod), not to query dashboard types
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart LR
@@ -75,7 +102,8 @@ flowchart LR
   UI -->|queries| QryAPI --> ReadModel
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -125,7 +153,8 @@ apps/worker/        # projection updaters
 packages/contracts/ # command + query zod schemas for web
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // commands/confirm-booking/handler.ts
@@ -174,7 +203,10 @@ export function useBookingCalendar(listingId: string, range: DateRange) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** command handlers + domain invariants
 - **Integration:** command commits; query SQL returns expected shape
@@ -182,7 +214,16 @@ export function useBookingCalendar(listingId: string, range: DateRange) {
 - **E2E:** mutate then eventually observe read model (if async)
 - **Mocking:** mock payment ports on commands; queries tested with real SQL fixtures
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Query mutates state | Ban in query handler review |
+| Stale calendar after confirm | Invalidate TanStack Query / projection lag UX |
+| Same SQL for read and write | Extract purpose-built query SQL |
+
+### Anti-patterns
+
 
 - Dual models for every trivial entity — maintenance explosion
 - Returning full write aggregates from every query “for reuse”
@@ -190,7 +231,37 @@ export function useBookingCalendar(listingId: string, range: DateRange) {
 - Forgetting invalidation — UI shows stale data with no strategy
 - Treating CQRS as requiring Event Sourcing (it does not)
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | CQRS cost |
+|-----------|-----------|
+| Team | Two mental models per feature when over-applied |
+| Delivery | Heavy screens ship faster with purpose SQL |
+| Ops | Projection lag if async read models |
+| Evolution | Logical CQRS first; physical split only with evidence |
+
+### Evolution
+
+1. `commands/` vs `queries/` folders in one Hono module.
+2. TanStack Query for reads; mutations for commands on web.
+3. Worker projections only when read SQL contends with writes.
+
+### ADR triggers
+
+Separate read database · event-driven projections · shared write model for queries.
+
+### Automate
+
+- Lint or convention: query handlers must not call command repositories
+- Schema tests: command vs query Zod in `packages/contracts`
+
+## Migration
+
 
 1. Split route folders into `commands/` and `queries/` for one module
 2. Write purpose-built SQL for the heaviest screen
@@ -198,15 +269,10 @@ export function useBookingCalendar(listingId: string, range: DateRange) {
 4. Add projection table + worker only when read SQL becomes too expensive or contentious
 5. Introduce separate read store only with clear scaling evidence
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Event Sourcing | Possible but requires discipline | ES often pairs with CQRS; CQRS does not require ES |
-| Event-Driven | Natural combination | Events update read models |
-| DDD | Natural combination | Write side hosts aggregates |
-| Vertical Slice | Natural combination | Command slice vs query slice |
-| Modular monolith | Natural combination | Per-module CQRS without services |
-| Microservices | Possible but requires discipline | Easy to over-distribute read/write services |
-| Simple layered CRUD | Usually avoid | Same model for all reads/writes at same boundary |
-| FSD | Natural combination | Features call command/query APIs separately |
+[Event-driven](event-driven.md) · [Event sourcing](event-sourcing.md) · [DDD](domain-driven-design.md) · [Vertical slice](vertical-slice.md)
+
+## Where in this repo
+
+Command/query split inside Hono modules; TanStack Query on the client. See vertical-slice todo example.

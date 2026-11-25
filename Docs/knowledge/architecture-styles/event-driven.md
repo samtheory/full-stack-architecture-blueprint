@@ -1,14 +1,34 @@
 # Event-Driven Architecture
 
-## One-line Definition
+## One-line definition
 
 Components communicate by producing and consuming **events** (facts that something happened), enabling loose coupling, asynchronous side effects, and independent scaling of producers and consumers.
 
-## Problem It Solves
+## Problem it solves
 
 Synchronous request chains couple services and modules: a booking confirm that directly emails, indexes search, updates billing, and notifies chat becomes fragile and slow. Events let the write path finish quickly while other work happens asynchronously.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+User gets a fast HTTP response. Facts go to an outbox → bus → workers do email, search, webhooks later.
+
+```mermaid
+flowchart LR
+  API[Hono command] --> DB[(Postgres + outbox)]
+  DB --> Bus[Queue / bus]
+  Bus --> W1[Email worker]
+  Bus --> W2[Search worker]
+```
+
+**Why it exists:** so slow side effects never block the booking confirm response.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Side effects that need not complete inside the user request (email, analytics, search index, webhooks)
 - Multiple consumers interested in the same fact
@@ -16,14 +36,14 @@ Synchronous request chains couple services and modules: a booking confirm that d
 - Team comfortable with eventual consistency and observability
 - Workers/queues already in the stack (or planned)
 
-## When Not to Use It
+### When not
 
 - Simple CRUD where sync calls are clearer
 - Strong immediate consistency required across all reads with no tolerance for lag
 - Team lacks tooling for poison messages, retries, idempotency, and tracing
 - Using events as a disguised remote procedure call (request/response over a bus)
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +56,7 @@ Synchronous request chains couple services and modules: a booking confirm that d
 | Marketplace / booking system | Good | Booked/paid/cancelled fans out to many parties |
 | Internal admin panel | Medium | Useful for audit/notifications; often optional |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 Primarily **communication style** and **cross-cutting system design** on the backend; frontend may consume realtime projections.
 
@@ -47,7 +67,9 @@ In React + Next.js + Hono:
 - Next.js/React read updated state via TanStack Query, SSE, or Supabase Realtime
 - Do not drive core form submits only through an event bus
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Events are **past tense facts** (`BookingConfirmed`), not commands (`ConfirmBooking`) mixed casually without clear intent
 - Producers must not require a specific consumer to be online (unless using sync in-process handlers deliberately)
@@ -57,7 +79,8 @@ In React + Next.js + Hono:
 - React components do not publish integration events directly to the bus
 - Schema version events; never “fix” payload shapes silently
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 sequenceDiagram
@@ -79,7 +102,8 @@ sequenceDiagram
   Worker->>DB: mark outbox processed
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -125,7 +149,8 @@ packages/events/                     # versioned event schemas
 packages/module-booking/             # optional extract
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // packages/events/src/booking-confirmed.ts
@@ -179,7 +204,10 @@ export async function onBookingConfirmed(raw: unknown, mail: MailPort) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** producers build correct event payloads; consumers handle duplicates
 - **Integration:** outbox write + consumer processing against real queue/DB
@@ -187,7 +215,17 @@ export async function onBookingConfirmed(raw: unknown, mail: MailPort) {
 - **E2E:** confirm booking → eventually receive email / see search update
 - **Mocking:** fake bus in unit tests; use real queue in staging integration
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Publish before DB commit | Outbox in same transaction |
+| Duplicate consumer delivery | Idempotency key in worker |
+| Poison message | DLQ + alert |
+| UI assumes instant side effect | Query invalidation / pending copy |
+
+### Anti-patterns
+
 
 - Calling events as remote functions and waiting for “response events” everywhere
 - Publishing before the DB commit (listeners see lies)
@@ -195,7 +233,37 @@ export async function onBookingConfirmed(raw: unknown, mail: MailPort) {
 - Giant god-topics with unrelated payloads
 - Leaking internal DB row shapes as the public event contract
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | EDA cost |
+|-----------|----------|
+| Team | Needs idempotency, poison queues, tracing literacy |
+| Delivery | Async UX product decisions (stale reads, notifications) |
+| Ops | Worker deploys, bus monitoring, DLQ playbooks |
+| Evolution | Start in-process + outbox inside modular monolith |
+
+### Evolution
+
+1. Transactional outbox from one hot command.
+2. `packages/events` Zod contracts versioned.
+3. Split worker only when consumer scaling demands it.
+
+### ADR triggers
+
+New bus technology · at-least-once vs exactly-once · publishing before commit.
+
+### Automate
+
+- Consumer idempotency keys in CI contract tests
+- Metrics: lag, DLQ depth, duplicate delivery rate
+
+## Migration
+
 
 1. Identify blocking side effects in hot paths (email, webhooks)
 2. Introduce outbox table + worker for one event type
@@ -203,15 +271,10 @@ export async function onBookingConfirmed(raw: unknown, mail: MailPort) {
 4. Add idempotency and metrics before adding more consumers
 5. Expand to cross-module integration events once stable
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| DDD | Natural combination | Domain events as integration mechanism |
-| CQRS | Natural combination | Events update read models |
-| Event Sourcing | Natural combination | Store events as source of truth (stronger commitment) |
-| Modular monolith | Natural combination | In-process bus or outbox without network services |
-| Microservices | Natural combination | Primary integration style between services |
-| Serverless | Natural combination | Functions as consumers |
-| Sync-only layered monolith | Possible but requires discipline | Start sync; add events at edges |
-| BFF | Possible but requires discipline | BFF stays request/response; backend may be event-driven |
+[DDD](domain-driven-design.md) · [CQRS](cqrs.md) · [Event sourcing](event-sourcing.md) · [Modular monolith](modular-monolith.md) · [Serverless](serverless.md)
+
+## Where in this repo
+
+Outbox + workers in tech-space and walkthrough steps; event contracts in `packages/events` (planned).

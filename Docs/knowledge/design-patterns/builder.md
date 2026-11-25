@@ -8,98 +8,112 @@ Constructs a complex object **step by step**. The same construction process can 
 
 **Builder** شیء پیچیده را قدم‌به‌قدم می‌سازد. فرآیند ساخت ثابت می‌ماند؛ خروجی می‌تواند فرق کند (مثلاً همان صفحهٔ Notion یک‌بار PDF و یک‌بار Markdown شود). وقتی سازندهٔ شیء آرگومان‌های زیاد، ترتیب حساس، یا شاخه‌های اختیاری دارد، Builder خوانایی و اعتبارسنجی نهایی را بهتر از یک سازندهٔ غول‌پیکر نگه می‌دارد.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  B[Builder] --> T[title]
+  T --> Bl[blocks]
+  Bl --> C[cover optional]
+  C --> Out[build]
+```
+
+**Why:** fluent steps assemble a valid export only at `build()`—not half-built objects in flight.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Export / report objects with many optional sections
 - Fluent APIs that must validate only at `build()`
 
-## When not to use
+### When not to use
 
 - A plain object literal or one constructor is enough
 - Every field is required and independent — no assembly story
 
-## Good practice
+### Good practice
 
 - `build()` fails fast if required steps were skipped
 - Keep the director (orchestration) separate from the concrete builder when formats multiply
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** builder that mutates a shared global document
 - **Worst:** `build()` that returns a half-valid object “for convenience”
 
-## Trade-offs
+**Trade-offs:** Clear step API vs more types than a single factory function.
 
-Clear step API vs more types than a single factory function.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Notion page export
+Real example — Notion page export (Markdown vs PDF job).
 
-A workspace page has title, blocks, and cover. Export must produce either a Markdown string or a PDF job payload. The steps are the same: set title → add blocks → optional cover → finish. The representation differs.
-
-### Backend (Hono)
+### Backend (Hono) — worst practice
 
 ```ts
-type ExportDoc = { title: string; sections: string[]; coverUrl?: string };
+function exportPage(page: Page, format: string) {
+  let md = "";
+  if (!page.title) return { error: "no title" };
+  md += `# ${page.title}\n\n`;
+  for (const block of page.blocks) {
+    if (block.type === "paragraph") md += block.text + "\n";
+    // pdf branch copy-pasted below
+  }
+  if (format === "pdf") return { pdfJob: { title: page.title, sections: md.split("\n") } };
+  return { markdown: md };
+}
+```
 
+### Backend (Hono) — best practice
+
+```ts
 interface PageExportBuilder {
   title(value: string): this;
   block(block: { type: string; text?: string; url?: string }): this;
   cover(url: string): this;
-  build(): ExportDoc | { markdown: string } | { pdfJob: ExportDoc };
+  build(): { markdown: string } | { pdfJob: ExportDoc };
 }
 
 class MarkdownExportBuilder implements PageExportBuilder {
   private titleText = "";
   private lines: string[] = [];
-  private coverUrl?: string;
 
-  title(value: string) {
-    this.titleText = value.trim();
-    return this;
-  }
-  block(block: { type: string; text?: string; url?: string }) {
+  title(value: string) { this.titleText = value.trim(); return this; }
+  block(block: { type: string; text?: string }) {
     if (block.type === "paragraph") this.lines.push(block.text ?? "");
-    if (block.type === "embed") this.lines.push(`[embed](${block.url})`);
     return this;
   }
-  cover(url: string) {
-    this.coverUrl = url;
-    return this;
-  }
+  cover(url: string) { this.coverUrl = url; return this; }
   build() {
     if (!this.titleText) throw new Error("TITLE_REQUIRED");
-    const cover = this.coverUrl ? `![cover](${this.coverUrl})\n\n` : "";
-    return { markdown: `# ${this.titleText}\n\n${cover}${this.lines.join("\n\n")}\n` };
+    return { markdown: `# ${this.titleText}\n\n${this.lines.join("\n\n")}\n` };
   }
 }
 
-function exportPage(
-  page: { title: string; coverUrl?: string; blocks: { type: string; text?: string; url?: string }[] },
-  builder: PageExportBuilder,
-) {
+function exportPage(page: Page, builder: PageExportBuilder) {
   builder.title(page.title);
-  if (page.coverUrl) builder.cover(page.coverUrl);
   for (const block of page.blocks) builder.block(block);
   return builder.build();
 }
-
-// POST /pages/:id/export { format: "markdown" | "pdf" }
-app.post("/pages/:id/export", async (c) => {
-  const page = await pages.get(c.req.param("id"));
-  const { format } = await c.req.json();
-  const builder =
-    format === "pdf" ? new PdfJobExportBuilder() : new MarkdownExportBuilder();
-  return c.json(exportPage(page, builder));
-});
 ```
 
-### Frontend (React)
-
-The export dialog builds a preview the same way: steps fill a draft, `build()` produces what the download button sends.
+### Frontend (React) — worst practice
 
 ```tsx
-"use client";
+function ExportDialog() {
+  const [title, setTitle] = useState("");
+  const [lines, setLines] = useState<string[]>([]);
+  function download() {
+    if (!title) alert("title"); // validate at click only, inconsistent
+    const md = `# ${title}\n` + lines.join("\n");
+    // ...
+  }
+}
+```
 
+### Frontend (React) — best practice
+
+```tsx
 function useExportDraft() {
   const [draft, setDraft] = useState<{ title?: string; lines: string[] }>({ lines: [] });
 
@@ -114,17 +128,41 @@ function useExportDraft() {
 }
 ```
 
-### Side-by-side
+## 4. Rich — edge cases · testing seams
 
-| Change | Without Builder | With Builder |
-|--------|-----------------|--------------|
-| Add PDF export | Duplicate assembly in a second function | New builder; same `exportPage` steps |
-| Missing title | Half-written file | `build()` throws before response |
+**Edge cases**
 
-## Related concepts
+- **Idempotent `title()`:** last call wins; document for API consumers.
+- **Director pattern:** `exportPage` is director—reused across Markdown/PDF builders.
+- **Streaming PDF:** builder may enqueue job id instead of bytes in `build()`.
 
-Factory, Abstract Factory
+**Testing seams**
 
-## Where in this repo
+- Builder unit tests: missing title throws on `build()`, not on `block()`.
+- Golden test: fixture page + `MarkdownExportBuilder` output string.
 
-Teaching pattern for export flows; no dedicated example package yet.
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Builder with 40 methods for a 3-field DTO
+- Shared builder instance across requests (mutable state leak)
+
+### Alternatives
+
+- Zod parse at boundary for simple shapes
+- [Factory](factory.md) when there is no stepwise assembly
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Export builders | `packages/application/exports` |
+| `POST /pages/:id/export` | `apps/api` |
+| `useExportDraft` | `apps/web` export dialog |
+
+## Related · Where in this repo
+
+**Related:** [Factory](factory.md), [Abstract Factory](abstract-factory.md)
+
+**Where:** Teaching pattern for export flows; no dedicated example package yet.

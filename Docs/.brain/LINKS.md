@@ -14,6 +14,33 @@ Relation types: `teaches`, `uses`, `implements`, `contrasts`, `contains`, `depen
 | Project Blueprint | contains | Database Adapter Package | libSQL / MariaDB / PostgreSQL |
 | Learning Path | uses | Vertical Slice | First runnable story |
 | Learning Path | uses | Walkthrough | Ordered implementation steps |
+| Learning Path | uses | Architecture Course | Narrative curriculum in Docs/knowledge/COURSE.md |
+| Learning Path | uses | Career Course | Full stack + platform + soft skills + CTO plans |
+| Career Course | contains | Career Course Plan | Phased lesson implementation |
+| Career Course | uses | Architecture Course | Architecture depth stays in knowledge/ |
+| Career Course | teaches | Foundations HTTP | Wave 1.1 |
+| Career Course | teaches | TypeScript for Architects | Wave 1.1 |
+| Career Course | teaches | Git Workflows | Wave 1.1 |
+| Career Course | teaches | Debugging Discipline | Wave 1.1 |
+| Foundations HTTP | depends-on | TypeScript for Architects | Contracts at HTTP edge |
+| Debugging Discipline | uses | Git Workflows | bisect / revert |
+| Debugging Discipline | uses | Foundations HTTP | status + request_id |
+| Career Course | teaches | What Architecture Is | Wave 1.2 |
+| Career Course | teaches | Quality Attributes NFRs | Wave 1.2 |
+| Career Course | teaches | C4 Model | Wave 1.2 |
+| Career Course | teaches | Capacity Planning | Wave 1.2 |
+| Knowledge Tracks Index | uses | Architecture Course | Links COURSE tracks A–G |
+| What Architecture Is | depends-on | Quality Attributes NFRs | NFRs drive decisions |
+| C4 Model | demonstrates | Project Blueprint | L1/L2 map to apps/packages |
+| Capacity Planning | depends-on | Quality Attributes NFRs | Targets before sizing |
+| Career Course | teaches | What Architecture Is | Wave 1.2 |
+| Career Course | teaches | Quality Attributes NFRs | Wave 1.2 |
+| Career Course | teaches | C4 Model | Wave 1.2 |
+| Career Course | teaches | Capacity Planning | Wave 1.2 |
+| Knowledge Tracks Index | uses | Architecture Course | Links COURSE tracks A–G |
+| What Architecture Is | depends-on | Quality Attributes NFRs | NFRs drive decisions |
+| C4 Model | demonstrates | Project Blueprint | L1/L2 map to apps/packages |
+| Capacity Planning | depends-on | Quality Attributes NFRs | Targets before sizing |
 | Walkthrough | contains | Monorepo Setup Step | Step 01 |
 | Walkthrough | demonstrates | Monorepo Structure | Built in steps 01–02 |
 | Vertical Slice | demonstrates | Dependency Inversion | Domain independent of Hono/UI/DB |

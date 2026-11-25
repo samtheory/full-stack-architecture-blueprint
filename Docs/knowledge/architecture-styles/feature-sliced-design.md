@@ -1,14 +1,42 @@
 # Feature-Sliced Design (FSD)
 
-## One-line Definition
+## One-line definition
 
 Feature-Sliced Design is a **frontend architectural methodology** that organizes UI code into layers (`app`, `processes`/`pages`, `widgets`, `features`, `entities`, `shared`) with strict import rules: higher layers may use lower layers, never the reverse.
 
-## Problem It Solves
+## Problem it solves
 
 Large React and Next.js apps rot into `components/`, `hooks/`, and `utils/` dumps where any file imports any other. FSD makes feature ownership and dependency direction explicit so teams can scale the UI without accidental coupling.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Six UI layers. Arrows only go down: app → pages → widgets → features → entities → shared.
+
+```mermaid
+flowchart TB
+  app[app]
+  pages[pages]
+  widgets[widgets]
+  features[features]
+  entities[entities]
+  shared[shared]
+  app --> pages
+  pages --> widgets
+  pages --> features
+  widgets --> features
+  features --> entities
+  entities --> shared
+```
+
+**Why it exists:** so one feature's hook never imports another feature's internals.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Medium to large frontend teams (often 3+ frontend engineers)
 - Product with many entities and user scenarios (dashboards, marketplaces, SaaS consoles)
@@ -16,14 +44,14 @@ Large React and Next.js apps rot into `components/`, `hooks/`, and `utils/` dump
 - Expected scale: dozens of screens and shared entity models
 - Maintenance: multiple people touching UI weekly without stepping on each other
 
-## When Not to Use It
+### When not
 
 - Tiny MVP / marketing site with few screens — layer ceremony outweighs benefit
 - Team unfamiliar with FSD who will invent custom “layers” inconsistently
 - Backend-only services — FSD is not a Hono architecture
 - When you only need feature folders (vertical slices) without the full layer taxonomy
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +64,7 @@ Large React and Next.js apps rot into `components/`, `hooks/`, and `utils/` dump
 | Marketplace / booking system | Good | Rich entities (listing, booking, payment) |
 | Internal admin panel | Medium | Good if large; overkill if few CRUD screens |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Frontend organization** (cross-cutting UI structure).
 
@@ -47,7 +75,9 @@ In React + Next.js + Hono:
 - Share only primitives (`packages/shared`) — not FSD layers — with the API
 - Next.js `app/` directory is the FSD **app** (and pages) layer entry
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 Standard FSD import direction (high → low only):
 
@@ -63,7 +93,8 @@ app → pages → widgets → features → entities → shared
 - UI may call Hono via `shared/api` or feature-level API modules — never import server domain packages into client bundles carelessly
 - Business rules that must be authoritative stay on the server; client entities hold view models and light invariants only
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -88,7 +119,8 @@ flowchart TB
   app --> shared
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -174,7 +206,8 @@ apps/api/                 # modular backend
 packages/shared/          # zod schemas / money — maps to FSD shared, not entities
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // entities/booking/model/status.ts
@@ -230,7 +263,10 @@ export function BookingCheckoutPage({ listing }: { listing: Listing }) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** entity pure functions (`canCancel`), feature model hooks with Query client wrapper
 - **Integration:** feature UI + MSW/mock API for Hono endpoints
@@ -238,7 +274,16 @@ export function BookingCheckoutPage({ listing }: { listing: Listing }) {
 - **E2E:** page-level flows (checkout) across features
 - **Mocking:** mock `shared/api` or network; do not mock entities that are pure
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Feature A imports Feature B internals | ESLint boundaries / compose in widget |
+| Business rule only in client entity | Move authoritative rule to Hono domain |
+| Deep import bypassing index.ts | Public API review |
+
+### Anti-patterns
+
 
 - `features/a` importing `features/b` — create a widget/page composer instead
 - Dumping everything into `shared` — shared becomes the new god folder
@@ -246,7 +291,37 @@ export function BookingCheckoutPage({ listing }: { listing: Listing }) {
 - Using FSD folders without public `index.ts` APIs — deep imports break the model
 - Applying FSD layer names on the backend — confuses the team
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | FSD cost |
+|-----------|----------|
+| Team | Steeper onboarding; pays off at 3+ FE engineers |
+| Delivery | Feature PRs stay localized when boundaries hold |
+| Ops | N/A (frontend-only taxonomy) |
+| Evolution | Pair with [modular frontend](modular-frontend.md) or full FSD layers |
+
+### Evolution
+
+1. Start `shared/` + one `entities/*` + one `features/*`.
+2. Add `eslint-plugin-boundaries` / steiger before adding widgets/pages layers.
+3. Keep authoritative rules in Hono `packages/domain` — FSD entities are view models.
+
+### ADR triggers
+
+Adopting FSD repo-wide · renaming Next `app/` vs FSD `pages` · banning cross-feature imports.
+
+### Automate
+
+- Lint: `features/*` cannot import sibling `features/*`
+- Public `index.ts` per slice; fail CI on deep imports
+
+## Migration
+
 
 1. Introduce `shared/` and stop adding to root `utils/`
 2. Extract one `entities/x` from the messiest domain noun
@@ -254,14 +329,10 @@ export function BookingCheckoutPage({ listing }: { listing: Listing }) {
 4. Enforce lint boundaries (`eslint-plugin-boundaries` or steiger)
 5. Compose pages/widgets last; leave untouched screens until edited
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Vertical Slice | Natural combination | Features ≈ slices; FSD adds entity/shared layers |
-| Modular frontend | Natural combination | FSD is a concrete modular frontend methodology |
-| Next.js App Router | Natural combination | `app/` hosts routing; FSD owns composition below |
-| Modular monolith (backend) | Natural combination | Different categories — UI vs deployable |
-| Microservices | Possible but requires discipline | One web app can still be FSD while APIs are services |
-| Layered frontend (`components/hooks/services`) | Mutually exclusive at the same boundary | Pick one folder taxonomy |
-| Hexagonal (backend) | Natural combination | Orthogonal concerns |
+[Modular frontend](modular-frontend.md) · [Vertical slice](vertical-slice.md) · [Modular monolith](modular-monolith.md) · [Hexagonal](hexagonal.md) (backend)
+
+## Where in this repo
+
+Apply in planned `apps/web` under FSD or feature folders. Contrast with backend [vertical-slice.md](vertical-slice.md).

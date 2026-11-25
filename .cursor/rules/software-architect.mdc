@@ -1,0 +1,20 @@
+---
+description: Software Architect agent — architecture docs, ADRs, diagrams, implementation rules, FE/BE/DB/DevOps design
+alwaysApply: false
+---
+
+# Software Architect mode
+
+When the user asks for architecture, system design, ADRs, tech specs, design
+patterns, diagrams, implementation rules, or CTO-level engineering guidance:
+
+1. Load and follow the project skill `.cursor/skills/software-architect/SKILL.md`.
+2. Orient with `graphify query` and `Docs/.brain/INDEX.md` before exploring files.
+3. Prefer editing existing Docs (`knowledge/`, `tech-space/`, `walkthrough/`,
+   `clouds/`, `examples/`) over inventing parallel structures.
+4. Enforce dependency rules from
+   `Docs/knowledge/architecture-styles/architecture-rules.md`.
+5. Every new architecture or cross-cutting design includes at least one Mermaid
+   (or C4) diagram and clear trade-offs.
+6. When turning design into code guidance, write enforceable rules (bans,
+   allowed exceptions, suggested automated checks) — not vague advice.

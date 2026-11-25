@@ -248,6 +248,68 @@ createBookingRoute.post("/", async (c) => {
 4. When a second feature needs the same rule, extract a small `shared/` inside the module
 5. Optionally rename App Router folders to match slice names for traceability
 
+## 1. Dummy — 30-second picture
+
+```mermaid
+flowchart LR
+  subgraph slice["One slice: CreateBooking"]
+    R[Route] --> H[Handler] --> D[Rules] --> P[SQL]
+  end
+```
+
+**Why:** a product change should live in **one folder**, not four horizontal layers.
+
+## 4. Rich — failure & seams (extra)
+
+| Failure | Stay inside the slice |
+|---------|------------------------|
+| Validation | Zod at edge; domain asserts in handler |
+| Conflict | Domain/SQL unique path → mapped HTTP status in route |
+| Shared rule used thrice | Extract `module/shared`, not a global service layer |
+
+## 5. Professional / CTO
+
+| Signal | Decision |
+|--------|----------|
+| God `BookingService` returns | Re-slice; ban new methods on the god object |
+| Cross-slice SQL imports | Enforce module public API / shared kernel only |
+| Team ships features E2E | Prefer slices inside [modular monolith](modular-monolith.md) |
+
+**ADR triggers:** adopting slices repo-wide · extracting a shared kernel · combining slices with hexagonal ports at module edge.
+
+**Automate:** lint against deep imports across slice folders; PR template “files touched stay under one slice?”
+
+## 1. Dummy — 30-second picture
+
+```mermaid
+flowchart LR
+  subgraph slice["One slice: CreateBooking"]
+    R[Route] --> H[Handler] --> D[Rules] --> P[SQL]
+  end
+```
+
+**Why:** a product change should live in **one folder**, not four horizontal layers.
+
+## 4. Rich — failure & seams (extra)
+
+| Failure | Stay inside the slice |
+|---------|------------------------|
+| Validation | Zod at edge; domain asserts in handler |
+| Conflict | Domain/SQL unique path → mapped HTTP status in route |
+| Shared rule used thrice | Extract `module/shared`, not a global service layer |
+
+## 5. Professional / CTO
+
+| Signal | Decision |
+|--------|----------|
+| God `BookingService` returns | Re-slice; ban new methods on the god object |
+| Cross-slice SQL imports | Enforce module public API / shared kernel only |
+| Team ships features E2E | Prefer slices inside [modular monolith](modular-monolith.md) |
+
+**ADR triggers:** adopting slices repo-wide · extracting a shared kernel · combining slices with hexagonal ports at module edge.
+
+**Automate:** lint against deep imports across slice folders; PR template “files touched stay under one slice?”
+
 ## Related Architectures
 
 | Other architecture | Relationship | Why |
@@ -259,3 +321,11 @@ createBookingRoute.post("/", async (c) => {
 | Microservices | Possible but requires discipline | Each service can be slice-organized; slices ≠ services |
 | Classic layered-only org | Usually avoid | Competing folder strategies at the same boundary |
 | Event Sourcing | Possible but requires discipline | Event-sourced writes can still be one slice per command |
+
+## Where in this repo
+
+Default **inside-module** organization for walkthroughs and examples (`Docs/examples/vertical-slice-todo`).
+
+## Where in this repo
+
+Default **inside-module** organization for walkthroughs and examples (`Docs/examples/vertical-slice-todo`).

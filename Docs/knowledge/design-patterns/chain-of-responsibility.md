@@ -8,65 +8,67 @@ Passes a request along a **chain of handlers** until one handles it (or each may
 
 **Chain of Responsibility** درخواست را در زنجیره‌ای از handlerها جلو می‌برد تا یکی رسیدگی کند (یا هرکدام کاری بکند و رد کند). Middlewareهای Hono و پایپ‌لاین moderation چت همین ایده هستند: احراز هویت → محدودیت نرخ → فیلتر محتوا → ذخیره. فرستنده نمی‌داند کدام حلقه جواب نهایی را می‌دهد.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  Msg[POST message] --> H1[Empty check]
+  H1 --> H2[Banned words]
+  H2 --> H3[Mask secrets]
+  H3 --> Save[Persist]
+```
+
+**Why:** add moderation stages by inserting links—without inflating one validator function.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Middleware pipelines
 - Moderation / validation pipelines with optional stages
 - Support ticket routing by rules
 
-## When not to use
+### When not to use
 
 - A single definite handler is known
 - Order is unclear and bugs become “who ate the request?”
 
-## Good practice
+### Good practice
 
 - Explicit order; each handler has one job
 - Terminal handler guarantees a response/error
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** handlers that sometimes swallow errors silently
 - **Worst:** dynamic chains that reorder per request without logs
 
-## Trade-offs
+**Trade-offs:** Flexible pipelines vs harder debugging of fall-through.
 
-Flexible pipelines vs harder debugging of fall-through.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Chat message moderation + Hono middleware
+Real example — Chat message moderation + Hono middleware.
 
-### Backend (Hono)
+### Backend (Hono) — worst practice
+
+```ts
+app.post("/rooms/:roomId/messages", async (c) => {
+  const body = (await c.req.json()).body;
+  if (!body.trim()) return c.json({ code: "BODY_REQUIRED" }, 400);
+  if (/\b(scam)\b/i.test(body)) return c.json({ code: "BLOCKED" }, 400);
+  const redacted = body.replace(/sk-[a-zA-Z0-9]+/g, "[redacted]");
+  // next check → edit this function again
+  return c.json(await postMessage(redacted), 201);
+});
+```
+
+### Backend (Hono) — best practice
 
 ```ts
 type Msg = { roomId: string; authorId: string; body: string };
 type Result = { ok: true; body: string } | { ok: false; code: string };
 
-type Handler = {
-  handle(msg: Msg): Promise<Result | "next">;
-};
-
-const stripEmpty: Handler = {
-  async handle(msg) {
-    if (!msg.body.trim()) return { ok: false, code: "BODY_REQUIRED" };
-    return "next";
-  },
-};
-
-const blockBannedWords: Handler = {
-  async handle(msg) {
-    if (/\b(scam|phishing)\b/i.test(msg.body)) return { ok: false, code: "BLOCKED" };
-    return "next";
-  },
-};
-
-const maskSecrets: Handler = {
-  async handle(msg) {
-    return {
-      ok: true,
-      body: msg.body.replace(/sk-[a-zA-Z0-9]+/g, "[redacted]"),
-    };
-  },
-};
+type Handler = { handle(msg: Msg): Promise<Result | "next"> };
 
 async function runChain(msg: Msg, chain: Handler[]): Promise<Result> {
   for (const handler of chain) {
@@ -76,24 +78,24 @@ async function runChain(msg: Msg, chain: Handler[]): Promise<Result> {
   return { ok: false, code: "UNHANDLED" };
 }
 
-app.post("/rooms/:roomId/messages", async (c) => {
-  const body = await c.req.json();
-  const moderated = await runChain(
-    { roomId: c.req.param("roomId"), authorId: c.get("userId"), body: body.body },
-    [stripEmpty, blockBannedWords, maskSecrets],
-  );
-  if (!moderated.ok) return c.json({ code: moderated.code }, 400);
-  const saved = await postMessage({ ...body, body: moderated.body }, deps);
-  return c.json(saved, 201);
-});
+const chain = [stripEmpty, blockBannedWords, maskSecrets];
 ```
 
-Hono middleware (`auth` → `rateLimit` → route) is the framework form of the same chain.
+### Frontend (React) — worst practice
 
-### Frontend (React)
+```tsx
+function validate(body: string) {
+  if (!body.trim()) return "Message required";
+  if (body.length > 4000) return "Too long";
+  if (/spam/.test(body)) return "Blocked";
+  // all rules in one function
+}
+```
+
+### Frontend (React) — best practice
 
 ```ts
-type SubmitHandler = (body: string) => string | null; // null = pass
+type SubmitHandler = (body: string) => string | null;
 
 const handlers: SubmitHandler[] = [
   (body) => (body.trim() ? null : "Message required"),
@@ -109,17 +111,41 @@ function validateMessage(body: string) {
 }
 ```
 
-### Side-by-side
+## 4. Rich — edge cases · testing seams
 
-| Change | One mega-validator | Chain |
-|--------|--------------------|-------|
-| Add PII redaction | Edit a giant function | Insert a handler |
-| Reorder checks | Fragile edits | Reorder the array |
+**Edge cases**
 
-## Related concepts
+- **Short-circuit vs transform:** `maskSecrets` returns final body; document which handlers terminate.
+- **Async handlers:** moderation ML step—chain must await consistently.
+- **Hono middleware:** global vs route chain—order documented in README.
 
-Decorator, Middleware, Template Method
+**Testing seams**
 
-## Where in this repo
+- Run `runChain` with fixture message through isolated handlers.
+- Insert spy handler in array to assert order.
 
-Natural language for Hono middleware and moderation pipelines.
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Chain length >10 with no diagram or integration test
+- Handlers share mutable module state
+
+### Alternatives
+
+- [Decorator](decorator.md) for HTTP wrapper composition
+- Schema validation (Zod) for static field rules at the edge
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Moderation handlers | `packages/application/chat/moderation` |
+| `runChain` | `packages/application` or `apps/api` |
+| Client validators | `apps/web/src/chat` |
+
+## Related · Where in this repo
+
+**Related:** [Decorator](decorator.md), middleware, [Template Method](template-method.md)
+
+**Where:** Natural language for Hono middleware and moderation pipelines.

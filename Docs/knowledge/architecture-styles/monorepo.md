@@ -1,14 +1,37 @@
 # Monorepo Architecture
 
-## One-line Definition
+## One-line definition
 
 A monorepo keeps **multiple applications and packages in one repository**, with shared tooling, atomic cross-project changes, and explicit package boundaries — it is a repository organization strategy, not a runtime architecture.
 
-## Problem It Solves
+## Problem it solves
 
 Polyrepos make coordinated changes (API contract + web client + shared Zod schema) slow and inconsistent. A monorepo enables atomic PRs, unified CI, and shared libraries while still allowing multiple deployables.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+One git repo: `apps/web`, `apps/api`, `packages/domain`, shared tooling (pnpm, Turborepo).
+
+```mermaid
+flowchart TB
+  root[pnpm workspace root]
+  root --> web[apps/web]
+  root --> api[apps/api]
+  root --> domain[packages/domain]
+  root --> app[packages/application]
+  web --> domain
+  api --> domain
+```
+
+**Why it exists:** one PR can change API + UI + shared types with enforced boundaries.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Multiple apps share contracts, UI kit, or domain packages (Next.js + Hono + worker)
 - Team wants one CI pipeline and consistent TypeScript/ESLint versions
@@ -16,14 +39,14 @@ Polyrepos make coordinated changes (API contract + web client + shared Zod schem
 - Expected scale: several packages, not hundreds of unrelated products (unless invested in tooling)
 - Maintenance benefits from atomic refactors across API and UI
 
-## When Not to Use It
+### When not
 
 - Completely independent products with different release/security needs
 - No investment in tooling (Turborepo/Nx/pnpm) — monorepo becomes a junk drawer
 - Organizational politics require hard repo isolation
 - Using monorepo as an excuse for zero package boundaries
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +59,7 @@ Polyrepos make coordinated changes (API contract + web client + shared Zod schem
 | Marketplace / booking system | Good | Many modules/packages, one product |
 | Internal admin panel | Good | Admin + API + shared types |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Repository organization** spanning frontend, backend, workers, and shared packages.
 
@@ -46,7 +69,9 @@ In React + Next.js + Hono:
 - `packages/contracts`, `packages/ui`, `packages/eslint-config`
 - Deployables remain independent; the repo does not force microservices or a monolith
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Apps may depend on packages; packages must not depend on apps
 - Business modules should not become a free-for-all via `@repo/everything`
@@ -56,7 +81,8 @@ In React + Next.js + Hono:
 - One package ≈ one ownership boundary
 - Do not put secrets in the repo; `.env` examples only
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -76,7 +102,8 @@ flowchart TB
   worker --> config
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1–3. React / Next / Hono together
 
@@ -125,7 +152,8 @@ packages:
 }
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // packages/contracts/src/booking/create-booking.ts
@@ -158,7 +186,10 @@ import { createBookingInput } from "@repo/contracts/booking/create-booking";
 const parsed = createBookingInput.safeParse(formValues);
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** per package with local test runner
 - **Integration:** api + DB in `apps/api`
@@ -167,7 +198,16 @@ const parsed = createBookingInput.safeParse(formValues);
 - **Mocking:** prefer shared contract fixtures over duplicating shapes
 - CI: affected-project detection to keep feedback fast
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| packages/domain imports React | ESLint boundary |
+| Turbo cache stale wrong artifact | Affected CI + clean on config change |
+| Circular workspace deps | pnpm why + package rules |
+
+### Anti-patterns
+
 
 - `packages/common` that imports everything and is imported by everything
 - No boundary linting — monorepo becomes a single tangled graph
@@ -175,7 +215,31 @@ const parsed = createBookingInput.safeParse(formValues);
 - Forcing unrelated company products into one repo without tooling
 - Assuming monorepo equals modular monolith (deploy still matters)
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Monorepo cost |
+|-----------|---------------|
+| Team | Unified tooling; clearer ownership with package boundaries |
+| Delivery | Atomic cross-app changes |
+| Ops | Turborepo cache, affected CI |
+| Evolution | `packages/domain` + `packages/application` before extracting services |
+
+### ADR triggers
+
+New app in workspace · publishing packages externally · boundary/eslint policy change.
+
+### Automate
+
+- Turborepo `pipeline` + path filters
+- `pnpm` workspace protocol for internal deps
+
+## Migration
+
 
 1. Move web and api into `apps/` with a workspace tool
 2. Extract Zod contracts first
@@ -183,14 +247,10 @@ const parsed = createBookingInput.safeParse(formValues);
 4. Add Turborepo/Nx pipelines and boundary lint rules
 5. Split deploy pipelines per app while keeping one repo
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Modular monolith | Natural combination | Classic pairing |
-| Microservices | Natural combination | Multi-service code in one repo |
-| SCS | Natural combination | Multiple systems, one repo optional |
-| Vertical Slice / FSD | Natural combination | Inside apps |
-| Polyrepo | Mutually exclusive at the same boundary | Repo strategy alternatives |
-| Serverless | Natural combination | Many function apps in one repo |
-| DDD | Natural combination | Packages can mirror contexts |
+[Monorepo structure](../../tech-space/monorepo-structure.md) · [Modular monolith](modular-monolith.md) · [Architecture rules](architecture-rules.md)
+
+## Where in this repo
+
+[monorepo-structure.md](../../tech-space/monorepo-structure.md) and walkthrough step 01.

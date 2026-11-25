@@ -1,0 +1,956 @@
+{
+  "Docs/.brain/CONCEPTS.md": {
+    "mtime": 1795618602.7209532,
+    "seen": 1795618613.9660106,
+    "ast_hash": "f1078a17e85af43ad0809b59b07b0f20",
+    "semantic_hash": ""
+  },
+  "Docs/.brain/GLOSSARY.md": {
+    "mtime": 1795254705.4802573,
+    "seen": 1795337019.671403,
+    "ast_hash": "1dbdc37c82df223380b90c39a86d5682",
+    "semantic_hash": ""
+  },
+  "Docs/.brain/GRAPHIFY-SETUP.md": {
+    "mtime": 1795275684.359251,
+    "seen": 1795337019.671405,
+    "ast_hash": "5c69fb1de74e6dd32d3a1c25bd8d3858",
+    "semantic_hash": ""
+  },
+  "Docs/.brain/INDEX.md": {
+    "mtime": 1795618300.9901764,
+    "seen": 1795618313.4460864,
+    "ast_hash": "85dcfa0e212bc8f6732b433038f8d713",
+    "semantic_hash": ""
+  },
+  "Docs/.brain/LINKS.md": {
+    "mtime": 1795618603.3046134,
+    "seen": 1795618613.9660156,
+    "ast_hash": "6eee549155b3979fbe88336b6fa7764d",
+    "semantic_hash": ""
+  },
+  "Docs/.brain/QUERY-GUIDE.md": {
+    "mtime": 1795275684.359251,
+    "seen": 1795337019.6714077,
+    "ast_hash": "fc6f1060409a9ae7eb814fdd05c24a68",
+    "semantic_hash": ""
+  },
+  "Docs/README.md": {
+    "mtime": 1795618296.8246467,
+    "seen": 1795618313.4460893,
+    "ast_hash": "b26cd6891e356f895151302fe77d83ea",
+    "semantic_hash": ""
+  },
+  "Docs/examples/README.md": {
+    "mtime": 1795255066.1182182,
+    "seen": 1795337019.6714091,
+    "ast_hash": "4af97530dbf17197516a8741df3099c4",
+    "semantic_hash": ""
+  },
+  "Docs/examples/auth-session/README.md": {
+    "mtime": 1795255083.5353432,
+    "seen": 1795337019.6714098,
+    "ast_hash": "0e2e2c84aa8fd25a87d35ef6ece5e09a",
+    "semantic_hash": ""
+  },
+  "Docs/examples/multi-db-notes/README.md": {
+    "mtime": 1795255088.6113214,
+    "seen": 1795337019.6714108,
+    "ast_hash": "3730b9ac4c778ac1f14608cd3f86e44e",
+    "semantic_hash": ""
+  },
+  "Docs/examples/optimistic-ui-sync/README.md": {
+    "mtime": 1795255095.655526,
+    "seen": 1795337019.6714118,
+    "ast_hash": "9ed4d6c5816d7d170016cf8d5093e49a",
+    "semantic_hash": ""
+  },
+  "Docs/examples/vertical-slice-todo/README.md": {
+    "mtime": 1795255073.5904546,
+    "seen": 1795337019.6714125,
+    "ast_hash": "d25caf87d8d02da43ed3651c8342fb6c",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/README.md": {
+    "mtime": 1795617073.9045646,
+    "seen": 1795617452.888046,
+    "ast_hash": "d178ecfda8086db13cf932cdaacb9ca9",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/README.md": {
+    "mtime": 1795617557.233104,
+    "seen": 1795617763.1170788,
+    "ast_hash": "3bf7638c8e03ee062397c2107d2d5065",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/clean.md": {
+    "mtime": 1795617202.6660545,
+    "seen": 1795617452.8880522,
+    "ast_hash": "e87fb96ca15d81a53028e60053e0c078",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/hexagonal.md": {
+    "mtime": 1795617169.3168,
+    "seen": 1795617452.8880572,
+    "ast_hash": "d4a67d839e7c4c6ab57658e76685a780",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/layered.md": {
+    "mtime": 1795617120.0304635,
+    "seen": 1795617452.8880584,
+    "ast_hash": "82f621d822382f88174bf17ea0fee2a0",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/microservices.md": {
+    "mtime": 1795617537.3907144,
+    "seen": 1795617763.1170902,
+    "ast_hash": "d4c4afc705afc20c115c076aed7af5c3",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/modular-monolith.md": {
+    "mtime": 1795617243.3895466,
+    "seen": 1795617452.888061,
+    "ast_hash": "b65b280ca93bdd7ba2083a17e2049cae",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/README.md": {
+    "mtime": 1795617448.326406,
+    "seen": 1795617452.888069,
+    "ast_hash": "e3b95c056e091d075401dc5f5ba3682c",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/adapter.md": {
+    "mtime": 1795617413.407856,
+    "seen": 1795617452.8880703,
+    "ast_hash": "8b5c46ed8043d7cf6e7727079d0f02c4",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/dependency-injection.md": {
+    "mtime": 1795617423.7029333,
+    "seen": 1795617452.888076,
+    "ast_hash": "867d3c5a55acfa1bfb7d83cd31d6eabd",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/factory.md": {
+    "mtime": 1795617431.948501,
+    "seen": 1795617452.8880785,
+    "ast_hash": "a201cb0778527d19a3b4063c591721b1",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/observer.md": {
+    "mtime": 1795617432.9133353,
+    "seen": 1795617452.8880827,
+    "ast_hash": "08688cddafc36ccfda6c08d2857d00e1",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/repository.md": {
+    "mtime": 1795617445.8728836,
+    "seen": 1795617452.888085,
+    "ast_hash": "e127d9a58b0b771393e2139cae9e02f9",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/strategy.md": {
+    "mtime": 1795617409.1717,
+    "seen": 1795617452.8880875,
+    "ast_hash": "d80e11e497194087fc438161b7619b70",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/react-rendering/README.md": {
+    "mtime": 1795617674.4807093,
+    "seen": 1795617763.117123,
+    "ast_hash": "0321e3cd863277a3e3c94151b80a78c3",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/react-rendering/legacy-class-lifecycle.md": {
+    "mtime": 1795617675.6681747,
+    "seen": 1795617763.1171236,
+    "ast_hash": "680ad0c935bb9a8918e0aaf62d753d02",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/react-rendering/modern-lifecycle.md": {
+    "mtime": 1795617703.8341196,
+    "seen": 1795617763.1171246,
+    "ast_hash": "1561f35efcc5ff3d85f0fa05dd7c2f63",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/solid/01-S.md": {
+    "mtime": 1795617704.8456075,
+    "seen": 1795617763.1171253,
+    "ast_hash": "8585b2e154c201fd37e439e0236e3dbe",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/solid/02-O.md": {
+    "mtime": 1795617756.7183156,
+    "seen": 1795617763.117126,
+    "ast_hash": "8b12719b404d980cf1df804c7862fb9e",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/solid/03-L.md": {
+    "mtime": 1795617758.715161,
+    "seen": 1795617763.117127,
+    "ast_hash": "491b12a74e26389417560e7f4516bebb",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/solid/04-I.md": {
+    "mtime": 1795617758.9830823,
+    "seen": 1795617763.1171277,
+    "ast_hash": "6ccf616ed928dfab49932a06f2625bd4",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/solid/05-D.md": {
+    "mtime": 1795617776.1887352,
+    "seen": 1795618313.4461703,
+    "ast_hash": "d66e6fed75a3422f9171184e493431a1",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/solid/README.md": {
+    "mtime": 1795617554.3933425,
+    "seen": 1795617763.1171293,
+    "ast_hash": "7c33bdaa0663a3a2012a57fb3cadfae7",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/README.md": {
+    "mtime": 1795254723.8278668,
+    "seen": 1795337019.6714294,
+    "ast_hash": "c7e7771d28e7791f458e8e49b57d1ac4",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/backend-architecture.md": {
+    "mtime": 1795259139.808056,
+    "seen": 1795337019.67143,
+    "ast_hash": "90a6ea06349ad7d1acf25f0030093d28",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/database-abstraction.md": {
+    "mtime": 1795254853.2588701,
+    "seen": 1795337019.6714308,
+    "ast_hash": "9a3384abfd1ebb974bcf583c2523ab92",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/decisions/0001-monorepo-tooling.md": {
+    "mtime": 1795254892.965667,
+    "seen": 1795337019.6714315,
+    "ast_hash": "ca1d03f2f2954dc295d357e446345225",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/decisions/0002-database-adapters.md": {
+    "mtime": 1795254901.3300922,
+    "seen": 1795337019.6714323,
+    "ast_hash": "1128e9789174eb579ae66e779eddca38",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/decisions/0003-package-scope-and-boundaries.md": {
+    "mtime": 1795254907.7554398,
+    "seen": 1795337019.671433,
+    "ast_hash": "ddd0bfc0481cc17a73fa9d7bfcb21a63",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/decisions/README.md": {
+    "mtime": 1795254887.7371285,
+    "seen": 1795337019.6714337,
+    "ast_hash": "80a49be9cc63e4174202d398f676ae7c",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/frontend-architecture.md": {
+    "mtime": 1795254864.3176775,
+    "seen": 1795337019.6714344,
+    "ast_hash": "dc90c282d131ed13790f520f6e6eeaf0",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/mobile-architecture.md": {
+    "mtime": 1795254874.9247172,
+    "seen": 1795337019.6714354,
+    "ast_hash": "ccb9170ca362b9132f9edd497b48d6ae",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/monorepo-structure.md": {
+    "mtime": 1795259140.3381414,
+    "seen": 1795337019.671436,
+    "ast_hash": "223e9d5a4cf9d7033e378ad71eb37fb6",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/project-blueprint.md": {
+    "mtime": 1795256293.1512375,
+    "seen": 1795337019.6714368,
+    "ast_hash": "fc5c8db2b83e67fa97789091486ec691",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/security-observability.md": {
+    "mtime": 1795254883.4581602,
+    "seen": 1795337019.6714373,
+    "ast_hash": "55ae3d2304abdff11e50da1d6bff8bd3",
+    "semantic_hash": ""
+  },
+  "Docs/tech-space/tooling.md": {
+    "mtime": 1795254825.3194153,
+    "seen": 1795337019.671438,
+    "ast_hash": "c8d3b21b3105618ed4d15f45999944c1",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/01-monorepo-setup/README.md": {
+    "mtime": 1795423790.0998118,
+    "seen": 1795441014.0952804,
+    "ast_hash": "11d44800da25aa264647b2b3b1323e69",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/02-typescript-tooling/README.md": {
+    "mtime": 1795256011.9240885,
+    "seen": 1795337019.6714396,
+    "ast_hash": "9dfc78803a7d16a2c3702e5557774f0b",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/03-domain-package/README.md": {
+    "mtime": 1795259139.2701979,
+    "seen": 1795337019.6714401,
+    "ast_hash": "e3793501ad7fc637df2ce1b81c95517a",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/04-application-layer/README.md": {
+    "mtime": 1795256044.7480588,
+    "seen": 1795337019.6714408,
+    "ast_hash": "3de295439cf6bec3b72b2b17bae80595",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/05-config-and-contracts/README.md": {
+    "mtime": 1795256067.541145,
+    "seen": 1795337019.6714416,
+    "ast_hash": "59c52572b646c54e83c6e64d0b0bc90c",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/06-hono-api/README.md": {
+    "mtime": 1795259138.1849592,
+    "seen": 1795337019.6714423,
+    "ast_hash": "3dcbfac2f620047fd0de3abb0edc4ddf",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/07-database-port-and-libsql/README.md": {
+    "mtime": 1795256110.462771,
+    "seen": 1795337019.671443,
+    "ast_hash": "c405a6c1b2807c1de57016a91c672663",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/08-nextjs-web-app/README.md": {
+    "mtime": 1795256133.1372464,
+    "seen": 1795337019.6714437,
+    "ast_hash": "6ce6d49fa24523b9a3ad792cb701d25a",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/09-vertical-slice-wiring/README.md": {
+    "mtime": 1795256152.547605,
+    "seen": 1795337019.6714444,
+    "ast_hash": "0c04b927fcd71f7d781a052c83dd84cf",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/10-testing-strategy/README.md": {
+    "mtime": 1795256164.7567751,
+    "seen": 1795337019.6714451,
+    "ast_hash": "6c1c9c26452aaf34227596db0f5c08d5",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/11-postgres-adapter/README.md": {
+    "mtime": 1795256177.7686434,
+    "seen": 1795337019.671446,
+    "ast_hash": "f47fe28fb19fe3fd90b6c4d40409d5f1",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/12-mariadb-adapter/README.md": {
+    "mtime": 1795259137.6603901,
+    "seen": 1795337019.6714466,
+    "ast_hash": "31bf86452fb7cfa68acdd5d51759acce",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/13-capacitor-mobile/README.md": {
+    "mtime": 1795256208.5523024,
+    "seen": 1795337019.6714473,
+    "ast_hash": "57bf476dc331c474c0f3a1ef4ab5f096",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/14-auth-session/README.md": {
+    "mtime": 1795256221.8896573,
+    "seen": 1795337019.6714478,
+    "ast_hash": "bd71fd2aeabb7ccc56ff8db0e28de76f",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/15-optimistic-ui-sync/README.md": {
+    "mtime": 1795256233.8444557,
+    "seen": 1795337019.6714485,
+    "ast_hash": "414abfba5171e6828e709b4cfcf6d04d",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/16-ci-and-graphify/README.md": {
+    "mtime": 1795275684.359251,
+    "seen": 1795337019.6714492,
+    "ast_hash": "6d9bc1ee38741d8913961313879bbaba",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/README.md": {
+    "mtime": 1795440983.7118518,
+    "seen": 1795441014.0952947,
+    "ast_hash": "1b6bc907b23ca72b7f3e504076e5cb17",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1795423790.1028116,
+    "seen": 1795441014.0952983,
+    "ast_hash": "e590093390246f191c3f3af05beedefa",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/api-gateway.md": {
+    "mtime": 1795617744.5649364,
+    "seen": 1795617763.11708,
+    "ast_hash": "2ffa7f8a4f2190372bcbfd612c59ecff",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/architecture-combination-guide.md": {
+    "mtime": 1795356189.7304735,
+    "seen": 1795357366.9217381,
+    "ast_hash": "a2f377000997e7e393d6f77af082d918",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/architecture-rules.md": {
+    "mtime": 1795356291.4523585,
+    "seen": 1795357366.921739,
+    "ast_hash": "a7c999b000d3d5e4479187270f3ebb40",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/bff.md": {
+    "mtime": 1795617744.5649364,
+    "seen": 1795617763.1170826,
+    "ast_hash": "18400dcc82a01a7a5faf3901a0ec97a7",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/cqrs.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170845,
+    "ast_hash": "1035e3589888894d066edf5c0e497c18",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/domain-driven-design.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170852,
+    "ast_hash": "062615263b471b0cee9d82ba77fc5daf",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/event-driven.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.117086,
+    "ast_hash": "6b3ab991ae33e78c3024d80a2f34040b",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/event-sourcing.md": {
+    "mtime": 1795617759.7068243,
+    "seen": 1795617763.1170866,
+    "ast_hash": "5700ea0479f81cba639ec2d90ffeebff",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/feature-sliced-design.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170876,
+    "ast_hash": "9af45dc166352e51dcdf14efb24b1779",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/modular-frontend.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170912,
+    "ast_hash": "f6c1266f214c9eefe72af2e1ab79fd55",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/monorepo.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170926,
+    "ast_hash": "9a95cace8ae84312d285ff1e43ff46ea",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/plugin-microkernel.md": {
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170936,
+    "ast_hash": "2c1a63b9f67e07198ac6580dbb8ae145",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/react-next-hono-recommendations.md": {
+    "mtime": 1795356245.3287017,
+    "seen": 1795357366.9217513,
+    "ast_hash": "a0e13e02e49616418c4adeb92331b181",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/self-contained-systems.md": {
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.1170955,
+    "ast_hash": "8ec7d65104010a6d06334c2787fc991d",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/serverless.md": {
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.1170962,
+    "ast_hash": "ae81d0954bcfd5fd3e26dfb4ccc68107",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/soa.md": {
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.117097,
+    "ast_hash": "b60313980af33505ead47ef9314e5c74",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/strangler-fig.md": {
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.1170976,
+    "ast_hash": "0823da0b35d45a1668b5d392472275d2",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/architecture-styles/vertical-slice.md": {
+    "mtime": 1795617813.8709776,
+    "seen": 1795618313.4461398,
+    "ast_hash": "adbe42c6685192cd94a372c604fdfe67",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/abstract-factory.md": {
+    "mtime": 1795617348.4004629,
+    "seen": 1795617452.8880696,
+    "ast_hash": "942c8f5e3d4c85c90e309bf2ed59aec3",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/bridge.md": {
+    "mtime": 1795617361.492028,
+    "seen": 1795617452.8880715,
+    "ast_hash": "7e9cdd20bb94d23215ff41d1aaec68eb",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/builder.md": {
+    "mtime": 1795617398.563112,
+    "seen": 1795617452.888072,
+    "ast_hash": "be2a5f0b882113eb9cb3482318724aaf",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/chain-of-responsibility.md": {
+    "mtime": 1795617387.1883492,
+    "seen": 1795617452.8880727,
+    "ast_hash": "088f27e220de8aa70fba8952f98293a1",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/command.md": {
+    "mtime": 1795617384.037856,
+    "seen": 1795617452.8880737,
+    "ast_hash": "fea28a68c1e7fb70dbf3f57a85940851",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/composite.md": {
+    "mtime": 1795617381.0364106,
+    "seen": 1795617452.8880744,
+    "ast_hash": "64d14ec592ff5728396d2b3f00ea996b",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/decorator.md": {
+    "mtime": 1795617340.6821218,
+    "seen": 1795617452.888075,
+    "ast_hash": "3036a86cd4f2fa8d2b72f743ca2b9d84",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/facade.md": {
+    "mtime": 1795617377.0319486,
+    "seen": 1795617452.8880768,
+    "ast_hash": "42714c5965a4beee23422ca7e82bc6d6",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/factory-method.md": {
+    "mtime": 1795617372.7664719,
+    "seen": 1795617452.8880775,
+    "ast_hash": "224ed4c19bf161ad79fd8c18236e4eb1",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/flyweight.md": {
+    "mtime": 1795617364.9714375,
+    "seen": 1795617452.8880792,
+    "ast_hash": "c792a79c819f7d282eb016c340c6155c",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/iterator.md": {
+    "mtime": 1795617336.9165666,
+    "seen": 1795617452.88808,
+    "ast_hash": "d5a8c23e4448820afaef5406acdbfdcd",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/mediator.md": {
+    "mtime": 1795617353.6497993,
+    "seen": 1795617452.8880806,
+    "ast_hash": "cdbf1ba0dac0c9949ca7cb5983805aae",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/memento.md": {
+    "mtime": 1795617391.9453504,
+    "seen": 1795617452.8880816,
+    "ast_hash": "4038f6232f939693b36a8eeaf2a7f119",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/prototype.md": {
+    "mtime": 1795617332.426686,
+    "seen": 1795617452.8880832,
+    "ast_hash": "5a610079a1f33f0c23ef4fd123c55ef7",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/proxy.md": {
+    "mtime": 1795617345.1935475,
+    "seen": 1795617452.8880842,
+    "ast_hash": "70c6342863a7787ea5339ca1ed2a2a81",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/singleton.md": {
+    "mtime": 1795617326.647751,
+    "seen": 1795617452.888086,
+    "ast_hash": "5cf880eba1ac1a6af6d41ece654930c5",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/state.md": {
+    "mtime": 1795617436.1491232,
+    "seen": 1795617452.8880868,
+    "ast_hash": "6ed2d82fd615934ffe311da2b90a64ca",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/template-method.md": {
+    "mtime": 1795617395.1112194,
+    "seen": 1795617452.8880882,
+    "ast_hash": "b013ccab00bb4db5a17a7654bb84aa28",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/design-patterns/visitor.md": {
+    "mtime": 1795617440.0661082,
+    "seen": 1795617452.8880892,
+    "ast_hash": "556085d9c5dfdfd97621309a9e4c9b5e",
+    "semantic_hash": ""
+  },
+  "Docs/thinking/README.md": {
+    "mtime": 1795357749.5494258,
+    "seen": 1795357845.933019,
+    "ast_hash": "f8f04f9a336bd947b8992f003eefa51f",
+    "semantic_hash": ""
+  },
+  "Docs/thinking/marketplace-fa-en-architecture.md": {
+    "mtime": 1795440990.8261094,
+    "seen": 1795441014.0952795,
+    "ast_hash": "903fcc5588e58b4dfb0853c72fc05f8c",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1795423790.1040797,
+    "seen": 1795441014.0951898,
+    "ast_hash": "14697ddb7f227f27c9c2e04a2c8864b9",
+    "semantic_hash": ""
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1795423790.1028116,
+    "seen": 1795441014.0951915,
+    "ast_hash": "a9860db67333bd04350cc2184a5537c8",
+    "semantic_hash": ""
+  },
+  "turbo.json": {
+    "mtime": 1795423790.1050806,
+    "seen": 1795441014.0951927,
+    "ast_hash": "2a72799d7358503fe87a9e5402684551",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/hono-server-setup/README.md": {
+    "mtime": 1795423790.1040797,
+    "seen": 1795441014.095296,
+    "ast_hash": "2089f89cd08cedd40ccc161892044796",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/package-setup/README.md": {
+    "mtime": 1795423790.0998118,
+    "seen": 1795441014.0952969,
+    "ast_hash": "6cc6c3b30ce225e70e3a98bc92a8196a",
+    "semantic_hash": ""
+  },
+  "Docs/walkthrough/react-app-setup/README.md": {
+    "mtime": 1795423790.0998118,
+    "seen": 1795441014.0952976,
+    "ast_hash": "8cd225f7ca4a85fb35bd836cc5850ca7",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/package.json": {
+    "mtime": 1795424594.4051309,
+    "seen": 1795441014.0951803,
+    "ast_hash": "0dcd626cb04742688f56a392873974df",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/index.ts": {
+    "mtime": 1795446695.205316,
+    "seen": 1795617452.8880107,
+    "ast_hash": "c812bba40ebeaad156c87c2b9f469a77",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/tsconfig.json": {
+    "mtime": 1795424586.5725868,
+    "seen": 1795441014.0951865,
+    "ast_hash": "d8c28edcdb3e7996c7f9671ffefab509",
+    "semantic_hash": ""
+  },
+  "infra/docker-compose.yml": {
+    "mtime": 1795440980.924499,
+    "seen": 1795441014.0951874,
+    "ast_hash": "e7592324532197d990c0f0f33a0a3e15",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/README.md": {
+    "mtime": 1795440886.5999963,
+    "seen": 1795441014.095202,
+    "ast_hash": "293dd40c673b391ac27ff09f1d8d4cae",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/01-folder-structure.md": {
+    "mtime": 1795446969.5418396,
+    "seen": 1795617452.8880358,
+    "ast_hash": "871041bccb383703bdc94191fb0ce075",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/02-postgres-docker.md": {
+    "mtime": 1795440932.5773454,
+    "seen": 1795441014.0952036,
+    "ast_hash": "32a6aafd795142126db0723c5bbfd014",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/03-drizzle-setup.md": {
+    "mtime": 1795440952.3120694,
+    "seen": 1795441014.0952046,
+    "ast_hash": "b826ef80aa361921def401cd5dd7b105",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/04-listing-slice.md": {
+    "mtime": 1795440966.3511565,
+    "seen": 1795441014.0952053,
+    "ast_hash": "bf6e27b8c58a3c53f8c5fdb8a839c156",
+    "semantic_hash": ""
+  },
+  "Docs/clouds/market-place-server/README.md": {
+    "mtime": 1795440896.9084477,
+    "seen": 1795441014.0952063,
+    "ast_hash": "0172b76f3b4fc12bc9f3f40507ae83cc",
+    "semantic_hash": ""
+  },
+  "infra/README.md": {
+    "mtime": 1795440978.7571354,
+    "seen": 1795441014.095299,
+    "ast_hash": "76cf64633fdc95037a0c92d9d4d9f6b8",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/create-app.ts": {
+    "mtime": 1795446651.1602755,
+    "seen": 1795617452.888008,
+    "ast_hash": "528d999060017f18d2b154da3bd462e6",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/middleware/cors.ts": {
+    "mtime": 1795445892.4292493,
+    "seen": 1795617452.8880122,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/create-listing/create-listing.handler.ts": {
+    "mtime": 1795446353.186342,
+    "seen": 1795617452.8880134,
+    "ast_hash": "e5b51aa482b425661d51d02144b01925",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/create-listing/create-listing.route.ts": {
+    "mtime": 1795446359.7833412,
+    "seen": 1795617452.8880146,
+    "ast_hash": "91f0267d560b338e53d0a113e2afa56a",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/create-listing/create-listing.ts": {
+    "mtime": 1795446346.24816,
+    "seen": 1795617452.8880153,
+    "ast_hash": "55ff021b8147de8e2ade44b1842644e7",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/list-listings/list-listings.handler.ts": {
+    "mtime": 1795446247.0318213,
+    "seen": 1795617452.8880162,
+    "ast_hash": "b49efb24584e8a6635a0bc0d6a287c8e",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/list-listings/list-listings.route.ts": {
+    "mtime": 1795446297.896082,
+    "seen": 1795617452.888017,
+    "ast_hash": "f12d2943df122eb723e68218a05d5ed5",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/list-listings/list-listings.ts": {
+    "mtime": 1795446222.009782,
+    "seen": 1795617452.8880177,
+    "ast_hash": "9b5f377f209bbb1238e31d0f8ae231a3",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/public.ts": {
+    "mtime": 1795446374.4295795,
+    "seen": 1795617452.8880184,
+    "ast_hash": "99ace274466ed5c27ffbf782578ada02",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/software-architect/SKILL.md": {
+    "mtime": 1795616305.1682599,
+    "seen": 1795617452.888025,
+    "ast_hash": "52f9b8f482847db6d46634f925513095",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/software-architect/examples.md": {
+    "mtime": 1795616727.6510372,
+    "seen": 1795617452.888026,
+    "ast_hash": "e103d5899b39f98c1d6a086c5be8d790",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/software-architect/reference.md": {
+    "mtime": 1795616341.0904438,
+    "seen": 1795617452.888027,
+    "ast_hash": "dacff031ee8a40ee5186e1f021468123",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/COURSE.md": {
+    "mtime": 1795618303.9811976,
+    "seen": 1795618313.4461157,
+    "ast_hash": "fdb189991e75be68c3f1b9479c243342",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/_PAGE-TEMPLATE.md": {
+    "mtime": 1795617029.8816204,
+    "seen": 1795617452.8880467,
+    "ast_hash": "83a26cac9f6ad7e7f2b3b693b9de6eb8",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/README.md": {
+    "mtime": 1795618593.2852528,
+    "seen": 1795618613.9660275,
+    "ast_hash": "0786131b75a45aebd2e3f0d74694c35c",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/README.md": {
+    "mtime": 1795618229.8892443,
+    "seen": 1795618313.4460974,
+    "ast_hash": "701e796c53c207be92011b3c1dad1271",
+    "semantic_hash": ""
+  },
+  "Docs/course/02-backend-hono-bun/README.md": {
+    "mtime": 1795618235.6441169,
+    "seen": 1795618313.446098,
+    "ast_hash": "054caf48895a227036468b4d1da29da5",
+    "semantic_hash": ""
+  },
+  "Docs/course/03-frontend-react-next/README.md": {
+    "mtime": 1795618242.2777584,
+    "seen": 1795618313.446099,
+    "ast_hash": "05688e2b8edbf1b075ebbc78cc75cecd",
+    "semantic_hash": ""
+  },
+  "Docs/course/04-data-stores/README.md": {
+    "mtime": 1795618247.7816708,
+    "seen": 1795618313.4460998,
+    "ast_hash": "2888f94fdf4025f79fda6bc147689336",
+    "semantic_hash": ""
+  },
+  "Docs/course/05-platform-infra/README.md": {
+    "mtime": 1795618253.726957,
+    "seen": 1795618313.4461005,
+    "ast_hash": "bd2f391aa1d148ac5445bdcd1aeed49e",
+    "semantic_hash": ""
+  },
+  "Docs/course/06-cicd/README.md": {
+    "mtime": 1795618260.0336509,
+    "seen": 1795618313.4461012,
+    "ast_hash": "34157b884252075fab0715c0483b7bf1",
+    "semantic_hash": ""
+  },
+  "Docs/course/07-security/README.md": {
+    "mtime": 1795618265.3336234,
+    "seen": 1795618313.446102,
+    "ast_hash": "a0a2e55dbdaed4fec3695eb322d5aa4f",
+    "semantic_hash": ""
+  },
+  "Docs/course/08-observability/README.md": {
+    "mtime": 1795618269.3725114,
+    "seen": 1795618313.4461026,
+    "ast_hash": "00c7ebea1c601eaa3dd23a1d089026ad",
+    "semantic_hash": ""
+  },
+  "Docs/course/09-quality-testing/README.md": {
+    "mtime": 1795618273.3438578,
+    "seen": 1795618313.4461033,
+    "ast_hash": "72972653810d9af345a789e30c4a690c",
+    "semantic_hash": ""
+  },
+  "Docs/course/10-product-delivery/README.md": {
+    "mtime": 1795618278.0141997,
+    "seen": 1795618313.446104,
+    "ast_hash": "c0d65a110578cd720f29d1b0ab61d214",
+    "semantic_hash": ""
+  },
+  "Docs/course/11-soft-skills-leadership/README.md": {
+    "mtime": 1795618283.0940368,
+    "seen": 1795618313.4461045,
+    "ast_hash": "4fe81f4ba342bdcb0193724e035f23c8",
+    "semantic_hash": ""
+  },
+  "Docs/course/12-cto-executive/README.md": {
+    "mtime": 1795618288.0518117,
+    "seen": 1795618313.4461052,
+    "ast_hash": "ca4ad93cb62520b4d4dbb5de5cb5dd8e",
+    "semantic_hash": ""
+  },
+  "Docs/course/LADDER.md": {
+    "mtime": 1795618173.6882527,
+    "seen": 1795618313.4461062,
+    "ast_hash": "bb9d990280aaaa736434ed29fcc2bf0a",
+    "semantic_hash": ""
+  },
+  "Docs/course/PLAN.md": {
+    "mtime": 1795618599.4880202,
+    "seen": 1795618613.9660401,
+    "ast_hash": "d1bcc7e6904887b7585877f67b4fdc0e",
+    "semantic_hash": ""
+  },
+  "Docs/course/README.md": {
+    "mtime": 1795618167.590703,
+    "seen": 1795618313.4461076,
+    "ast_hash": "466cac4ddbd3977438ed26521490beee",
+    "semantic_hash": ""
+  },
+  "Docs/course/TRACKS.md": {
+    "mtime": 1795618599.4886327,
+    "seen": 1795618613.9660416,
+    "ast_hash": "cab1515cda66e03448e67e5e04765cf8",
+    "semantic_hash": ""
+  },
+  "Docs/course/_TOPIC-TEMPLATE.md": {
+    "mtime": 1795618177.427267,
+    "seen": 1795618313.4461088,
+    "ast_hash": "e24fb17bd3dce36466576196b2b246c8",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-02-http.md": {
+    "mtime": 1795618494.2463877,
+    "seen": 1795618613.9660242,
+    "ast_hash": "91018f63f9f554c185a88fdf9bddb7f3",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-03-typescript.md": {
+    "mtime": 1795618530.309287,
+    "seen": 1795618613.966025,
+    "ast_hash": "be96200109085da4d5ec956c37829672",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-05-git.md": {
+    "mtime": 1795618556.645777,
+    "seen": 1795618613.966026,
+    "ast_hash": "67303c525012234a40fe445bf8aa634b",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-06-debugging.md": {
+    "mtime": 1795618588.3653588,
+    "seen": 1795618613.9660268,
+    "ast_hash": "87e7c84c895fe06545979d0e73c2117a",
+    "semantic_hash": ""
+  },
+  "pnpm-lock.yaml": {
+    "mtime": 1795424594.4028628,
+    "seen": 1795441014.0953002,
+    "ast_hash": "448fa7775d1dbae8ffbc2251d9c7ad68",
+    "semantic_hash": ""
+  }
+}

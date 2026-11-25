@@ -1,14 +1,33 @@
 # Strangler Fig Migration Pattern
 
-## One-line Definition
+## One-line definition
 
 The Strangler Fig pattern migrates a legacy system **incrementally** by routing selected paths to new implementations until the old system is starved of traffic and can be removed — without a big-bang rewrite.
 
-## Problem It Solves
+## Problem it solves
 
 Full rewrites of React/Next.js/Hono (or older Express/Rails) systems fail under parallel feature pressure. Strangler Fig lets you ship a new architecture (modular monolith, BFF, services) piece by piece behind the same product façade.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Proxy sends **some** traffic to the new stack; legacy starves route by route.
+
+```mermaid
+flowchart LR
+  User[Users] --> Proxy[Gateway / Next rewrites]
+  Proxy -->|new paths| New[Hono + App Router]
+  Proxy -->|legacy paths| Old[Legacy stack]
+```
+
+**Why it exists:** migrate without a big-bang rewrite.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Existing production system that cannot stop for a rewrite
 - Clear seams: routes, screens, or bounded contexts to peel off
@@ -16,14 +35,14 @@ Full rewrites of React/Next.js/Hono (or older Express/Rails) systems fail under 
 - Migration target is known (e.g. Express → Hono, Pages Router → App Router, blob → modular monolith)
 - Risk reduction matters more than speed of “clean rewrite”
 
-## When Not to Use It
+### When not
 
 - Greenfield apps — there is nothing to strangle
 - No routing/proxy ability to split traffic
 - Team keeps building forever on both old and new without a kill plan
 - Attempting to strangle with no behavioral parity tests
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +55,7 @@ Full rewrites of React/Next.js/Hono (or older Express/Rails) systems fail under 
 | Marketplace / booking system | Good | Context-by-context extraction |
 | Internal admin panel | Good | Low-risk incremental UI rewrites |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Migration / cross-cutting system design** applicable to frontend, backend, and edge routing.
 
@@ -47,7 +66,9 @@ In React + Next.js + Hono:
 - For UI: route group by group to App Router modules
 - Keep contracts stable for mobile clients during cutover
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Identify a façade (hostname, gateway, Next rewrites) that can choose old vs new
 - Migrate by **complete vertical** (UI + API + data ownership) when possible, not only cosmetic UI
@@ -57,7 +78,8 @@ In React + Next.js + Hono:
 - Never leave “temporary” branches without owners and deadlines
 - Data migration strategy decided per context (sync, batch, expand-contract)
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -74,7 +96,8 @@ flowchart TB
   Facade -.->|optional shadow compare| New
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -129,7 +152,8 @@ packages/contracts/
 docs/migration/booking-cutover.md
 ```
 
-## Implementation Example
+### TypeScript
+
 
 Gateway path cutover:
 
@@ -166,7 +190,10 @@ Expand-contract data migration sketch:
 // 4) Contract: remove legacy writes
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** new module tests as primary safety net
 - **Integration:** new API against migrated schema
@@ -175,7 +202,16 @@ Expand-contract data migration sketch:
 - **Parity / shadow:** compare responses for sampled traffic
 - **Mocking:** do not mock away the façade routing tests
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Behavioral drift legacy vs new | Parity test suite |
+| Dual-write inconsistency | One writer per entity; sync job |
+| No kill date | ADR with traffic sunset |
+
+### Anti-patterns
+
 
 - Big-bang rewrite labeled “strangler” with no incremental routing
 - Migrating only UI while still coupling to legacy APIs forever
@@ -183,7 +219,31 @@ Expand-contract data migration sketch:
 - No metrics on % traffic still on legacy
 - Strangling by technical layers (all repos first) instead of business capabilities
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Strangler cost |
+|-----------|----------------|
+| Team | Dual-run expertise; parity tests |
+| Delivery | Slower short-term; avoids failed rewrite |
+| Ops | Two systems until kill date |
+| Evolution | Route-by-route to [modular monolith](modular-monolith.md) + Next App Router |
+
+### ADR triggers
+
+Kill date for legacy · traffic split % · data dual-write.
+
+### Automate
+
+- Feature flags or gateway weights per path
+- Parity test suite comparing legacy vs new responses
+
+## Migration
+
 
 1. Establish façade (gateway or Next rewrites) and metrics
 2. Choose the smallest valuable bounded context (e.g. Promo codes or Bookings)
@@ -192,15 +252,10 @@ Expand-contract data migration sketch:
 5. Delete legacy code paths; repeat for the next context
 6. Decommission legacy app when traffic is zero
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Modular monolith | Natural combination | Common migration target |
-| Microservices | Natural combination | Extract contexts as services gradually |
-| API Gateway | Natural combination | Ideal strangler façade |
-| BFF | Natural combination | New BFF can strangle old client aggregation |
-| SCS | Natural combination | Peel into self-contained systems |
-| Event-Driven | Possible but requires discipline | Sync/async during dual-run needs care |
-| Clean/Hexagonal rewrite only | Possible but requires discipline | Apply inside new modules while strangling |
-| Big-bang rewrite | Mutually exclusive at the same boundary | Opposite migration strategies |
+[API gateway](api-gateway.md) · [Modular monolith](modular-monolith.md) · [Vertical slice](vertical-slice.md)
+
+## Where in this repo
+
+Migration playbook when legacy exists; combine with [api-gateway.md](api-gateway.md).

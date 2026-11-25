@@ -1,14 +1,34 @@
 # Backend for Frontend (BFF)
 
-## One-line Definition
+## One-line definition
 
 A Backend for Frontend is an **API layer tailored to a specific client experience** (web, mobile, admin) that aggregates, shapes, and secures backend data so the UI is not forced to speak to multiple internal services in their raw form.
 
-## Problem It Solves
+## Problem it solves
 
 When a React/Next.js app calls many microservices or modules directly, the client accumulates orchestration, over-fetching, and auth complexity. A BFF gives each client a purpose-built façade.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Each client gets its own API tailor. Web BFF aggregates; core API keeps invariants.
+
+```mermaid
+flowchart LR
+  Web[Next.js UI] --> WebBFF[Web BFF]
+  Mob[Capacitor app] --> MobBFF[Mobile BFF]
+  WebBFF --> Core[Hono core modules]
+  MobBFF --> Core
+```
+
+**Why it exists:** mobile and web need different payloads — not different domain rules.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Multiple clients with different data needs (web vs mobile vs admin)
 - Microservices or many internal APIs that would otherwise couple to the UI
@@ -16,14 +36,14 @@ When a React/Next.js app calls many microservices or modules directly, the clien
 - Next.js already acts as a server layer for the web client
 - Team can own BFF as part of the frontend or edge platform team
 
-## When Not to Use It
+### When not
 
 - Single client + modular monolith with a well-shaped public API — extra hop
 - BFF becomes a second domain layer duplicating business rules
 - Every micro-page gets its own BFF service (ops explosion)
 - Using BFF only to avoid fixing a bad public API
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +56,7 @@ When a React/Next.js app calls many microservices or modules directly, the clien
 | Marketplace / booking system | Good | Web and mobile booking flows diverge |
 | Internal admin panel | Medium | Admin BFF if admin shapes differ strongly |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Integration boundary** between clients and backend(s). Often implemented with Next.js (web BFF) or a dedicated Hono service (mobile BFF).
 
@@ -47,7 +67,9 @@ In React + Next.js + Hono:
 - Core domain stays in the main Hono API / modules — BFF should not own invariants
 - Stripe secrets and service credentials stay server-side in BFF or core API, never in the browser
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - BFF may aggregate and translate; it must not become the system of record for business invariants
 - One BFF per client type (or carefully shared), not one per screen by default
@@ -57,7 +79,8 @@ In React + Next.js + Hono:
 - Caching and auth-session concerns for that client belong in the BFF
 - Avoid infinite BFF-to-BFF chains
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -75,7 +98,8 @@ flowchart TB
   Core --> Stripe
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend (SPA calling BFF)
 
@@ -127,7 +151,8 @@ apps/api/                 # core domain API
 packages/contracts/       # shared zod where safe
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // apps/web/src/bff/checkout-summary.ts
@@ -166,7 +191,10 @@ export async function GET(req: Request) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** mappers and aggregation helpers
 - **Integration:** BFF route with mocked core API clients
@@ -174,7 +202,16 @@ export async function GET(req: Request) {
 - **E2E:** UI → BFF → core in staging
 - **Mocking:** mock downstream Hono modules at HTTP client boundary
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Validation drift from core | Commands only on core API |
+| BFF N+1 to microservices | Aggregate endpoint in BFF |
+| Secret leaked to client bundle | Server-only client module |
+
+### Anti-patterns
+
 
 - Reimplementing domain validation in the BFF and drifting from core
 - God-BFF that serves web, mobile, and admin with tangled conditionals
@@ -182,7 +219,31 @@ export async function GET(req: Request) {
 - Putting SQL in the Next.js BFF while core API also owns the same tables
 - Treating server actions as free license to skip authorization
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | BFF cost |
+|-----------|----------|
+| Team | Extra layer to own; must not duplicate domain |
+| Delivery | Faster UI iteration when aggregation is real |
+| Ops | More deployables if mobile BFF splits |
+| Evolution | Next.js as web BFF first; dedicated `apps/mobile-bff` when Capacitor diverges |
+
+### ADR triggers
+
+New BFF per client channel · business rules creeping into BFF · BFF calling BFF.
+
+### Automate
+
+- Server-only imports for core API clients in Next
+- Contract tests: BFF DTO ↔ UI components
+
+## Migration
+
 
 1. Stop importing multiple module clients into Client Components
 2. Add one aggregated Route Handler / server function for the worst screen
@@ -190,14 +251,10 @@ export async function GET(req: Request) {
 4. If mobile diverges, create `apps/mobile-bff`
 5. Keep core Hono as the system of record
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Next.js App Router | Natural combination | Ideal web BFF host |
-| API Gateway | Possible but requires discipline | Gateway routes; BFF shapes — different jobs |
-| Microservices | Natural combination | Classic reason for BFF |
-| Modular monolith | Possible but requires discipline | Often a thin Next layer is enough, not a full BFF product |
-| Hexagonal core API | Natural combination | BFF is another driving adapter channel |
-| DDD in BFF | Usually avoid | Domain belongs in core bounded contexts |
-| Plugin architecture | Possible but requires discipline | BFF can expose plugin surfaces carefully |
+[Next.js recommendations](react-next-hono-recommendations.md) · [API gateway](api-gateway.md) · [Microservices](microservices.md) · [Hexagonal](hexagonal.md)
+
+## Where in this repo
+
+Next.js web BFF pattern in [react-next-hono-recommendations.md](react-next-hono-recommendations.md); optional `apps/mobile-bff`.

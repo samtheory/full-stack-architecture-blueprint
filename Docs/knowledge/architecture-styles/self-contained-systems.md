@@ -1,14 +1,41 @@
 # Self-Contained Systems (SCS)
 
-## One-line Definition
+## One-line definition
 
 Self-Contained Systems split a large product into **autonomous vertical systems** — each owning its UI, backend logic, and data — that collaborate loosely, prioritizing independence over shared central services.
 
-## Problem It Solves
+## Problem it solves
 
 Large web products become organizational bottlenecks when every feature shares one frontend monolith and one backend monolith. SCS gives each team an end-to-end vertical (UI + API + DB) so they can deliver without coordinating every release.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Each **SCS** is a mini product: own UI, API, data, team. Integrate via events/APIs — not shared DB.
+
+```mermaid
+flowchart TB
+  subgraph scs1["SCS: Booking"]
+    UI1[UI slice]
+    API1[API]
+    DB1[(DB)]
+  end
+  subgraph scs2["SCS: Billing"]
+    UI2[Admin UI]
+    API2[API]
+    DB2[(DB)]
+  end
+  scs1 -->|events| scs2
+```
+
+**Why it exists:** team autonomy at the cost of more deployables than a modular monolith.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Multiple teams owning distinct business domains end-to-end
 - Need independent deploy of UI+API together per domain
@@ -16,14 +43,14 @@ Large web products become organizational bottlenecks when every feature shares o
 - Large marketplace/platform where “Booking”, “Search”, “Account” can be separate systems
 - High cost of centralized release coordination
 
-## When Not to Use It
+### When not
 
 - Small team shipping one product
 - Strong requirement for one unified SPA with deep shared client state
 - Unwillingness to duplicate auth/UI patterns across systems
 - Domains too tightly coupled to separate meaningfully
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +63,7 @@ Large web products become organizational bottlenecks when every feature shares o
 | Marketplace / booking system | Good | Natural verticals (search, book, pay, host) |
 | Internal admin panel | Medium | Admin can be its own SCS |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Deployment topology + team ownership** spanning frontend and backend together.
 
@@ -47,7 +74,9 @@ In React + Next.js + Hono:
 - A thin portal shell may deep-link into systems
 - Unlike microservices-only, SCS includes the UI in the autonomy boundary
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Each SCS owns its data store; no shared mutable DB
 - Prefer HTML/UI integration (links, redirects, fragments) over chatty shared SPAs
@@ -57,7 +86,8 @@ In React + Next.js + Hono:
 - A team can deploy its SCS without waiting on others
 - Do not build a central “god API” that every SCS must go through for business logic
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -75,7 +105,8 @@ flowchart TB
   Search --> Events
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1–2. React / Next.js per system
 
@@ -113,7 +144,8 @@ packages/
   auth-client/                       # SSO helpers
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // booking-api: owns bookings table exclusively
@@ -139,7 +171,10 @@ export function ListingActions({ listingId }: { listingId: string }) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit / integration:** inside each SCS as a normal app
 - **Contract:** event schemas between SCS
@@ -147,7 +182,16 @@ export function ListingActions({ listingId }: { listingId: string }) {
 - **Mocking:** stub other SCS via contracts; never share test DBs
 - Focus autonomy: a failing billing deploy must not block booking unit tests
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Shared database between SCS | Integration via API/events only |
+| Duplicated entity definitions | Published language / ACL |
+| UI coupling across SCS | Deep links + contracts, not imports |
+
+### Anti-patterns
+
 
 - Shared database across “SCS” — autonomy theater
 - One giant SPA importing every system’s components
@@ -155,7 +199,30 @@ export function ListingActions({ listingId }: { listingId: string }) {
 - Excessive sync coupling that recreates a distributed monolith
 - Duplicating nothing and therefore coupling everything through shared packages
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | SCS cost |
+|-----------|----------|
+| Team | Full-stack squads per SCS |
+| Delivery | Autonomous releases; duplicated UI patterns risk |
+| Ops | N deployables + integration observability |
+| Evolution | Split from modular monolith only when team/topology requires |
+
+### ADR triggers
+
+New SCS boundary · shared database temptation · duplicate entity definitions.
+
+### Automate
+
+- No shared DB integration tests across SCS in CI — only contract tests
+
+## Migration
+
 
 1. Identify team-owned verticals in the modular monolith
 2. Split UI routes by domain; deploy as separate Next apps behind a portal
@@ -163,15 +230,10 @@ export function ListingActions({ listingId }: { listingId: string }) {
 4. Replace cross-module DB joins with APIs/events
 5. Measure independence of release trains before splitting further
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Microservices | Possible but requires discipline | SCS includes UI; services often API-only |
-| Modular monolith | Natural combination | Evolve from modular monolith verticals |
-| Event-Driven | Natural combination | Loose integration |
-| BFF | Possible but requires discipline | Per-SCS BFF OK; global BFF can centralize too much |
-| SOA | Usually avoid | SOA emphasizes shared reusable services; SCS emphasizes autonomy |
-| Monorepo | Natural combination | Many SCS codebases in one repo with boundaries |
-| FSD | Possible but requires discipline | Apply FSD inside each web SCS |
-| Single SPA microservices backend | Usually avoid | Conflicts with SCS UI autonomy |
+[Modular monolith](modular-monolith.md) · [Microservices](microservices.md) · [Event-driven](event-driven.md)
+
+## Where in this repo
+
+Team-topology option beyond [modular-monolith.md](modular-monolith.md).

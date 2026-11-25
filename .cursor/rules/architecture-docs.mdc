@@ -1,0 +1,20 @@
+---
+description: Conventions for architecture, pattern, ADR, and walkthrough Docs
+globs: Docs/**/*.md
+alwaysApply: false
+---
+
+# Architecture documentation rules
+
+When editing `Docs/**`:
+
+1. Navigate from `Docs/.brain/INDEX.md`; update CONCEPTS / LINKS / GLOSSARY for
+   new durable ideas.
+2. Keep depth in `knowledge/` and `tech-space/`; keep `.brain` short.
+3. New architecture-style pages: when-to-use, monorepo mapping, Mermaid/C4
+   diagram, trade-offs, link to related styles and rules.
+4. New design-pattern pages: intent, structure diagram, toy example, this-repo
+   placement, anti-patterns.
+5. ADRs live in `Docs/tech-space/decisions/` — context, decision, consequences.
+6. Implementation steps belong in `walkthrough/` or `clouds/` with commands + why.
+7. Do not contradict `architecture-rules.md` or open ADRs without calling it out.

@@ -1,14 +1,40 @@
 # Domain-Driven Design (DDD)
 
-## One-line Definition
+## One-line definition
 
 Domain-Driven Design is a **modeling approach** that aligns software structure with the business domain using bounded contexts, ubiquitous language, aggregates, domain events, and explicit domain rules — not a deployment topology by itself.
 
-## Problem It Solves
+## Problem it solves
 
 When business rules are scattered across React components, Hono routes, and SQL, the product language disappears and changes become risky. DDD keeps complex rules in a domain model that the team and code share.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Bounded contexts as bubbles. Inside each bubble: aggregates enforce rules. Outside: only public APIs and events — no reaching into another context's tables.
+
+```mermaid
+flowchart TB
+  subgraph booking["Bounded context: Booking"]
+    Agg[Booking aggregate]
+    UC[Use cases]
+    Agg --> UC
+  end
+  subgraph billing["Bounded context: Billing"]
+    Inv[Invoice aggregate]
+  end
+  booking -->|domain event| billing
+  Web[Next.js / Hono UI] --> UC
+```
+
+**Why it exists:** so "confirm booking" and "capture payment" stay separate languages with explicit handoffs.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Genuine domain complexity (pricing, bookings, entitlements, compliance, multi-party workflows)
 - Multiple specialists collaborating on the same problem space
@@ -16,14 +42,14 @@ When business rules are scattered across React components, Hono routes, and SQL,
 - Team can invest in language workshops and context maps
 - Scale of *rules*, not just traffic — complexity of meaning
 
-## When Not to Use It
+### When not
 
 - Simple CRUD / content sites / thin admin panels
 - Early MVP still discovering the problem — premature bounded contexts
 - Team uses DDD vocabulary (`AggregateRoot`) without modeling discipline
 - Every module gets full tactical DDD ceremony for anemic data
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +62,7 @@ When business rules are scattered across React components, Hono routes, and SQL,
 | Marketplace / booking system | Good | Classic DDD fit: listings, bookings, payments, disputes |
 | Internal admin panel | Medium | Only where policy/workflow complexity exists |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 Primarily **domain / business modeling**, applied most strongly on the **backend**, with a thinner language mirror on the frontend.
 
@@ -47,7 +73,9 @@ In React + Next.js + Hono:
 - **Next.js/React** consume DTOs and may share Zod + display rules, not full aggregates
 - **Workers** apply the same domain when processing outbox/queue messages
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Code and conversation use the same ubiquitous language per bounded context
 - A bounded context has an explicit public API; other contexts do not reach into its tables or internals
@@ -57,7 +85,8 @@ In React + Next.js + Hono:
 - Cross-context collaboration via public functions, domain events, or anti-corruption layers — not shared DB tables
 - Prefer one aggregate transaction boundary; update other contexts asynchronously when consistency allows
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -76,7 +105,8 @@ flowchart TB
   Dom -.->|domain events| App
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -130,7 +160,8 @@ apps/api/src/modules/
 packages/shared/                     # IDs, money — not full domain models
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // modules/booking/domain/booking.ts
@@ -205,7 +236,10 @@ export async function confirmBooking(
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** aggregates and domain services with no DB/framework
 - **Integration:** repository adapters + use cases against Postgres
@@ -213,7 +247,17 @@ export async function confirmBooking(
 - **E2E:** critical journeys spanning contexts (book → pay → confirm)
 - **Mocking:** mock ports at application boundary; never mock aggregate internals
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Invariant violated (confirm twice) | Domain aggregate → mapped in application |
+| Missing booking | Repository / use case → 404 at route |
+| Cross-context direct SQL | Module boundary / ADR |
+| Payment gateway timeout | Infrastructure adapter → retry policy in application |
+
+### Anti-patterns
+
 
 - Anemic “entities” that are only TypeScript interfaces with all logic in services
 - One global domain model across the whole company — unbounded context
@@ -221,7 +265,37 @@ export async function confirmBooking(
 - Using DDD names as folder decoration without invariants
 - Synchronously coupling every context in one request transaction forever
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | DDD cost |
+|-----------|----------|
+| Team | Workshops + context maps; onboarding to ubiquitous language |
+| Delivery | Slower early modeling; faster when rules are truly complex |
+| Ops | Still one modular monolith in this teaching stack |
+| Evolution | Microservices only when bounded contexts prove separation |
+
+### Evolution
+
+1. Start with modules in a [modular monolith](modular-monolith.md); name contexts from product language.
+2. Add tactical DDD only where invariants justify aggregates.
+3. Use [hexagonal](hexagonal.md) ports at context edges; [event-driven](event-driven.md) between contexts when sync coupling hurts.
+
+### ADR triggers
+
+Open an ADR when you: split a bounded context to a separate deployable; share tables across contexts; or adopt event sourcing on a core aggregate.
+
+### Automate
+
+- ESLint import boundaries: `modules/*/domain` cannot import infrastructure frameworks
+- Contract tests on `public.ts` per module
+
+## Migration
+
 
 1. Name bounded contexts from the product language (Booking, Billing, Identity)
 2. Draw a context map; assign table ownership
@@ -230,16 +304,10 @@ export async function confirmBooking(
 5. Add domain events for cross-context side effects only where needed
 6. Leave simple CRUD modules layered/slice-based without full tactical DDD
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Modular monolith | Natural combination | Modules = bounded contexts in one deploy |
-| Hexagonal / Clean | Natural combination | Ports protect the domain model |
-| CQRS | Natural combination | Complex domains often separate write model |
-| Event-Driven | Natural combination | Domain events integrate contexts |
-| Event Sourcing | Possible but requires discipline | Strong with DDD aggregates; high cost |
-| Microservices | Natural combination | One service per bounded context when justified |
-| Vertical Slice | Possible but requires discipline | Slices call into domain; avoid duplicating rules per slice |
-| FSD | Possible but requires discipline | Frontend entities ≠ DDD aggregates |
-| Layered anemic CRUD | Usually avoid | Conflicts with rich domain modeling at same place |
+[Modular monolith](modular-monolith.md) · [Hexagonal](hexagonal.md) · [CQRS](cqrs.md) · [Event-driven](event-driven.md) · [Vertical slice](vertical-slice.md) · [Feature-sliced design](feature-sliced-design.md)
+
+## Where in this repo
+
+Tactical DDD lives in walkthrough modules under `apps/api/src/modules/*` and `packages/domain`. See [backend-architecture.md](../../tech-space/backend-architecture.md) and [modular-monolith.md](modular-monolith.md).

@@ -13,6 +13,23 @@ Status: `doc` = documented only; `planned` = will appear in code; `code` = imple
 | Monorepo Structure | doc | [../tech-space/monorepo-structure.md](../tech-space/monorepo-structure.md) |
 | Tooling Stack | doc | [../tech-space/tooling.md](../tech-space/tooling.md) |
 | Learning Path | doc | Blueprint § Learning path |
+| Architecture Course | doc | [../knowledge/COURSE.md](../knowledge/COURSE.md) |
+| Career Course | doc | [../course/README.md](../course/README.md) |
+| Career Course Plan | doc | [../course/PLAN.md](../course/PLAN.md) |
+| Foundations HTTP | doc | [../course/00-foundations/FD-02-http.md](../course/00-foundations/FD-02-http.md) |
+| TypeScript for Architects | doc | [../course/00-foundations/FD-03-typescript.md](../course/00-foundations/FD-03-typescript.md) |
+| Git Workflows | doc | [../course/00-foundations/FD-05-git.md](../course/00-foundations/FD-05-git.md) |
+| Debugging Discipline | doc | [../course/00-foundations/FD-06-debugging.md](../course/00-foundations/FD-06-debugging.md) |
+| What Architecture Is | doc | [../course/01-system-architecture/SA-01-what-architecture-is.md](../course/01-system-architecture/SA-01-what-architecture-is.md) |
+| Quality Attributes NFRs | doc | [../course/01-system-architecture/SA-02-nfrs.md](../course/01-system-architecture/SA-02-nfrs.md) |
+| C4 Model | doc | [../course/01-system-architecture/SA-03-c4.md](../course/01-system-architecture/SA-03-c4.md) |
+| Capacity Planning | doc | [../course/01-system-architecture/SA-10-capacity.md](../course/01-system-architecture/SA-10-capacity.md) |
+| Knowledge Tracks Index | doc | [../course/01-system-architecture/knowledge-tracks.md](../course/01-system-architecture/knowledge-tracks.md) |
+| What Architecture Is | doc | [../course/01-system-architecture/SA-01-what-architecture-is.md](../course/01-system-architecture/SA-01-what-architecture-is.md) |
+| Quality Attributes NFRs | doc | [../course/01-system-architecture/SA-02-nfrs.md](../course/01-system-architecture/SA-02-nfrs.md) |
+| C4 Model | doc | [../course/01-system-architecture/SA-03-c4.md](../course/01-system-architecture/SA-03-c4.md) |
+| Capacity Planning | doc | [../course/01-system-architecture/SA-10-capacity.md](../course/01-system-architecture/SA-10-capacity.md) |
+| Knowledge Tracks Index | doc | [../course/01-system-architecture/knowledge-tracks.md](../course/01-system-architecture/knowledge-tracks.md) |
 | Walkthrough | doc | [../walkthrough/README.md](../walkthrough/README.md) |
 | Monorepo Setup Step | doc | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
 | Vertical Slice | doc | [../examples/vertical-slice-todo/README.md](../examples/vertical-slice-todo/README.md) |

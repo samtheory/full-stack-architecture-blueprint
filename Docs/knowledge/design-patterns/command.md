@@ -8,34 +8,57 @@ Represents an action as an **object** with `execute` (and often `undo`). Useful 
 
 **Command** یک عمل را به‌صورت **شیء** مدل می‌کند (`execute` / `undo`). برای صف کارها، undo/redo ادیتور، و لاگ دستورات عالی است. در Notion، هر ویرایش عنوان یا بلاک یک command است که می‌توان به پشتهٔ undo هل داد و بعداً برگرداند؛ در Hono می‌توان همان command را در outbox برای پردازش بعدی ذخیره کرد.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  UI[Edit title] --> Cmd[RenamePageCommand]
+  Cmd --> Stack[Undo stack]
+  Stack -->|undo| Cmd
+```
+
+**Why:** treat each editor action as a reversible object—not a one-off mutation lost to history.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Undo/redo editors
 - Job queues / outbox of domain actions
 - Macro recording of user operations
 
-## When not to use
+### When not to use
 
 - A plain function call is enough
 - Every button becomes a class with no undo story
 
-## Good practice
+### Good practice
 
 - Commands are immutable intents; apply to a receiver
 - Undo must restore the previous memento/state explicitly
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** command that reaches into React components directly
 - **Worst:** undo that only works once because state was mutated in place without a snapshot
 
-## Trade-offs
+**Trade-offs:** Powerful history vs more types and memory for the stack.
 
-Powerful history vs more types and memory for the stack.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Notion editor undo
+Real example — Notion editor undo.
 
-### Backend (Hono) — persistable commands / outbox
+### Backend (Hono) — worst practice
+
+```ts
+app.post("/pages/:id/rename", async (c) => {
+  const { title } = await c.req.json();
+  await pages.saveTitle(c.req.param("id"), title); // no audit trail; no undo contract
+  return c.json({ ok: true });
+});
+```
+
+### Backend (Hono) — best practice
 
 ```ts
 interface Command {
@@ -75,7 +98,16 @@ app.post("/pages/:id/rename", async (c) => {
 });
 ```
 
-### Frontend (React)
+### Frontend (React) — worst practice
+
+```tsx
+function Editor() {
+  const [title, setTitle] = useState("Draft");
+  return <input value={title} onChange={(e) => setTitle(e.target.value)} />; // no undo
+}
+```
+
+### Frontend (React) — best practice
 
 ```tsx
 type EditorCommand = {
@@ -86,12 +118,10 @@ type EditorCommand = {
 
 function useUndoStack() {
   const [undo, setUndo] = useState<EditorCommand[]>([]);
-  const [redo, setRedo] = useState<EditorCommand[]>([]);
 
   function run(command: EditorCommand) {
     command.execute();
     setUndo((stack) => [...stack, command]);
-    setRedo([]);
   }
 
   function undoLast() {
@@ -99,7 +129,6 @@ function useUndoStack() {
       const command = stack[stack.length - 1];
       if (!command) return stack;
       command.undo();
-      setRedo((r) => [...r, command]);
       return stack.slice(0, -1);
     });
   }
@@ -108,17 +137,41 @@ function useUndoStack() {
 }
 ```
 
-### Side-by-side
+## 4. Rich — edge cases · testing seams
 
-| Need | Direct mutation | Command |
-|------|-----------------|---------|
-| Undo title change | Ad hoc previous value | `command.undo()` |
-| Replay / audit | Reconstruct from logs painfully | Serialized command list |
+**Edge cases**
 
-## Related concepts
+- **Coalescing:** typing bursts—merge keystrokes into one command or stack explodes.
+- **Server vs client undo:** optimistic command may need server reconciliation ([memento](memento.md)).
+- **Outbox:** command serializes to durable queue; worker replays idempotently.
 
-Memento, Observer, Queue/outbox
+**Testing seams**
 
-## Where in this repo
+- `RenamePageCommand` with fake repository: execute then undo restores title.
+- Hook test: run two commands, undo once, assert state.
 
-Teaching pattern for editor history and durable jobs.
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Command class per form field with no undo/redo/queue requirement
+- Undo stacks unbounded in browser memory on long sessions
+
+### Alternatives
+
+- Event sourcing when audit is the product requirement
+- Simple PATCH for stateless CRUD
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Command types + execute | `packages/application/editor` |
+| Outbox worker | `apps/worker` |
+| `useUndoStack` | `apps/web/src/editor` |
+
+## Related · Where in this repo
+
+**Related:** [Memento](memento.md), [Observer](observer.md), queue/outbox
+
+**Where:** Teaching pattern for editor history and durable jobs.

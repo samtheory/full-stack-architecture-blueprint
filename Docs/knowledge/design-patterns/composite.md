@@ -8,35 +8,65 @@ Lets **individual objects and groups of objects** be treated uniformly through a
 
 **Composite** به برگ و گروه یک رابط مشترک می‌دهد تا کلاینت نداند با یک آیتم طرف است یا با درخت. در Notion، صفحه و سکشن و پاراگراف همگی «بلاک» هستند: `wordCount()` یا `toMarkdown()` روی کل درخت یکسان صدا زده می‌شود. افزودن سکشن تو در تو نباید API فراخواننده را عوض کند.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart TB
+  Page[Section block] --> P1[Paragraph]
+  Page --> S2[Section]
+  S2 --> P2[Paragraph]
+```
+
+**Why:** one `wordCount()` on the root walks leaves and nested sections the same way.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Tree structures (pages, folders, menus, comment threads)
 - Operations that must run the same way on leaf and node
 
-## When not to use
+### When not to use
 
 - Flat lists with no nesting
 - Forcing a tree where a simple array is enough
 
-## Good practice
+### Good practice
 
 - Shared component interface for leaf and composite
 - Clear ownership of children; avoid cycles
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** composite that exposes a different API than leaves for every operation
 - **Worst:** storing parent pointers and children without a single source of truth
 
-## Trade-offs
+**Trade-offs:** Uniform tree ops vs more complex mutation and rendering.
 
-Uniform tree ops vs more complex mutation and rendering.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Notion block tree
+Real example — Notion block tree.
 
-A page contains sections; sections contain paragraphs and embeds. Export and word count walk the same tree.
+### Backend (Hono) — worst practice
 
-### Backend (Hono)
+```ts
+// ❌ Separate code paths per type in the route
+app.get("/pages/:id/stats", async (c) => {
+  const page = await loadRawPage(c.req.param("id"));
+  let words = 0;
+  for (const block of page.blocks) {
+    if (block.type === "paragraph") words += block.text.split(" ").length;
+    if (block.type === "section") {
+      for (const child of block.children) {
+        if (child.type === "paragraph") words += child.text.split(" ").length;
+      }
+    }
+  }
+  return c.json({ words });
+});
+```
+
+### Backend (Hono) — best practice
 
 ```ts
 interface BlockNode {
@@ -46,27 +76,16 @@ interface BlockNode {
 }
 
 class ParagraphBlock implements BlockNode {
-  constructor(
-    public id: string,
-    private text: string,
-  ) {}
+  constructor(public id: string, private text: string) {}
   wordCount() {
     return this.text.trim() ? this.text.trim().split(/\s+/).length : 0;
   }
-  toMarkdown() {
-    return this.text;
-  }
+  toMarkdown() { return this.text; }
 }
 
 class SectionBlock implements BlockNode {
-  constructor(
-    public id: string,
-    private title: string,
-    private children: BlockNode[] = [],
-  ) {}
-  add(child: BlockNode) {
-    this.children.push(child);
-  }
+  constructor(public id: string, private title: string, private children: BlockNode[] = []) {}
+  add(child: BlockNode) { this.children.push(child); }
   wordCount() {
     return this.children.reduce((sum, child) => sum + child.wordCount(), 0);
   }
@@ -81,7 +100,19 @@ app.get("/pages/:id/stats", async (c) => {
 });
 ```
 
-### Frontend (React)
+### Frontend (React) — worst practice
+
+```tsx
+function PageView({ blocks }: { blocks: unknown[] }) {
+  return blocks.map((b) => {
+    if ((b as any).type === "paragraph") return <p>{(b as any).text}</p>;
+    // sections handled elsewhere — drift
+    return null;
+  });
+}
+```
+
+### Frontend (React) — best practice
 
 ```tsx
 type BlockNode =
@@ -101,19 +132,41 @@ function BlockView({ node }: { node: BlockNode }) {
 }
 ```
 
-Recursive `BlockView` is the UI composite: the parent does not special-case how deep the tree goes.
+## 4. Rich — edge cases · testing seams
 
-### Side-by-side
+**Edge cases**
 
-| Operation | Flat special-cases | Composite |
-|-----------|--------------------|-----------|
-| Word count | Separate loops per type | `root.wordCount()` |
-| Nested section | New code paths | Same `add` / render |
+- **Cycles:** `add` must reject parent-as-child.
+- **Immutable updates:** React state copies path to edited node ([iterator](iterator.md) for walks).
+- **Empty section:** `wordCount` is 0; markdown still emits heading.
 
-## Related concepts
+**Testing seams**
 
-Visitor, Iterator, Factory
+- Build small tree in memory; assert `root.wordCount()` without HTTP.
+- Visitor or iterator can walk same tree for export tests.
 
-## Where in this repo
+## 5. CTO — overuse signals · monorepo placement
 
-Pairs with Notion block factory / export examples.
+### Overuse signals
+
+- Every block type is a class with 50 methods—prefer data + functions for simple editors
+- Tree stored differently in API vs client with no shared DTO
+
+### Alternatives
+
+- Normalized `blocks` table + adjacency list when persistence dominates
+- [Visitor](visitor.md) when many operations cross the tree
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| `BlockNode` interface + ops | `packages/domain/blocks` |
+| `loadBlockTree` | `packages/application` + repository |
+| `BlockView` | `apps/web/src/editor` |
+
+## Related · Where in this repo
+
+**Related:** [Visitor](visitor.md), [Iterator](iterator.md), [Factory](factory.md)
+
+**Where:** Pairs with Notion block factory / export examples.

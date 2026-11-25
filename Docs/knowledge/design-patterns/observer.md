@@ -8,31 +8,45 @@ Dependents (**observers**) get notified when a subject’s state changes. In UI 
 
 **Observer** وقتی وضعیت یک subject عوض می‌شود، وابسته‌ها (observers) را خبر می‌کند. در چت سازمانی، بعد از ذخیرهٔ پیام، inbox، mention و thread باز باید به‌روز شوند؛ use case فقط publish می‌کند و listenerها جدا ثبت می‌شوند. در React معمولاً به‌صورت اشتراک سوکت و به‌روزرسانی کش query دیده می‌شود.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart TB
+  PM[postMessage] --> Hub[Message hub]
+  Hub --> Inbox[Inbox subscriber]
+  Hub --> Thread[Thread subscriber]
+  Hub --> Mention[Mention subscriber]
+```
+
+**Why:** one publish after persist—many views update without the use case calling each one.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Optimistic UI that must refresh multiple views after mutation
 - Domain events inside a process (carefully)
 
-## When not to use
+### When not to use
 
 - Direct call is enough and clearer
 - Cross-service “events” without delivery guarantees pretending to be Observer
 
-## Good practice
+### Good practice
 
 - Explicit subscriptions and teardown (avoid leaks)
 - Keep domain notifications framework-agnostic if used
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** silent global bus with stringly-typed events everywhere
 - **Worst:** observers performing more writes that re-enter the subject unboundedly
 
-## Trade-offs
+**Trade-offs:** Decoupling vs harder-to-follow control flow.
 
-Decoupling vs harder-to-follow control flow.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Chat message fan-out
+### Real example — Chat message fan-out
 
 Someone posts “@sam the deploy failed” in a channel. After the row is stored, three things care, and they care for different reasons: the inbox unread count, a mention push, and every open view of that channel (the thread and the sidebar). `postMessage` should stay “validate, store, tell subscribers.” Adding an audit log later is a new subscriber in the composition root.
 
@@ -214,10 +228,41 @@ export function ChatLayout({ socket, roomId }: { socket: RoomSocket; roomId: str
 | Sidebar unread while a thread is open | Each component binds the socket | One subscription writes the inbox and message caches |
 | Leave the channel | Stale `socket.on` keeps appending | Effect cleanup calls the `subscribe` unsubscribe |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-Optimistic UI Sync Example
+**Edge cases**
 
-## Where in this repo
+- **Listener failure:** persist succeeded—subscriber errors should not roll back the row (log + DLQ).
+- **Re-entrancy:** subscriber must not call `postMessage` synchronously without guard.
+- **Teardown:** websocket unsubscribe on route change—avoid duplicate handlers.
 
-Client cache invalidation / sync example (planned).
+**Testing seams**
+
+- Fake hub: subscribe spy, call `postMessage`, assert publish count.
+- React Query: invalidate keys in one listener; test with mock `queryClient`.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Global string event bus with no owners
+- Observer used where a single direct call is clearer
+
+### Alternatives
+
+- [Mediator](mediator.md) for many-to-many UI widgets
+- Outbox + worker for cross-process fan-out
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Domain hub interface | `packages/application` |
+| WS fan-out adapter | `apps/api` |
+| Query invalidation listeners | `apps/web` |
+
+## Related · Where in this repo
+
+**Related:** Optimistic UI sync example
+
+**Where:** Client cache invalidation / sync example (planned).

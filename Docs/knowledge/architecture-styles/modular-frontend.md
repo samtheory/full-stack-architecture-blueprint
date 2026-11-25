@@ -1,14 +1,38 @@
 # Modular Frontend Architecture
 
-## One-line Definition
+## One-line definition
 
 Modular frontend architecture structures the UI into **owned modules/packages** with public APIs, isolated state, and explicit composition — so large React/Next.js apps do not become a single interdependent component graph.
 
-## Problem It Solves
+## Problem it solves
 
 Frontend codebases grow into entangled `components/` trees where any screen imports any store, API client, or style helper. Modular frontend design restores team ownership, lazy loading boundaries, and safer refactors.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Frontend split like backend modules: features own screens; shared is thin; boundaries enforced.
+
+```mermaid
+flowchart LR
+  shell[App shell / routing]
+  M1[Module: bookings UI]
+  M2[Module: billing UI]
+  shared[Shared UI + API client]
+  shell --> M1
+  shell --> M2
+  M1 --> shared
+  M2 --> shared
+```
+
+**Why it exists:** scale the UI team without one `components/` dump.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Large React dashboards or multi-area SaaS consoles
 - Multiple frontend engineers / teams
@@ -16,14 +40,14 @@ Frontend codebases grow into entangled `components/` trees where any screen impo
 - Long-lived product with frequent UI changes
 - Desire for clearer ownership without necessarily adopting microfrontends
 
-## When Not to Use It
+### When not
 
 - Small SPA / marketing site
 - Over-splitting into microfrontends for a single team
 - Modules that still share one giant global store freely
 - Inventing module boundaries that don’t match user areas or domains
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +60,7 @@ Frontend codebases grow into entangled `components/` trees where any screen impo
 | Marketplace / booking system | Good | Guest / host / admin shells |
 | Internal admin panel | Good | Section modules (users, billing, audits) |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Frontend organization**. Backend stays modular monolith / slices / hexagonal separately.
 
@@ -47,7 +71,9 @@ In React + Next.js + Hono:
 - Talk to Hono through module-owned API clients or a shared HTTP kit
 - Do not import Hono server modules into client bundles
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Each frontend module exposes a public API (`index.ts`) — screens import that, not internals
 - Cross-module UI composition happens in the app shell / routes, not via deep imports
@@ -57,7 +83,8 @@ In React + Next.js + Hono:
 - Modules may share types from `@repo/contracts`, not from each other’s private models
 - Client modules must not import server-only Next.js code unless marked server boundaries clearly
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -75,7 +102,8 @@ flowchart TB
   Billing --> Shared
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -145,7 +173,8 @@ packages/
   contracts/
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // modules/booking/index.ts — public API
@@ -178,7 +207,10 @@ export async function postBooking(input: CreateBookingInput) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** module features and pure helpers
 - **Integration:** module page + MSW for Hono
@@ -186,7 +218,15 @@ export async function postBooking(input: CreateBookingInput) {
 - **E2E:** cross-module journeys from the shell
 - **Mocking:** mock `shared/http`; do not reach into another module’s internals in tests
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Module imports another module internals | public.ts per module |
+| Shared becomes god folder | Extract domain-specific to module |
+
+### Anti-patterns
+
 
 - Modules importing each other’s private folders
 - One Redux store with all modules’ state forever
@@ -194,7 +234,30 @@ export async function postBooking(input: CreateBookingInput) {
 - Microfrontends without module boundaries first
 - Duplicating the entire design system per module without a kit
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Modular FE cost |
+|-----------|-----------------|
+| Team | Module owners; lighter than full FSD |
+| Delivery | Parallel UI work with linted seams |
+| Ops | N/A |
+| Evolution | FSD layers inside each module when UI grows |
+
+### ADR triggers
+
+Module split on web · shared state between modules · Capacitor shared shell.
+
+### Automate
+
+- ESLint boundaries between `src/modules/*`
+
+## Migration
+
 
 1. Identify top navigation areas as candidate modules
 2. Move one area into `modules/x` with an `index.ts` public API
@@ -202,14 +265,10 @@ export async function postBooking(input: CreateBookingInput) {
 4. Introduce route-based lazy loading
 5. Adopt FSD/slices inside modules once boundaries stabilize
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Feature-Sliced Design | Natural combination | FSD is a detailed modular frontend method |
-| Vertical Slice | Natural combination | Slices inside modules |
-| Microfrontends | Possible but requires discipline | Deployable modules; higher cost |
-| Next.js App Router | Natural combination | Route groups as composition roots |
-| Modular monolith backend | Natural combination | Mirror module names across stack |
-| Layered `components/hooks/services` | Mutually exclusive at the same boundary | Competing taxonomies |
-| SCS | Possible but requires discipline | Stronger autonomy including separate apps |
+[Feature-sliced design](feature-sliced-design.md) · [Vertical slice](vertical-slice.md) · [React recommendations](react-next-hono-recommendations.md)
+
+## Where in this repo
+
+Planned `apps/web` module boundaries; complements [feature-sliced-design.md](feature-sliced-design.md).

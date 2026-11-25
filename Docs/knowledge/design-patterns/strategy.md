@@ -8,31 +8,45 @@ Define a family of interchangeable algorithms behind a common interface; select 
 
 **Strategy** خانواده‌ای از الگوریتم‌های قابل تعویض را پشت یک رابط می‌گذارد و در زمان اجرا یکی را انتخاب می‌کند. مثال سازمانی: کمیسیون فروشنده، مالیات کشور، یا روش تحویل (ارسال / تحویل حضوری / دیجیتال) بدون دست‌کاری فرمول اصلی `quoteOrder`. در React هم فیلدها و اعتبارسنجی هر روش تحویل یک strategy جداست.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  Quote[quoteOrder] --> Comm[CommissionPolicy]
+  Quote --> Tax[TaxPolicy]
+  Comm --> A[standard 10%]
+  Comm --> B[pro 0%]
+```
+
+**Why:** swap commission or tax algorithms at runtime without editing the core quote formula.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Auth modes (session cookie vs bearer) with shared application flow
 - Pricing/tax variants, retry policies
 
-## When not to use
+### When not to use
 
 - Two near-identical functions that will never vary independently
 - Replacing a simple `if` that runs once at startup with a hierarchy
 
-## Good practice
+### Good practice
 
 - Strategy interface owned by application layer
 - Selection in composition root / config
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** strategies that need to know Hono `Context`
 - **Worst:** strategy explosion for every boolean flag
 
-## Trade-offs
+**Trade-offs:** Flexibility vs number of types.
 
-Flexibility vs number of types.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Marketplace quote and checkout
+### Real example — Marketplace quote and checkout
 
 Two families of algorithms vary on their own.
 
@@ -282,10 +296,41 @@ Local delivery is a new entry in `fulfillmentStrategies`. The page’s render an
 | Local delivery fields | Another branch in `CheckoutPage` | New `Fields` + `validate` in the map |
 | Show the buyer total | Recompute tax in React | Render `quote` from `POST /quotes` |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-OCP, DIP
+**Edge cases**
 
-## Where in this repo
+- **Independent axes:** commission and tax strategies compose—avoid one mega-strategy with hidden coupling.
+- **Unknown plan / region:** selection throws or returns 400; `quoteOrder` stays pure.
+- **Checkout fulfillment:** never recompute tax in React—render API quote only.
 
-Auth session example (planned).
+**Testing seams**
+
+- Table tests on `CommissionPolicy.feeCents` and `TaxPolicy.taxCents` with no HTTP.
+- Inject `policiesFor(plan, shipTo)` in route tests with fixed maps.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- One boolean flag → new strategy interface
+- Strategies importing Hono `Context` or React hooks
+
+### Alternatives
+
+- Plain functions when variation is config, not behavior
+- [Template Method](template-method.md) when step *order* is fixed
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Policy interfaces + impls | `packages/application/finance` |
+| `policiesFor` selection | `apps/api` composition root |
+| `fulfillmentStrategies` | `apps/web` checkout |
+
+## Related · Where in this repo
+
+**Related:** OCP, DIP
+
+**Where:** Auth session example (planned). Course track A10 — [COURSE.md](../COURSE.md).

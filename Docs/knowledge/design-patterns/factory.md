@@ -10,31 +10,45 @@ Centralizes creation logic so callers request a product without knowing the conc
 
 **Factory** منطق ساخت را در یک نقطه متمرکز می‌کند تا فراخواننده بدون دانستن کلاس دقیق، محصول بخواهد. مثال: ساخت بلاک Notion (پاراگراف، دیتابیس، embed) با قوانین اعتبارسنجی یکسان برای API و منوی slash. برای انتخاب درایور دیتابیس هم از همین ایده استفاده می‌شود.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  Caller[POST /blocks] --> F[createBlock]
+  F --> P[paragraph]
+  F --> D[database]
+  F --> E[embed]
+```
+
+**Why:** one front door validates and constructs blocks—callers don’t embed type-specific rules.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - `createDb(config)` returns the correct vendor client/adapter
 - Test suites swap in-memory implementations via factory
 
-## When not to use
+### When not to use
 
 - `new` is clear and singular
 - Abstract factory trees with one product ever
 
-## Good practice
+### Good practice
 
 - Factory lives near composition/config, not inside domain entities
 - Fail fast on unknown `DATABASE_DRIVER`
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** factory hidden behind service locator globals
 - **Worst:** reflection magic to invent classes by string everywhere
 
-## Trade-offs
+**Trade-offs:** Single creation point vs indirection.
 
-Single creation point vs indirection.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Notion blocks
+### Real example — Notion blocks
 
 A page is a list of blocks, and each block type is built differently. A paragraph stores rich text. A database block stores a property schema and rejects duplicate property names. An embed stores an `https` URL. The slash menu, the “turn into” action, and `POST /blocks` all need a valid block. If each caller assembles the object, a database block with no schema gets saved and the editor crashes when it opens.
 
@@ -229,10 +243,41 @@ Empty paragraph text is legal while someone is typing. The database and embed ru
 | Slash menu inserts an embed | `{ type: "embed" }` with no URL field | `createEmptyDraft("embed")` returns `{ url: "" }`; `createBlock` rejects it until the URL is `https` |
 | New “bookmark” block | Hunt every `switch (block.type)` | New domain branch, new editor, one map entry |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-Adapter, DI
+**Edge cases**
 
-## Where in this repo
+- **Draft vs persisted:** `createEmptyDraft` for UI; `createBlock` for API—same validation rules.
+- **Unknown type:** factory throws domain error → 400, not silent default paragraph.
+- **DB driver factory:** fails fast on bad `DATABASE_DRIVER` at boot.
 
-DB driver selection; see multi-db notes example.
+**Testing seams**
+
+- Table tests on `createBlock` inputs without HTTP.
+- In-memory repo via `createDb({ driver: "memory" })` in tests.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Stringly-typed `createThing(type: string)` without validation
+- Factory in domain entity constructors
+
+### Alternatives
+
+- [Factory Method](factory-method.md) when variants own creation
+- [Abstract Factory](abstract-factory.md) for vendor families
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| `createBlock` | `packages/domain/blocks` |
+| `createDb` | `packages/infrastructure` |
+| Slash menu wiring | `apps/web/src/editor` |
+
+## Related · Where in this repo
+
+**Related:** [Adapter](adapter.md), [DI](dependency-injection.md)
+
+**Where:** DB driver selection; see multi-db notes example.

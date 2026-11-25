@@ -8,33 +8,59 @@ Coordinates communication between objects so they **do not refer to each other d
 
 **Mediator** ارتباط بین اشیاء را هماهنگ می‌کند تا به هم **وابسته مستقیم** نباشند. در چت، composer و لیست اعضا و typing indicator نباید همدیگر را import کنند؛ یک هماهنگ‌کنندهٔ اتاق رویدادها را پخش می‌کند. با Observer فرق ظریف دارد: اینجا تمرکز روی **کاهش وابستگی متقابل** بین چند همکار است، نه فقط اطلاع از تغییر یک subject.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart TB
+  Composer --> Bus[Room mediator]
+  Thread --> Bus
+  Members --> Bus
+  Typing --> Bus
+```
+
+**Why:** many chat widgets stay decoupled—they only speak to one coordinator, not to each other.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Many UI widgets or domain colleagues with tangled pairwise links
 - Room/session coordinators
 
-## When not to use
+### When not to use
 
 - Two objects with a simple direct call
 - Mediator becomes a god object that owns all logic
 
-## Good practice
+### Good practice
 
 - Mediator routes; business rules stay in colleagues or use cases
 - Keep a clear event/command vocabulary
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** mediator that imports every feature module’s internals
 - **Worst:** replacing all structure with one global event bus of strings
 
-## Trade-offs
+**Trade-offs:** Decoupled colleagues vs a busy coordinator.
 
-Decoupled colleagues vs a busy coordinator.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Chat room coordinator
+Real example — Chat room coordinator.
 
-### Backend (Hono)
+### Backend (Hono) — worst practice
+
+```ts
+// ❌ Composer handler imports thread cache directly
+import { bumpThreadVersion } from "./thread-module";
+app.post("/rooms/:id/messages", async (c) => {
+  await saveMessage(/* ... */);
+  bumpThreadVersion(c.req.param("id"));
+  notifyTypingOff(c.get("userId"));
+});
+```
+
+### Backend (Hono) — best practice
 
 ```ts
 type RoomEvent =
@@ -60,20 +86,19 @@ class RoomMediator {
     this.publish({ type: "message.posted", messageId: id, body, authorId });
   }
 }
-
-const rooms = new Map<string, RoomMediator>();
-
-app.post("/rooms/:roomId/messages", async (c) => {
-  const roomId = c.req.param("roomId");
-  const mediator = rooms.get(roomId) ?? new RoomMediator();
-  rooms.set(roomId, mediator);
-  const { body } = await c.req.json();
-  await mediator.postMessage(c.get("userId"), body, (msg) => messages.add(roomId, msg));
-  return c.json({ ok: true }, 201);
-});
 ```
 
-### Frontend (React)
+### Frontend (React) — worst practice
+
+```tsx
+// ❌ Composer imports Thread to optimistically prepend
+import { prependMessage } from "./Thread";
+function Composer() {
+  return <textarea onBlur={() => prependMessage(draft)} />;
+}
+```
+
+### Frontend (React) — best practice
 
 ```tsx
 type RoomBus = {
@@ -91,21 +116,43 @@ function ChatRoom({ bus }: { bus: RoomBus }) {
     </>
   );
 }
-
-// Composer and Thread never import each other — only the bus (mediator)
 ```
 
-### Side-by-side
+## 4. Rich — edge cases · testing seams
 
-| Change | Pairwise imports | Mediator |
-|--------|------------------|----------|
-| Add typing indicator | Wire into composer + thread | Subscribe to bus |
-| Refactor thread | Breaks composer import | Bus contract stays |
+**Edge cases**
 
-## Related concepts
+- **In-memory mediator per process:** scale-out needs Redis pub/sub mediator adapter.
+- **Event ordering:** typing events can arrive after message—UI should tolerate.
+- **Leak:** unsubscribe on unmount or listeners accumulate.
 
-Observer, Facade, DI
+**Testing seams**
 
-## Where in this repo
+- Publish synthetic `RoomEvent`s; assert thread and typing subscribers react without importing each other.
+- Fake `RoomBus` in component tests.
 
-Related to chat observer examples; mediator emphasizes multi-colleague coordination.
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Mediator contains SQL, validation, and React state setters
+- Stringly-typed global bus with no schema
+
+### Alternatives
+
+- [Observer](observer.md) for one-to-many change notification
+- [Facade](facade.md) for single entry orchestration, not many-to-many chat
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| `RoomEvent` types | `packages/domain` or `packages/chat` |
+| In-process mediator | `apps/api` websocket layer |
+| `RoomBus` React context | `apps/web/src/chat` |
+
+## Related · Where in this repo
+
+**Related:** [Observer](observer.md), [Facade](facade.md), [Dependency Injection](dependency-injection.md)
+
+**Where:** Related to chat observer examples; mediator emphasizes multi-colleague coordination.

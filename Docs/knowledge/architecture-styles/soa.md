@@ -1,14 +1,34 @@
 # Service-Oriented Architecture (SOA)
 
-## One-line Definition
+## One-line definition
 
 Service-Oriented Architecture structures a system as a set of **network-accessible services** that expose coarse-grained business capabilities through standardized contracts, often with a shared governance/ESB-style integration layer historically — in modern practice, closer to well-governed service boundaries with shared platforms.
 
-## Problem It Solves
+## Problem it solves
 
 Large organizations need reusable business capabilities (billing, identity, inventory) consumed by many channels. SOA aims to expose those capabilities as services with contracts so applications compose capabilities instead of duplicating them.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Coarse **services** with explicit contracts, often an ESB/bus era. Prefer modules/monolith first in this repo.
+
+```mermaid
+flowchart LR
+  GW[Gateway] --> S1[Booking service]
+  GW --> S2[Billing service]
+  S1 --> Bus[Message bus]
+  S2 --> Bus
+```
+
+**Why it exists:** enterprise integration when organizations already own separate systems.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Enterprise portfolios with many consuming applications
 - Strong need for reusable business capabilities across teams
@@ -16,14 +36,14 @@ Large organizations need reusable business capabilities (billing, identity, inve
 - Coarse-grained services (not tiny endpoints) matching business functions
 - Organization can fund shared platform, contracts, and ops
 
-## When Not to Use It
+### When not
 
 - Startup / single-product modular monolith stage
 - Confusing SOA with “many tiny microservices”
 - Central ESB that becomes a bottleneck and logic dump
 - Small React+Hono app inventing SOAP/ESB ceremony
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +56,7 @@ Large organizations need reusable business capabilities (billing, identity, inve
 | Marketplace / booking system | Medium | Useful at org scale; overkill for one app |
 | Internal admin panel | Medium | Consumer of shared services |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 Primarily **deployment topology + integration** for backends and enterprise composition. Frontends consume services (often through a BFF).
 
@@ -47,7 +67,9 @@ In React + Next.js + Hono:
 - Next.js BFF composes them for the web UX
 - Avoid recreating a heavyweight ESB; use explicit APIs, events, and an API gateway
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Services expose **business capabilities**, not raw tables
 - Contracts are versioned (OpenAPI/AsyncAPI); consumers depend on contracts only
@@ -57,7 +79,8 @@ In React + Next.js + Hono:
 - Governance for auth, discovery, and observability is part of the architecture
 - UI must not orchestrate five enterprise services with business rules in the browser
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -77,7 +100,8 @@ flowchart TB
   Identity --> Bus
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -119,7 +143,8 @@ packages/
   contracts-billing/
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // packages/contracts-booking/src/confirm.ts
@@ -154,7 +179,10 @@ export async function composeCheckout(bookingId: string) {
 }
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** per-service domain
 - **Integration:** service + its DB
@@ -162,7 +190,16 @@ export async function composeCheckout(bookingId: string) {
 - **E2E:** cross-service journeys in a staged environment
 - **Mocking:** contract stubs for UI/BFF; never skip contract tests
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| ESB becomes god object | Push logic to services; bus carries events only |
+| Chatty sync orchestration | Prefer events + sagas |
+| Shared canonical model wars | Bounded context ownership |
+
+### Anti-patterns
+
 
 - Building an ESB that contains all business logic
 - Shared database “for convenience” across services
@@ -170,7 +207,31 @@ export async function composeCheckout(bookingId: string) {
 - Calling it SOA while shipping an ungoverned microsphere of endpoints
 - Putting enterprise orchestration exclusively in React
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | SOA cost |
+|-----------|----------|
+| Team | Integration architects; ESB baggage if over-centralized |
+| Delivery | Slow cross-service changes |
+| Ops | Many runtimes, distributed tracing required |
+| Evolution | This repo teaches [modular monolith](modular-monolith.md) first; SOA when org boundaries demand it |
+
+### ADR triggers
+
+Extracting a SOA service from a module · canonical data model debates · ESB introduction.
+
+### Automate
+
+- Service contract repository (OpenAPI) per boundary
+- Consumer-driven contract tests
+
+## Migration
+
 
 1. Start with modular monolith capability modules + public APIs
 2. Publish contracts for the most reused capability
@@ -178,15 +239,10 @@ export async function composeCheckout(bookingId: string) {
 4. Put Next.js BFF in front for web composition
 5. Add gateway + event integration as consumers grow
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Microservices | Possible but requires discipline | Microservices are a finer-grained evolution; not identical |
-| API Gateway | Natural combination | Entry and policy layer |
-| BFF | Natural combination | Client-specific composition |
-| Event-Driven | Natural combination | Integration without brittle sync chains |
-| Modular monolith | Usually avoid as simultaneous topology | Alternatives at deployment boundary — evolve from monolith |
-| SCS | Possible but requires discipline | SCS favors autonomy over shared reusable services |
-| DDD | Natural combination | Capabilities ≈ bounded contexts |
-| Serverless | Possible but requires discipline | Services hosted as functions |
+[Microservices](microservices.md) · [Modular monolith](modular-monolith.md) · [Self-contained systems](self-contained-systems.md)
+
+## Where in this repo
+
+Historical contrast; default stance is [modular-monolith.md](modular-monolith.md).

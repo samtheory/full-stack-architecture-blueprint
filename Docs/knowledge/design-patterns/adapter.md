@@ -8,31 +8,44 @@ Converts one interface into another the client expects. In hexagonal terms: **im
 
 **Adapter** رابط یک سیستم بیرونی (مثلاً Stripe یا Adyen) را به قراردادی تبدیل می‌کند که دامنه/use case انتظار دارد. SDK فروشنده داخل فایل adapter می‌ماند؛ هسته فقط «پرداخت موفق با reference» یا «رد شدن با دلیل» را می‌فهمد. در مارکت‌پلیس، هم درگاه پرداخت سمت Hono و هم ویجت پرداخت سمت React معمولاً adapter هستند.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  UC[Place order] --> Port[PaymentGateway]
+  Port --> Ad[Stripe adapter]
+  Ad --> SDK[Stripe SDK]
+```
+
+**Why:** the use case speaks one port—vendor SDKs stay behind adapters you can swap or fake.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Vendor SDKs (pg, mysql, libsql) behind a stable port
 - Capacitor plugin wrapped for the app
 
-## When not to use
+### When not to use
 
 - Wrapping your own simple function with no mismatch
 - Adapter that only renames methods without isolating anything
 
-## Good practice
+### Good practice
 
 - Keep vendor types inside the adapter file/package
 - Document behavioral differences honestly
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** “adapter” that re-exports the SDK unchanged into domain
 - **Worst:** catching all errors and returning null everywhere
 
-## Trade-offs
+**Trade-offs:** Boilerplate vs isolation and replaceability.
 
-Boilerplate vs isolation and replaceability.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Marketplace checkout
+### Real example — Marketplace checkout
 
 A marketplace captures payment when a buyer places an order. Stripe talks in PaymentIntents (`amount`, `payment_method`, `StripeCardError.code`). Adyen talks in `/payments` (`amount.value`, `resultCode`: `Authorised` or `Refused`). The order use case needs neither vocabulary. It needs “captured, here is the provider reference” or “declined, here is a reason the buyer can read.”
 
@@ -264,10 +277,40 @@ export function CheckoutPayBox({
 | Card declined | `catch` returns `null` | `402` with `insufficient_funds` or `expired_card` |
 | Stripe.js API change | Pay button and order use case both break | One file, `createStripePaymentForm`, breaks |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-Hexagonal, LSP, OCP
+**Edge cases**
 
-## Where in this repo
+- **Declined vs error:** adapters map provider codes to domain reasons—never blanket `null`.
+- **3DS / async capture:** adapter documents pending states the use case must handle.
+- **React widget lifecycle:** mount/unmount inside adapter; page calls `submit()` only.
 
-`packages/db` vendor adapters; mobile secure storage (planned).
+**Testing seams**
+
+- `FakePaymentGateway` implementing the port for order tests.
+- Contract tests per adapter file when SDK responses drift.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Adapter that re-exports entire SDK to `packages/domain`
+- One adapter file per method instead of one bounded context port
+
+### Alternatives
+
+- [Facade](facade.md) when orchestrating many calls, not translating one port
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Ports | `packages/application` |
+| Stripe/Adyen/pg adapters | `packages/infrastructure` |
+| Payment form adapters | `apps/web` |
+
+## Related · Where in this repo
+
+**Related:** Hexagonal, LSP, OCP
+
+**Where:** `packages/db` vendor adapters; mobile secure storage (planned). Course A9 — [COURSE.md](../COURSE.md).

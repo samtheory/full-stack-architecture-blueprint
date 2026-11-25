@@ -8,31 +8,44 @@ A technique to supply a module’s dependencies from the outside rather than con
 
 **Dependency Injection** وابستگی‌ها را از بیرون به ماژول می‌دهد، نه اینکه ماژول خودش آن‌ها را بسازد. DI روش تحویل **DIP** است؛ خود DIP نیست. در چت، `createApp(deps)` و `ChatServicesProvider` همان composition root هستند: تست clock را فریز می‌کند، Storybook API جعلی می‌دهد، و production Postgres واقعی را.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  Main[main.ts] --> App[createApp deps]
+  App --> UC[postMessage]
+  UC --> Repo[MessageRepository port]
+```
+
+**Why:** build real adapters once at the edge; use cases receive ports they can swap in tests.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Use cases need repositories/loggers/clocks
 - Tests replace deps with fakes
 
-## When not to use
+### When not to use
 
 - Passing every transitive dependency through 10 layers (fix with composition)
 - Container-heavy frameworks for a 3-route teaching API
 
-## Good practice
+### Good practice
 
 - Manual injection in `createApp(deps)` for this repo’s scale
 - Composition root only in apps
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** importing concrete adapters inside use cases “just this once”
 - **Worst:** ambient global `container.get` scattered in domain
 
-## Trade-offs
+**Trade-offs:** Wiring code vs hard-wired dependencies that resist tests.
 
-Wiring code vs hard-wired dependencies that resist tests.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Chat composition root
+### Real example — Chat composition root
 
 `postMessage` needs a message store, a clock (the `createdAt` we persist and that tests freeze), an id generator, and the hub from [observer.md](observer.md). The React composer needs an API client and that same clock for an optimistic bubble. Neither the use case nor the composer should construct Postgres, open a websocket, or call `container.get`.
 
@@ -252,10 +265,41 @@ Storybook renders the same provider with `api.postMessage` resolving a fixture a
 | Storybook the composer | Mock the API module | `ChatServicesProvider` with a fake `api` |
 | Swap Postgres for an in-memory store | Edit `postMessage` | Edit `main.ts` only |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-DIP, Factory, Hexagonal
+**Edge cases**
 
-## Where in this repo
+- **Constructor injection vs props:** React uses provider props; Hono uses `createApp(deps)`—same idea, different shell.
+- **Optional deps:** prefer no-op implementations over `undefined` checks scattered in use cases.
+- **Request scope:** per-request user id is not a singleton—pass through `Context`, not global container.
 
-Hono API composition root (planned).
+**Testing seams**
+
+- `createApp({ messages: fake, clock: fixed })` for route tests.
+- Storybook `ChatServicesProvider` with fake API—no module mocking.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Service locator `container.get` in `packages/domain`
+- Every new dependency prop-drilled through six React layers without context
+
+### Alternatives
+
+- Manual wiring at `main.ts` for this monorepo’s scale
+- [Singleton](singleton.md) only for true process resources at root
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| `createApp(deps)` | `apps/api` |
+| Use cases | `packages/application` |
+| Providers | `apps/web/src/providers` |
+
+## Related · Where in this repo
+
+**Related:** DIP, [Factory](factory.md), Hexagonal
+
+**Where:** Hono API composition root (planned). Course A7 — [COURSE.md](../COURSE.md).

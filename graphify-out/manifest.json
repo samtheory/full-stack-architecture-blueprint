@@ -1,8 +1,8 @@
 {
   "Docs/.brain/CONCEPTS.md": {
-    "mtime": 1795259136.8219492,
-    "seen": 1795337019.6713989,
-    "ast_hash": "f489030c5fb6c76eb3cc9bef16100d02",
+    "mtime": 1795618886.8282764,
+    "seen": 1795618900.2290118,
+    "ast_hash": "03af5640b498c6f5ecea7a5d9efc8016",
     "semantic_hash": ""
   },
   "Docs/.brain/GLOSSARY.md": {
@@ -18,15 +18,15 @@
     "semantic_hash": ""
   },
   "Docs/.brain/INDEX.md": {
-    "mtime": 1795275684.359251,
-    "seen": 1795337019.671406,
-    "ast_hash": "7e2c3b5e5873d51a156493812d841635",
+    "mtime": 1795618300.9901764,
+    "seen": 1795618313.4460864,
+    "ast_hash": "85dcfa0e212bc8f6732b433038f8d713",
     "semantic_hash": ""
   },
   "Docs/.brain/LINKS.md": {
-    "mtime": 1795256277.5228162,
-    "seen": 1795337019.6714067,
-    "ast_hash": "1ee14423ae885a7c3e2e7f338f31ffa5",
+    "mtime": 1795618888.558924,
+    "seen": 1795618900.2290163,
+    "ast_hash": "03d15895362fb0540b06453f2abb23da",
     "semantic_hash": ""
   },
   "Docs/.brain/QUERY-GUIDE.md": {
@@ -36,9 +36,9 @@
     "semantic_hash": ""
   },
   "Docs/README.md": {
-    "mtime": 1795256261.4839597,
-    "seen": 1795337019.6714084,
-    "ast_hash": "84e6356b93d15e937407f878c3e76873",
+    "mtime": 1795618296.8246467,
+    "seen": 1795618313.4460893,
+    "ast_hash": "b26cd6891e356f895151302fe77d83ea",
     "semantic_hash": ""
   },
   "Docs/examples/README.md": {
@@ -72,141 +72,141 @@
     "semantic_hash": ""
   },
   "Docs/knowledge/README.md": {
-    "mtime": 1795356350.0237951,
-    "seen": 1795357366.9217348,
-    "ast_hash": "13f666bc3b069dd469068fcd4909af88",
+    "mtime": 1795617073.9045646,
+    "seen": 1795617452.888046,
+    "ast_hash": "d178ecfda8086db13cf932cdaacb9ca9",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/README.md": {
-    "mtime": 1795356308.7948637,
-    "seen": 1795357366.921736,
-    "ast_hash": "81315fb0ff6b0d22d031a6ff28665320",
+    "mtime": 1795617557.233104,
+    "seen": 1795617763.1170788,
+    "ast_hash": "3bf7638c8e03ee062397c2107d2d5065",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/clean.md": {
-    "mtime": 1795343103.5694494,
-    "seen": 1795357366.9217408,
-    "ast_hash": "9748c43eab68dec218325540ad6f90fa",
+    "mtime": 1795617202.6660545,
+    "seen": 1795617452.8880522,
+    "ast_hash": "e87fb96ca15d81a53028e60053e0c078",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/hexagonal.md": {
-    "mtime": 1795343085.6009305,
-    "seen": 1795357366.9217453,
-    "ast_hash": "8aeff397aff4d82a17917415fd92607f",
+    "mtime": 1795617169.3168,
+    "seen": 1795617452.8880572,
+    "ast_hash": "d4a67d839e7c4c6ab57658e76685a780",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/layered.md": {
-    "mtime": 1795343069.1431122,
-    "seen": 1795357366.9217465,
-    "ast_hash": "18a05efd30980c6c96fecda9b003b00c",
+    "mtime": 1795617120.0304635,
+    "seen": 1795617452.8880584,
+    "ast_hash": "82f621d822382f88174bf17ea0fee2a0",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/microservices.md": {
-    "mtime": 1795343191.4345832,
-    "seen": 1795357366.9217472,
-    "ast_hash": "54f1374d9387b1bb703877a2d8a43665",
+    "mtime": 1795617537.3907144,
+    "seen": 1795617763.1170902,
+    "ast_hash": "d4c4afc705afc20c115c076aed7af5c3",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/modular-monolith.md": {
-    "mtime": 1795343449.8308358,
-    "seen": 1795357366.9217489,
-    "ast_hash": "f96651ade11f22ba773a74dfe50aa434",
+    "mtime": 1795617243.3895466,
+    "seen": 1795617452.888061,
+    "ast_hash": "b65b280ca93bdd7ba2083a17e2049cae",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/README.md": {
-    "mtime": 1795348976.53555,
-    "seen": 1795357366.9217556,
-    "ast_hash": "e32da99651058d0b03bfd2136d8704be",
+    "mtime": 1795617448.326406,
+    "seen": 1795617452.888069,
+    "ast_hash": "e3b95c056e091d075401dc5f5ba3682c",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/adapter.md": {
-    "mtime": 1795348986.4080853,
-    "seen": 1795357366.9217572,
-    "ast_hash": "df5eb9b93b030877d336c5cbc5a725e8",
+    "mtime": 1795617413.407856,
+    "seen": 1795617452.8880703,
+    "ast_hash": "8b5c46ed8043d7cf6e7727079d0f02c4",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/dependency-injection.md": {
-    "mtime": 1795441278.5411587,
-    "seen": 1795445664.406038,
-    "ast_hash": "1f864b32f5918bf18745bde6d4149757",
+    "mtime": 1795617423.7029333,
+    "seen": 1795617452.888076,
+    "ast_hash": "867d3c5a55acfa1bfb7d83cd31d6eabd",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/factory.md": {
-    "mtime": 1795348991.084742,
-    "seen": 1795357366.9217658,
-    "ast_hash": "2590eb86b00dab9a164cdf4c483afca2",
+    "mtime": 1795617431.948501,
+    "seen": 1795617452.8880785,
+    "ast_hash": "a201cb0778527d19a3b4063c591721b1",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/observer.md": {
-    "mtime": 1795348993.2839327,
-    "seen": 1795357366.9217694,
-    "ast_hash": "fe9808d15122b74bc97cb5afa7a40bba",
+    "mtime": 1795617432.9133353,
+    "seen": 1795617452.8880827,
+    "ast_hash": "08688cddafc36ccfda6c08d2857d00e1",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/repository.md": {
-    "mtime": 1795348983.8062081,
-    "seen": 1795357366.9217718,
-    "ast_hash": "ab431905d69f78c190aab846ec15ae69",
+    "mtime": 1795617445.8728836,
+    "seen": 1795617452.888085,
+    "ast_hash": "e127d9a58b0b771393e2139cae9e02f9",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/strategy.md": {
-    "mtime": 1795348988.7039254,
-    "seen": 1795357366.9217741,
-    "ast_hash": "f27ee8d8ea2b6308f2ce314fde0e23a3",
+    "mtime": 1795617409.1717,
+    "seen": 1795617452.8880875,
+    "ast_hash": "d80e11e497194087fc438161b7619b70",
     "semantic_hash": ""
   },
   "Docs/knowledge/react-rendering/README.md": {
-    "mtime": 1795267908.4222672,
-    "seen": 1795337019.6714232,
-    "ast_hash": "d252c43de990db6992c2269a2dcf9386",
+    "mtime": 1795617674.4807093,
+    "seen": 1795617763.117123,
+    "ast_hash": "0321e3cd863277a3e3c94151b80a78c3",
     "semantic_hash": ""
   },
   "Docs/knowledge/react-rendering/legacy-class-lifecycle.md": {
-    "mtime": 1795267903.110655,
-    "seen": 1795337019.671424,
-    "ast_hash": "f212cf463b22ff0a5c431f7dbe8a1d08",
+    "mtime": 1795617675.6681747,
+    "seen": 1795617763.1171236,
+    "ast_hash": "680ad0c935bb9a8918e0aaf62d753d02",
     "semantic_hash": ""
   },
   "Docs/knowledge/react-rendering/modern-lifecycle.md": {
-    "mtime": 1795337016.2183135,
-    "seen": 1795337019.6714249,
-    "ast_hash": "9d0867f64626775e156adc8b45c5889f",
+    "mtime": 1795617703.8341196,
+    "seen": 1795617763.1171246,
+    "ast_hash": "1561f35efcc5ff3d85f0fa05dd7c2f63",
     "semantic_hash": ""
   },
   "Docs/knowledge/solid/01-S.md": {
-    "mtime": 1795259869.7951858,
-    "seen": 1795337019.6714253,
-    "ast_hash": "50b23ea72fe9b9e3953feca84d776aee",
+    "mtime": 1795617704.8456075,
+    "seen": 1795617763.1171253,
+    "ast_hash": "8585b2e154c201fd37e439e0236e3dbe",
     "semantic_hash": ""
   },
   "Docs/knowledge/solid/02-O.md": {
-    "mtime": 1795260467.7875223,
-    "seen": 1795337019.671426,
-    "ast_hash": "ad8491eda1194f041d133602f461961a",
+    "mtime": 1795617756.7183156,
+    "seen": 1795617763.117126,
+    "ast_hash": "8b12719b404d980cf1df804c7862fb9e",
     "semantic_hash": ""
   },
   "Docs/knowledge/solid/03-L.md": {
-    "mtime": 1795261755.0193944,
-    "seen": 1795337019.6714268,
-    "ast_hash": "76402c1b68f20a85343ad90e20ec7845",
+    "mtime": 1795617758.715161,
+    "seen": 1795617763.117127,
+    "ast_hash": "491b12a74e26389417560e7f4516bebb",
     "semantic_hash": ""
   },
   "Docs/knowledge/solid/04-I.md": {
-    "mtime": 1795262459.9007516,
-    "seen": 1795337019.6714272,
-    "ast_hash": "d9315ee96315ea819149d787607e9e36",
+    "mtime": 1795617758.9830823,
+    "seen": 1795617763.1171277,
+    "ast_hash": "6ccf616ed928dfab49932a06f2625bd4",
     "semantic_hash": ""
   },
   "Docs/knowledge/solid/05-D.md": {
-    "mtime": 1795263663.6739626,
-    "seen": 1795337019.6714282,
-    "ast_hash": "df3abf88b034aad0d3c9f7d1f9c4ed15",
+    "mtime": 1795617776.1887352,
+    "seen": 1795618313.4461703,
+    "ast_hash": "d66e6fed75a3422f9171184e493431a1",
     "semantic_hash": ""
   },
   "Docs/knowledge/solid/README.md": {
-    "mtime": 1795260692.8430755,
-    "seen": 1795337019.671429,
-    "ast_hash": "27e13029221e977cd1ddcdc58b9cc92f",
+    "mtime": 1795617554.3933425,
+    "seen": 1795617763.1171293,
+    "ast_hash": "7c33bdaa0663a3a2012a57fb3cadfae7",
     "semantic_hash": ""
   },
   "Docs/tech-space/README.md": {
@@ -396,9 +396,9 @@
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/api-gateway.md": {
-    "mtime": 1795356103.8800287,
-    "seen": 1795357366.9217372,
-    "ast_hash": "378c1306ce789e16a1b9b9ee73a1f6b0",
+    "mtime": 1795617744.5649364,
+    "seen": 1795617763.11708,
+    "ast_hash": "2ffa7f8a4f2190372bcbfd612c59ecff",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/architecture-combination-guide.md": {
@@ -414,57 +414,57 @@
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/bff.md": {
-    "mtime": 1795355929.4898043,
-    "seen": 1795357366.9217398,
-    "ast_hash": "2a19e9c1bd0e8da9fccaa95ead7b5cce",
+    "mtime": 1795617744.5649364,
+    "seen": 1795617763.1170826,
+    "ast_hash": "18400dcc82a01a7a5faf3901a0ec97a7",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/cqrs.md": {
-    "mtime": 1795355825.8918898,
-    "seen": 1795357366.9217415,
-    "ast_hash": "298fe9e1171ab16a255a7a231df08db5",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170845,
+    "ast_hash": "1035e3589888894d066edf5c0e497c18",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/domain-driven-design.md": {
-    "mtime": 1795355759.6384108,
-    "seen": 1795357366.9217424,
-    "ast_hash": "fbac3e7f5b2c8e6f53f67c1edc5fe4b0",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170852,
+    "ast_hash": "062615263b471b0cee9d82ba77fc5daf",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/event-driven.md": {
-    "mtime": 1795355793.672258,
-    "seen": 1795357366.9217432,
-    "ast_hash": "a2868c0fbe5af7045ef002a80e481184",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.117086,
+    "ast_hash": "6b3ab991ae33e78c3024d80a2f34040b",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/event-sourcing.md": {
-    "mtime": 1795355859.5232327,
-    "seen": 1795357366.9217439,
-    "ast_hash": "ef60c5a2a727751be4f0404caa3155b9",
+    "mtime": 1795617759.7068243,
+    "seen": 1795617763.1170866,
+    "ast_hash": "5700ea0479f81cba639ec2d90ffeebff",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/feature-sliced-design.md": {
-    "mtime": 1795355719.4483256,
-    "seen": 1795357366.9217443,
-    "ast_hash": "1b55b28b812264ce7064975cd161d476",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170876,
+    "ast_hash": "9af45dc166352e51dcdf14efb24b1779",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/modular-frontend.md": {
-    "mtime": 1795356075.8352065,
-    "seen": 1795357366.9217482,
-    "ast_hash": "4d8312ca735498af573ff5b0a389eac0",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170912,
+    "ast_hash": "f6c1266f214c9eefe72af2e1ab79fd55",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/monorepo.md": {
-    "mtime": 1795356049.5587196,
-    "seen": 1795357366.9217496,
-    "ast_hash": "9dbd43c0bde88aa3df84b18e89ba136e",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170926,
+    "ast_hash": "9a95cace8ae84312d285ff1e43ff46ea",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/plugin-microkernel.md": {
-    "mtime": 1795355959.3250842,
-    "seen": 1795357366.9217505,
-    "ast_hash": "76ee9afdfed9c00776f41787ad8b9f57",
+    "mtime": 1795617744.565941,
+    "seen": 1795617763.1170936,
+    "ast_hash": "2c1a63b9f67e07198ac6580dbb8ae145",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/react-next-hono-recommendations.md": {
@@ -474,147 +474,147 @@
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/self-contained-systems.md": {
-    "mtime": 1795356019.3052988,
-    "seen": 1795357366.921752,
-    "ast_hash": "f9e01b93922882cf11c02e5030cf96db",
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.1170955,
+    "ast_hash": "8ec7d65104010a6d06334c2787fc991d",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/serverless.md": {
-    "mtime": 1795355896.371805,
-    "seen": 1795357366.9217527,
-    "ast_hash": "b2bc0f155bbe63a63bf3289ddb3c5c55",
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.1170962,
+    "ast_hash": "ae81d0954bcfd5fd3e26dfb4ccc68107",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/soa.md": {
-    "mtime": 1795355988.60446,
-    "seen": 1795357366.9217534,
-    "ast_hash": "9083d06e357696981de3bf13dfc2c609",
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.117097,
+    "ast_hash": "b60313980af33505ead47ef9314e5c74",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/strangler-fig.md": {
-    "mtime": 1795356124.0326486,
-    "seen": 1795357366.9217541,
-    "ast_hash": "9b03f64094e10d1d2ddc1d0b8c0c0331",
+    "mtime": 1795617744.567445,
+    "seen": 1795617763.1170976,
+    "ast_hash": "0823da0b35d45a1668b5d392472275d2",
     "semantic_hash": ""
   },
   "Docs/knowledge/architecture-styles/vertical-slice.md": {
-    "mtime": 1795445474.1188562,
-    "seen": 1795445664.4060285,
-    "ast_hash": "bb1c221ef24c488ec11cf34f4271db10",
+    "mtime": 1795617813.8709776,
+    "seen": 1795618313.4461398,
+    "ast_hash": "adbe42c6685192cd94a372c604fdfe67",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/abstract-factory.md": {
-    "mtime": 1795349056.7597196,
-    "seen": 1795357366.9217565,
-    "ast_hash": "d5899765262bd9b8cf790eaa8589f314",
+    "mtime": 1795617348.4004629,
+    "seen": 1795617452.8880696,
+    "ast_hash": "942c8f5e3d4c85c90e309bf2ed59aec3",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/bridge.md": {
-    "mtime": 1795349195.8171449,
-    "seen": 1795357366.9217582,
-    "ast_hash": "c11d64e5e9f35053a590fa4e8bc1e999",
+    "mtime": 1795617361.492028,
+    "seen": 1795617452.8880715,
+    "ast_hash": "7e9cdd20bb94d23215ff41d1aaec68eb",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/builder.md": {
-    "mtime": 1795349012.4147372,
-    "seen": 1795357366.92176,
-    "ast_hash": "b5dc69ea7dd7aac87e303bb48d4f0f45",
+    "mtime": 1795617398.563112,
+    "seen": 1795617452.888072,
+    "ast_hash": "be2a5f0b882113eb9cb3482318724aaf",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/chain-of-responsibility.md": {
-    "mtime": 1795349268.2932694,
-    "seen": 1795357366.9217608,
-    "ast_hash": "f3079699cd08841d0d7ae784cbbc2a58",
+    "mtime": 1795617387.1883492,
+    "seen": 1795617452.8880727,
+    "ast_hash": "088f27e220de8aa70fba8952f98293a1",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/command.md": {
-    "mtime": 1795349231.1935737,
-    "seen": 1795357366.9217613,
-    "ast_hash": "d5fb5a1b76a0cc1c92bc39ea296edf8e",
+    "mtime": 1795617384.037856,
+    "seen": 1795617452.8880737,
+    "ast_hash": "fea28a68c1e7fb70dbf3f57a85940851",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/composite.md": {
-    "mtime": 1795349177.0683978,
-    "seen": 1795357366.921762,
-    "ast_hash": "3f82b9ca9022d985b97f7ecca88c3d09",
+    "mtime": 1795617381.0364106,
+    "seen": 1795617452.8880744,
+    "ast_hash": "64d14ec592ff5728396d2b3f00ea996b",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/decorator.md": {
-    "mtime": 1795349107.1877508,
-    "seen": 1795357366.9217627,
-    "ast_hash": "e29a292343feeb71ba61b32f29b70203",
+    "mtime": 1795617340.6821218,
+    "seen": 1795617452.888075,
+    "ast_hash": "3036a86cd4f2fa8d2b72f743ca2b9d84",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/facade.md": {
-    "mtime": 1795349131.660081,
-    "seen": 1795357366.9217644,
-    "ast_hash": "5910abff5f1ea1af5299cf0472f2498b",
+    "mtime": 1795617377.0319486,
+    "seen": 1795617452.8880768,
+    "ast_hash": "42714c5965a4beee23422ca7e82bc6d6",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/factory-method.md": {
-    "mtime": 1795349082.7036781,
-    "seen": 1795357366.921765,
-    "ast_hash": "f673bbcd01b7e0449cfb63bdeb38b9a2",
+    "mtime": 1795617372.7664719,
+    "seen": 1795617452.8880775,
+    "ast_hash": "224ed4c19bf161ad79fd8c18236e4eb1",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/flyweight.md": {
-    "mtime": 1795349217.1897037,
-    "seen": 1795357366.9217668,
-    "ast_hash": "3c6f5b8f23438cd05462b84c62606094",
+    "mtime": 1795617364.9714375,
+    "seen": 1795617452.8880792,
+    "ast_hash": "c792a79c819f7d282eb016c340c6155c",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/iterator.md": {
-    "mtime": 1795349291.4917867,
-    "seen": 1795357366.9217675,
-    "ast_hash": "bea1bd564ed7e4ea8baad465aafc58cd",
+    "mtime": 1795617336.9165666,
+    "seen": 1795617452.88808,
+    "ast_hash": "d5a8c23e4448820afaef5406acdbfdcd",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/mediator.md": {
-    "mtime": 1795349279.811642,
-    "seen": 1795357366.921768,
-    "ast_hash": "5164ff9d70965a0c25afc1d5f65e2c36",
+    "mtime": 1795617353.6497993,
+    "seen": 1795617452.8880806,
+    "ast_hash": "cdbf1ba0dac0c9949ca7cb5983805aae",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/memento.md": {
-    "mtime": 1795349303.907869,
-    "seen": 1795357366.9217687,
-    "ast_hash": "b20b20101c2c0a2428977d8ca4e1ecef",
+    "mtime": 1795617391.9453504,
+    "seen": 1795617452.8880816,
+    "ast_hash": "4038f6232f939693b36a8eeaf2a7f119",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/prototype.md": {
-    "mtime": 1795349025.7382913,
-    "seen": 1795357366.9217703,
-    "ast_hash": "d6734028a929304b6ebce58c5317c239",
+    "mtime": 1795617332.426686,
+    "seen": 1795617452.8880832,
+    "ast_hash": "5a610079a1f33f0c23ef4fd123c55ef7",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/proxy.md": {
-    "mtime": 1795349156.8026881,
-    "seen": 1795357366.921771,
-    "ast_hash": "fd5739845029514ff92d4d28cbb7eae0",
+    "mtime": 1795617345.1935475,
+    "seen": 1795617452.8880842,
+    "ast_hash": "70c6342863a7787ea5339ca1ed2a2a81",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/singleton.md": {
-    "mtime": 1795349038.3063445,
-    "seen": 1795357366.9217727,
-    "ast_hash": "f661c0a1ee28e4c7779c4e30b37ca200",
+    "mtime": 1795617326.647751,
+    "seen": 1795617452.888086,
+    "ast_hash": "5cf880eba1ac1a6af6d41ece654930c5",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/state.md": {
-    "mtime": 1795349243.4389195,
-    "seen": 1795357366.9217732,
-    "ast_hash": "d106f6a1ffc279b9783d2b1fa19758c0",
+    "mtime": 1795617436.1491232,
+    "seen": 1795617452.8880868,
+    "ast_hash": "6ed2d82fd615934ffe311da2b90a64ca",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/template-method.md": {
-    "mtime": 1795349255.64214,
-    "seen": 1795357366.9217749,
-    "ast_hash": "e86603ab32c327975b443f0cbb973612",
+    "mtime": 1795617395.1112194,
+    "seen": 1795617452.8880882,
+    "ast_hash": "b013ccab00bb4db5a17a7654bb84aa28",
     "semantic_hash": ""
   },
   "Docs/knowledge/design-patterns/visitor.md": {
-    "mtime": 1795349316.6744282,
-    "seen": 1795357366.9217756,
-    "ast_hash": "ca1e836273ddb72d0dc1f11775d40780",
+    "mtime": 1795617440.0661082,
+    "seen": 1795617452.8880892,
+    "ast_hash": "556085d9c5dfdfd97621309a9e4c9b5e",
     "semantic_hash": ""
   },
   "Docs/thinking/README.md": {
@@ -672,9 +672,9 @@
     "semantic_hash": ""
   },
   "clouds/market-place-server/src/index.ts": {
-    "mtime": 1795424608.8411236,
-    "seen": 1795441014.0951843,
-    "ast_hash": "170025b4ec734e526e2a89b113d7f838",
+    "mtime": 1795446695.205316,
+    "seen": 1795617452.8880107,
+    "ast_hash": "c812bba40ebeaad156c87c2b9f469a77",
     "semantic_hash": ""
   },
   "clouds/market-place-server/tsconfig.json": {
@@ -696,9 +696,9 @@
     "semantic_hash": ""
   },
   "Docs/clouds/market-place-server/01-folder-structure.md": {
-    "mtime": 1795445657.1163268,
-    "seen": 1795445664.405996,
-    "ast_hash": "51b1f1c2f27e29dbd900c9a1009e9648",
+    "mtime": 1795446969.5418396,
+    "seen": 1795617452.8880358,
+    "ast_hash": "871041bccb383703bdc94191fb0ce075",
     "semantic_hash": ""
   },
   "Docs/clouds/market-place-server/02-postgres-docker.md": {
@@ -729,6 +729,252 @@
     "mtime": 1795440978.7571354,
     "seen": 1795441014.095299,
     "ast_hash": "76cf64633fdc95037a0c92d9d4d9f6b8",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/create-app.ts": {
+    "mtime": 1795446651.1602755,
+    "seen": 1795617452.888008,
+    "ast_hash": "528d999060017f18d2b154da3bd462e6",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/middleware/cors.ts": {
+    "mtime": 1795445892.4292493,
+    "seen": 1795617452.8880122,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/create-listing/create-listing.handler.ts": {
+    "mtime": 1795446353.186342,
+    "seen": 1795617452.8880134,
+    "ast_hash": "e5b51aa482b425661d51d02144b01925",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/create-listing/create-listing.route.ts": {
+    "mtime": 1795446359.7833412,
+    "seen": 1795617452.8880146,
+    "ast_hash": "91f0267d560b338e53d0a113e2afa56a",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/create-listing/create-listing.ts": {
+    "mtime": 1795446346.24816,
+    "seen": 1795617452.8880153,
+    "ast_hash": "55ff021b8147de8e2ade44b1842644e7",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/list-listings/list-listings.handler.ts": {
+    "mtime": 1795446247.0318213,
+    "seen": 1795617452.8880162,
+    "ast_hash": "b49efb24584e8a6635a0bc0d6a287c8e",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/list-listings/list-listings.route.ts": {
+    "mtime": 1795446297.896082,
+    "seen": 1795617452.888017,
+    "ast_hash": "f12d2943df122eb723e68218a05d5ed5",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/list-listings/list-listings.ts": {
+    "mtime": 1795446222.009782,
+    "seen": 1795617452.8880177,
+    "ast_hash": "9b5f377f209bbb1238e31d0f8ae231a3",
+    "semantic_hash": ""
+  },
+  "clouds/market-place-server/src/modules/listing/public.ts": {
+    "mtime": 1795446374.4295795,
+    "seen": 1795617452.8880184,
+    "ast_hash": "99ace274466ed5c27ffbf782578ada02",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/software-architect/SKILL.md": {
+    "mtime": 1795616305.1682599,
+    "seen": 1795617452.888025,
+    "ast_hash": "52f9b8f482847db6d46634f925513095",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/software-architect/examples.md": {
+    "mtime": 1795616727.6510372,
+    "seen": 1795617452.888026,
+    "ast_hash": "e103d5899b39f98c1d6a086c5be8d790",
+    "semantic_hash": ""
+  },
+  ".cursor/skills/software-architect/reference.md": {
+    "mtime": 1795616341.0904438,
+    "seen": 1795617452.888027,
+    "ast_hash": "dacff031ee8a40ee5186e1f021468123",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/COURSE.md": {
+    "mtime": 1795618303.9811976,
+    "seen": 1795618313.4461157,
+    "ast_hash": "fdb189991e75be68c3f1b9479c243342",
+    "semantic_hash": ""
+  },
+  "Docs/knowledge/_PAGE-TEMPLATE.md": {
+    "mtime": 1795617029.8816204,
+    "seen": 1795617452.8880467,
+    "ast_hash": "83a26cac9f6ad7e7f2b3b693b9de6eb8",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/README.md": {
+    "mtime": 1795618593.2852528,
+    "seen": 1795618613.9660275,
+    "ast_hash": "0786131b75a45aebd2e3f0d74694c35c",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/README.md": {
+    "mtime": 1795618876.0252945,
+    "seen": 1795618900.2290294,
+    "ast_hash": "fc3e3ade73cd6480bebff7bacfb39826",
+    "semantic_hash": ""
+  },
+  "Docs/course/02-backend-hono-bun/README.md": {
+    "mtime": 1795618235.6441169,
+    "seen": 1795618313.446098,
+    "ast_hash": "054caf48895a227036468b4d1da29da5",
+    "semantic_hash": ""
+  },
+  "Docs/course/03-frontend-react-next/README.md": {
+    "mtime": 1795618242.2777584,
+    "seen": 1795618313.446099,
+    "ast_hash": "05688e2b8edbf1b075ebbc78cc75cecd",
+    "semantic_hash": ""
+  },
+  "Docs/course/04-data-stores/README.md": {
+    "mtime": 1795618247.7816708,
+    "seen": 1795618313.4460998,
+    "ast_hash": "2888f94fdf4025f79fda6bc147689336",
+    "semantic_hash": ""
+  },
+  "Docs/course/05-platform-infra/README.md": {
+    "mtime": 1795618253.726957,
+    "seen": 1795618313.4461005,
+    "ast_hash": "bd2f391aa1d148ac5445bdcd1aeed49e",
+    "semantic_hash": ""
+  },
+  "Docs/course/06-cicd/README.md": {
+    "mtime": 1795618260.0336509,
+    "seen": 1795618313.4461012,
+    "ast_hash": "34157b884252075fab0715c0483b7bf1",
+    "semantic_hash": ""
+  },
+  "Docs/course/07-security/README.md": {
+    "mtime": 1795618265.3336234,
+    "seen": 1795618313.446102,
+    "ast_hash": "a0a2e55dbdaed4fec3695eb322d5aa4f",
+    "semantic_hash": ""
+  },
+  "Docs/course/08-observability/README.md": {
+    "mtime": 1795618269.3725114,
+    "seen": 1795618313.4461026,
+    "ast_hash": "00c7ebea1c601eaa3dd23a1d089026ad",
+    "semantic_hash": ""
+  },
+  "Docs/course/09-quality-testing/README.md": {
+    "mtime": 1795618273.3438578,
+    "seen": 1795618313.4461033,
+    "ast_hash": "72972653810d9af345a789e30c4a690c",
+    "semantic_hash": ""
+  },
+  "Docs/course/10-product-delivery/README.md": {
+    "mtime": 1795618278.0141997,
+    "seen": 1795618313.446104,
+    "ast_hash": "c0d65a110578cd720f29d1b0ab61d214",
+    "semantic_hash": ""
+  },
+  "Docs/course/11-soft-skills-leadership/README.md": {
+    "mtime": 1795618283.0940368,
+    "seen": 1795618313.4461045,
+    "ast_hash": "4fe81f4ba342bdcb0193724e035f23c8",
+    "semantic_hash": ""
+  },
+  "Docs/course/12-cto-executive/README.md": {
+    "mtime": 1795618288.0518117,
+    "seen": 1795618313.4461052,
+    "ast_hash": "ca4ad93cb62520b4d4dbb5de5cb5dd8e",
+    "semantic_hash": ""
+  },
+  "Docs/course/LADDER.md": {
+    "mtime": 1795618173.6882527,
+    "seen": 1795618313.4461062,
+    "ast_hash": "bb9d990280aaaa736434ed29fcc2bf0a",
+    "semantic_hash": ""
+  },
+  "Docs/course/PLAN.md": {
+    "mtime": 1795618881.655052,
+    "seen": 1795618900.229046,
+    "ast_hash": "5862ccb26e99bebf3a5b4f412a2ac53e",
+    "semantic_hash": ""
+  },
+  "Docs/course/README.md": {
+    "mtime": 1795618167.590703,
+    "seen": 1795618313.4461076,
+    "ast_hash": "466cac4ddbd3977438ed26521490beee",
+    "semantic_hash": ""
+  },
+  "Docs/course/TRACKS.md": {
+    "mtime": 1795618884.578312,
+    "seen": 1795618900.2290478,
+    "ast_hash": "6d32c56266a3d340ad3a88264355771c",
+    "semantic_hash": ""
+  },
+  "Docs/course/_TOPIC-TEMPLATE.md": {
+    "mtime": 1795618177.427267,
+    "seen": 1795618313.4461088,
+    "ast_hash": "e24fb17bd3dce36466576196b2b246c8",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-02-http.md": {
+    "mtime": 1795618494.2463877,
+    "seen": 1795618613.9660242,
+    "ast_hash": "91018f63f9f554c185a88fdf9bddb7f3",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-03-typescript.md": {
+    "mtime": 1795618530.309287,
+    "seen": 1795618613.966025,
+    "ast_hash": "be96200109085da4d5ec956c37829672",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-05-git.md": {
+    "mtime": 1795618556.645777,
+    "seen": 1795618613.966026,
+    "ast_hash": "67303c525012234a40fe445bf8aa634b",
+    "semantic_hash": ""
+  },
+  "Docs/course/00-foundations/FD-06-debugging.md": {
+    "mtime": 1795618588.3653588,
+    "seen": 1795618613.9660268,
+    "ast_hash": "87e7c84c895fe06545979d0e73c2117a",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/SA-01-what-architecture-is.md": {
+    "mtime": 1795618784.2846923,
+    "seen": 1795618900.2290306,
+    "ast_hash": "bc114706ebdebb0fd9625b6b49094b4c",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/SA-02-nfrs.md": {
+    "mtime": 1795618807.804713,
+    "seen": 1795618900.2290313,
+    "ast_hash": "66ebef8ad3a947131149776e8e65c4c5",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/SA-03-c4.md": {
+    "mtime": 1795618830.364084,
+    "seen": 1795618900.2290325,
+    "ast_hash": "b24fd2c97c9e1e91faf3f880a4a9914d",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/SA-10-capacity.md": {
+    "mtime": 1795618858.852299,
+    "seen": 1795618900.2290332,
+    "ast_hash": "84d39dff42cfcf0d0b3840125d531e8a",
+    "semantic_hash": ""
+  },
+  "Docs/course/01-system-architecture/knowledge-tracks.md": {
+    "mtime": 1795618869.71438,
+    "seen": 1795618900.2290337,
+    "ast_hash": "84265bb007b4b1336815f40964a0a8ac",
     "semantic_hash": ""
   },
   "pnpm-lock.yaml": {

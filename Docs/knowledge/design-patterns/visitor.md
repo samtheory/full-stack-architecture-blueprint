@@ -8,31 +8,44 @@ Adds **new operations** to object structures without changing the classes of the
 
 **Visitor** عملیات جدید را به ساختار اشیاء اضافه می‌کند **بدون تغییر کلاس‌های عناصر**. هر بلاک `accept(visitor)` دارد؛ visitorهایی مثل `MarkdownExportVisitor` یا `SpellcheckVisitor` جدا اضافه می‌شوند. وقتی انواع عنصر پایدارند ولی عملیات‌ها زیاد می‌شوند (export، آمار، لینت)، Visitor می‌درخشد؛ وقتی انواع عنصر مدام زیاد می‌شوند، هزینهٔ به‌روز کردن همهٔ visitorها بالا می‌رود.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+flowchart LR
+  Tree[Block tree] --> Accept[accept visitor]
+  Accept --> MD[MarkdownVisitor]
+  Accept --> Spell[SpellcheckVisitor]
+```
+
+**Why:** add export or spellcheck without editing every block class—add a visitor instead.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Stable element hierarchy; growing operations (export, lint, analytics)
 - You want operations closed against element classes (OCP on behaviors)
 
-## When not to use
+### When not to use
 
 - Element types change often — each new type edits every visitor
 - A simple method on the element is clearer
 
-## Good practice
+### Good practice
 
 - Double dispatch via `accept` / `visitConcrete`
 - Keep visitors pure when possible (return values, don’t mutate silently)
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** visitor that needs to know private mutable fields of every node
 - **Worst:** using Visitor where a single `switch (type)` in one module would do and types churn weekly
 
-## Trade-offs
+**Trade-offs:** Easy new operations vs hard new element types.
 
-Easy new operations vs hard new element types.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Operations over Notion block tree
+### Real example — Operations over Notion block tree
 
 ### Backend (Hono)
 
@@ -139,10 +152,41 @@ const previewVisitor: Visitor = {
 | Add spellcheck | Edit Paragraph/Section/Embed | New `SpellcheckVisitor` |
 | Add new block type | One class | Update every visitor |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-Composite, Iterator, OCP
+**Edge cases**
 
-## Where in this repo
+- **New block type:** every visitor gets a new `visitX`—budget that cost.
+- **Pure visitors:** return strings or diagnostics; avoid silent tree mutation.
+- **React preview:** visitor can be a render map (`paragraph`, `embed`) without class-based accept.
 
-Pairs with Composite block trees and export/builder flows.
+**Testing seams**
+
+- Golden export: fixture tree + `MarkdownExportVisitor` output.
+- Missing `visitEmbed` should fail compile (exhaustive visitor typing).
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- Weekly new block types with five visitors each to update
+- Visitor used where one `switch (type)` module would be clearer
+
+### Alternatives
+
+- [Composite](composite.md) methods when only one operation exists
+- [Builder](builder.md) for single export path
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Visitors (export, spellcheck) | `packages/application/blocks` |
+| `accept` on nodes | `packages/domain/blocks` |
+| Preview visitor | `apps/web/src/editor` |
+
+## Related · Where in this repo
+
+**Related:** [Composite](composite.md), [Iterator](iterator.md), OCP
+
+**Where:** Pairs with Composite block trees and export/builder flows.

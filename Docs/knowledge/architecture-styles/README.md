@@ -2,7 +2,9 @@
 
 Styles are **organizational patterns for the whole system**, not drop-in libraries. This repo demonstrates several and explains **when each fits**. None is universally best.
 
-Most pages include fit tables for React / Next.js / Hono, core rules, Mermaid diagrams, folder structures, TypeScript examples, testing, mistakes, migration, and related styles.
+**Curriculum:** [`../COURSE.md`](../COURSE.md) Tracks B–E + G. **Page shape:** [`../_PAGE-TEMPLATE.md`](../_PAGE-TEMPLATE.md) (Dummy → Working → Rich → CTO).
+
+Upgraded pages include fit tables for React / Next.js / Hono, Mermaid diagrams, folder structures, TypeScript worst/best, testing seams, mistakes, migration, and CTO cost notes.
 
 ## Core styles (this repo’s originals)
 

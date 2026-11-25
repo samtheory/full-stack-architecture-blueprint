@@ -443,6 +443,43 @@ export function TodoComposer() {
 
 The list is rendered on the server from the fetch result. Only the form opts into the client lifecycle.
 
+---
+
+## 1. Dummy — 30-second picture
+
+Render → commit → effects. The component function is pure; DOM and network happen after commit.
+
+```mermaid
+flowchart LR
+  R[Render — pure function] --> C[Commit — DOM]
+  C --> E[Effects — after paint]
+  E -->|state change| R
+```
+
+**Why it exists:** so you know whether a bug is render purity, missing cleanup, or server vs client boundary.
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Modern React cost |
+|-----------|-------------------|
+| Team | Hooks rules + Server/Client split to learn once |
+| Delivery | Fewer class lifecycle bugs; clearer test seams |
+| Ops | RSC shifts work to build/deploy pipeline |
+| Evolution | Prefer data libraries / server loaders over `useEffect` fetch |
+
+### ADR triggers
+
+App-wide `"use client"` default · moving data fetch from server to client · concurrent features affecting UX contracts.
+
+### Automate
+
+- ESLint: `react-hooks/rules-of-hooks` and exhaustive deps (with judgment)
+- Boundary lint: shared UI must not import server-only modules
+
 ## Related concepts
 
 Separation of UI and Domain, Optimistic UI Sync

@@ -1,14 +1,36 @@
 # Plugin / Microkernel Architecture
 
-## One-line Definition
+## One-line definition
 
 A microkernel (plugin) architecture keeps a stable **core** that provides extension points; features ship as **plugins** that register capabilities without modifying the core’s internals.
 
-## Problem It Solves
+## Problem it solves
 
 Products that need optional integrations, automations, or customer-specific features accumulate `if (tenant.hasX)` branches in the core. Plugins isolate extensibility so the core stays small and third parties (or internal teams) can add behavior safely.
 
-## When to Use It
+---
+
+## 1. Dummy — 30-second picture
+
+Small **core** (kernel) + **plugins** that register hooks. Core never imports plugin internals.
+
+```mermaid
+flowchart TB
+  Core[Kernel — lifecycle + registry]
+  P1[Plugin: Stripe billing]
+  P2[Plugin: SendGrid mail]
+  Core --> P1
+  Core --> P2
+  Host[Hono host] --> Core
+```
+
+**Why it exists:** extend product behavior without merging every vendor into one god module.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Platform products with integrations (Slack, HubSpot, custom webhooks)
 - Automations/workflows that vary by customer
@@ -16,14 +38,14 @@ Products that need optional integrations, automations, or customer-specific feat
 - Multi-team contribution where not everyone should edit core modules
 - Clear stable contracts can be defined for registration and lifecycle
 
-## When Not to Use It
+### When not
 
 - Single-product SaaS with a fixed feature set
 - “Plugin” folders that still hard-import core internals freely
 - No versioning/security model for third-party code
 - Early MVP inventing a plugin SDK before product-market fit
 
-## Best Fit by Application Type
+### Fit by application type
 
 | Application type | Fit | Why |
 |---|---:|---|
@@ -36,7 +58,7 @@ Products that need optional integrations, automations, or customer-specific feat
 | Marketplace / booking system | Good | Channel integrations, tax, PMS plugins |
 | Internal admin panel | Medium | Optional tools/modules |
 
-## Frontend, Backend, or Both?
+### Frontend, backend, or both?
 
 **Extensibility** pattern — works on backend (most common), frontend (widget slots), or both with separate registries.
 
@@ -47,7 +69,9 @@ In React + Next.js + Hono:
 - **React** may load plugin widgets via a registry/slot component
 - Core domain remains authoritative; plugins react to events or call public APIs
 
-## Core Rules
+## 3. Working — folders and a thin example
+
+### Core rules
 
 - Plugins depend on core **public contracts** only — never on core internal modules
 - Core must not import a specific plugin (composition root loads them)
@@ -57,7 +81,8 @@ In React + Next.js + Hono:
 - Shared state goes through core APIs/events, not plugin-to-plugin internals
 - Version the plugin API; breaking changes require migration guides
 
-## Dependency Diagram
+### Dependency diagram (this monorepo)
+
 
 ```mermaid
 flowchart TB
@@ -78,7 +103,8 @@ flowchart TB
   Reg -->|loads| P3
 ```
 
-## Recommended Folder Structure
+### Folder structure
+
 
 ### 1. React frontend
 
@@ -132,7 +158,8 @@ packages/plugin-slack/
 packages/plugin-salesforce/
 ```
 
-## Implementation Example
+### TypeScript
+
 
 ```ts
 // packages/plugin-api/src/index.ts
@@ -177,7 +204,10 @@ const ctx = createPluginContext(app);
 await slackNotifyPlugin.register(ctx);
 ```
 
-## Testing Strategy
+## 4. Rich — seams, failures, tests
+
+### Seams worth testing
+
 
 - **Unit:** plugin handlers against fake `PluginContext`
 - **Integration:** kernel boots with plugin registered; event fires side effect
@@ -185,7 +215,16 @@ await slackNotifyPlugin.register(ctx);
 - **E2E:** enable plugin for a tenant and complete a booking
 - **Mocking:** mock external SaaS in plugin adapters; core tests run with null plugins
 
-## Common Mistakes
+### Failure modes
+
+| Failure | Who owns it |
+|---------|-------------|
+| Plugin mutates core tables | Kernel ACL / sandbox |
+| Unregistered hook order | Explicit lifecycle in kernel |
+| Version skew at load time | Manifest semver in CI |
+
+### Anti-patterns
+
 
 - Core importing plugins directly in domain code
 - Plugins writing to core database tables bypassing APIs
@@ -193,7 +232,31 @@ await slackNotifyPlugin.register(ctx);
 - Unversioned plugin API → every upgrade breaks extensions
 - Building a plugin system for features that should be ordinary modules
 
-## Migration Path
+
+---
+
+## 5. Professional / CTO
+
+### Cost
+
+| Dimension | Plugin cost |
+|-----------|-------------|
+| Team | Registry + lifecycle discipline |
+| Delivery | Great for integrator marketplaces; overhead for simple SaaS |
+| Ops | Plugin versioning and sandboxing |
+| Evolution | Start with strategy/registry in `packages/application` before full microkernel |
+
+### ADR triggers
+
+Third-party plugins in prod · dynamic loading · security boundary of plugins.
+
+### Automate
+
+- Plugin manifest schema validated in CI
+- Forbidden imports from plugins into core `domain`
+
+## Migration
+
 
 1. Identify true variation points (integrations), not ordinary product features
 2. Extract a small `plugin-api` and move one integration behind it
@@ -201,15 +264,10 @@ await slackNotifyPlugin.register(ctx);
 4. Publish events from core instead of calling integration code inline
 5. Only later support third-party packaging if needed
 
-## Related Architectures
+## Related concepts
 
-| Other architecture | Relationship | Why |
-|---|---|---|
-| Modular monolith | Natural combination | Core modules + plugin packages in one deploy |
-| Event-Driven | Natural combination | Plugins subscribe to events |
-| Hexagonal | Natural combination | Plugins are adapters behind ports |
-| Microservices | Possible but requires discipline | Plugins as sidecars/services with stable API |
-| Serverless | Possible but requires discipline | Plugin handlers as functions |
-| DDD | Natural combination | Core bounded contexts remain clean |
-| Vertical Slice for core features | Possible but requires discipline | Don’t turn every slice into a plugin |
-| Random feature flags everywhere | Usually avoid | Flags ≠ microkernel contracts |
+[Hexagonal](hexagonal.md) · [Strategy](../design-patterns/strategy.md) · [Modular monolith](modular-monolith.md)
+
+## Where in this repo
+
+Strategy/registry patterns in `packages/application` when extensibility appears.

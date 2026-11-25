@@ -8,31 +8,46 @@ Lets an object **alter its behavior when its internal state changes**. It appear
 
 **State** رفتار شیء را بر اساس **وضعیت فعلی** عوض می‌کند. سفارش مارکت‌پلیس از `draft` به `paid` و `shipped` و `cancelled` می‌رود؛ هر وضعیت می‌گوید کدام انتقال مجاز است. به‌جای `if (status === …)` پراکنده، قوانین انتقال داخل اشیاء وضعیت (یا جدول انتقال صریح) می‌مانند.
 
-## When to use
+## 1. Dummy — Mermaid diagram + one sentence why
+
+```mermaid
+stateDiagram-v2
+  [*] --> draft
+  draft --> paid: pay
+  paid --> shipped: ship
+  draft --> cancelled: cancel
+  paid --> cancelled: cancel
+```
+
+**Why:** illegal transitions are rejected in one place—marketplace orders don’t ship from `draft` by accident.
+
+## 2. When / when not · Good · Bad
+
+### When to use
 
 - Lifecycles with restricted transitions (orders, tickets, subscriptions)
 - Behavior differs strongly per status
 
-## When not to use
+### When not to use
 
 - Two statuses with identical behavior
 - A boolean flag is enough
 
-## Good practice
+### Good practice
 
 - Illegal transitions throw a domain error mapped to `409`
 - Persist status as data; recover the state object on load
 
-## Bad / worst practice
+### Bad / worst practice
 
 - **Bad:** allowing every transition from a god `switch`
 - **Worst:** UI and API with different illegal-transition rules
 
-## Trade-offs
+**Trade-offs:** Clear lifecycle vs more types for each status.
 
-Clear lifecycle vs more types for each status.
+## 3. Working — Hono worst/best + React worst/best TypeScript examples
 
-## Real example — Marketplace order lifecycle
+### Real example — Marketplace order lifecycle
 
 ### Backend (Hono)
 
@@ -137,10 +152,41 @@ function OrderActions({ status, onAction }: { status: keyof typeof actionsByStat
 | Forbid ship while draft | Easy to miss a call site | `DraftState.ship` throws |
 | UI buttons | Duplicate rules in JSX | Mirror allowed actions from status |
 
-## Related concepts
+## 4. Rich — edge cases · testing seams
 
-Strategy, Command
+**Edge cases**
 
-## Where in this repo
+- **Hydration:** load status from DB, attach state object—don’t trust client-only status.
+- **409 mapping:** illegal transition → domain error → HTTP 409 consistently.
+- **UI parity:** `actionsByStatus` must match server transitions.
 
-Teaching pattern for order/ticket lifecycles.
+**Testing seams**
+
+- Transition table tests: `draft.pay()` ok; `draft.ship()` throws.
+- API test expects 409 on double-ship.
+
+## 5. CTO — overuse signals · monorepo placement
+
+### Overuse signals
+
+- State class per status when a transition table would fit
+- Client allows actions server rejects
+
+### Alternatives
+
+- Explicit `transition(from, action)` table in domain module
+- [Strategy](strategy.md) when behavior varies but lifecycle is flat
+
+### Monorepo placement
+
+| Piece | Location |
+|-------|----------|
+| Order aggregate + transitions | `packages/domain/orders` |
+| Routes | `apps/api` |
+| `OrderActions` UI | `apps/web` checkout/account |
+
+## Related · Where in this repo
+
+**Related:** [Strategy](strategy.md), [Command](command.md)
+
+**Where:** Teaching pattern for order/ticket lifecycles.

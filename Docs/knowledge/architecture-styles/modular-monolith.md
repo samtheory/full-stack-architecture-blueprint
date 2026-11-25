@@ -1,119 +1,233 @@
 # Modular monolith
 
-## What it is
+## One-line definition
 
-One deployable unit with **hard module boundaries** (packages/domains) and clear APIs between modules — without network calls between them.
+**One deployable** with **hard module boundaries** (business capabilities) and explicit public APIs between modules — **in-process** calls, not network hops. Same mental modules you might later deploy as services.
 
-## When to use
+## Problem it solves
+
+A layered blob becomes a distributed mess if you “split microservices” without ownership. A modular monolith teaches **bounded modules, table ownership, and public APIs** while keeping one process, one trace, and simple ops.
+
+---
+
+## 1. Dummy — 30-second picture
+
+One box (the deployable). Inside it, three rooms (modules). Doors are labeled `public.ts`. Nobody walks through the walls.
+
+```mermaid
+flowchart TB
+  subgraph deploy["One process / one deploy — apps/api"]
+    ID[identity<br/>public.ts]
+    DOC[documents<br/>public.ts]
+    SEA[search<br/>public.ts]
+  end
+  DOC -->|assertCanEdit| ID
+  DOC -->|indexPage| SEA
+  Web[Next.js / mobile] --> deploy
+```
+
+**Why it exists:** microservice *boundaries* without microservice *bills*.
+
+---
+
+## 2. When to use / when not
+
+### When to use
 
 - Product still exploring bounded contexts
-- Team wants microservice-like boundaries without ops cost
-- Teaching modularity before distributed systems
+- Team wants service-like ownership without ops cost
+- Teaching modularity before distributed systems (**this repo’s default**)
 
-## When not to use
+### When not to use
 
-- Hard requirement for independent deploy/scale per domain
-- Modules secretly share a tangled database with no ownership
+- Hard requirement for independent deploy/scale/failure isolation per domain
+- Modules secretly share tangled tables with no ownership
+- One developer MVP with three empty `public.ts` files and no real boundaries
 
-## Good practice
+### Fit by application type
 
-- Package boundaries + ownership of tables
-- Synchronous in-process calls; explicit public module API
+| Application type | Fit | Why |
+|------------------|-----|-----|
+| Marketplace | **Excellent** | listing, order, billing, identity |
+| Notion-style workspace | Excellent | identity, documents, search |
+| Tiny CRUD | Overkill | One module is enough |
+| Multi-tenant SaaS | Excellent | Clear ownership before scale |
 
-## Bad / worst practice
+### Frontend, backend, or both?
 
-- **Bad:** “modules” that import each other’s internals freely
-- **Worst:** distributed monolith later without fixing boundaries first
+**Primarily backend/package boundaries**, mirrored on the frontend as feature/modules with public entry points ([modular frontend](modular-frontend.md), [FSD](feature-sliced-design.md)). One Next app can still call one Hono deployable.
 
-## Trade-offs
+---
 
-Simpler ops than microservices; requires discipline so it does not rot into a blob.
+## 3. Working — folders and a thin example
 
-## Folder structure
+### Core rules
 
-Folders are cut by **business module**. A module owns its rules, its tables, and a small public file. Other modules import that file and call it in process. There is one Hono process and one React app. The same three modules appear again under [microservices.md](microservices.md), where each one is a separate deploy and a separate database.
+1. Each module owns its tables/schemas — no casual cross-module joins.
+2. Cross-module access **only** via `public.ts` (or equivalent).
+3. Prefer sync in-process calls; use events for async side effects ([event-driven](event-driven.md)).
+4. Vertical slices live **inside** a module — they are not a license to bypass `public.ts`.
+5. Composition root mounts module routers; it may know modules, modules must not know `apps/*` internals.
 
-The product is a Notion-style workspace: identity (who may edit), documents (pages), and search (the index).
+### Dependency diagram
 
-### Hono
+```mermaid
+flowchart TB
+  main[apps/api main.ts]
+  main --> ID
+  main --> DOC
+  main --> SEA
 
-**Why this tree.** A ranking change in search must stay inside search. A page rename must stay inside documents, and the only way documents learns “may this user edit?” is `identity/public.ts`. One `main.ts` mounts every module’s router, so there is still a single deploy, a single trace, and a function call instead of an HTTP hop.
+  subgraph ID["packages/identity"]
+    IDp[public.ts]
+    IDint[internal/*]
+    IDp --> IDint
+  end
+
+  subgraph DOC["packages/documents"]
+    DOCp[public.ts]
+    DOCint[internal/*]
+    DOCp --> DOCint
+  end
+
+  subgraph SEA["packages/search"]
+    SEAp[public.ts]
+    SEAint[internal/*]
+    SEAp --> SEAint
+  end
+
+  DOCint -->|import public only| IDp
+  DOCint -->|import public only| SEAp
+```
+
+### Folder structure — Hono monorepo
 
 ```text
-apps/api/                              # one process, one deploy
-  src/main.ts                          # mounts identity, documents, and search routers
+apps/api/src/main.ts                 # mounts module routers
 packages/
   identity/
-    public.ts                          # assertCanEdit(userId, pageId)
+    public.ts                        # assertCanEdit(userId, pageId)
     http/membership.route.ts
-    internal/session-store.ts          # identity tables only
+    internal/session-store.ts
   documents/
-    public.ts                          # renamePage — calls identity/public.ts
+    public.ts                        # renamePage(...)
     http/pages.route.ts
-    internal/postgres-pages.ts         # documents tables only
+    internal/page-repository.ts
   search/
-    public.ts                          # indexPage, query
-    http/query.route.ts
-    internal/index-store.ts            # search tables only
+    public.ts                        # indexPage / searchPages
+    http/search.route.ts
+    internal/indexer.ts
 ```
 
-ESLint bans `packages/search` from importing `packages/documents/internal`. A cross-module join in SQL is the same violation.
+### TypeScript — public API
 
-**Example.** `PATCH /pages/p1` with `{ "title": "Launch plan" }`. `documents/http/pages.route.ts` calls `documents/public.renamePage`. That function calls `identity/public.assertCanEdit` in process, writes the documents table, then calls `search/public.indexPage` in process. The handler returns `200` after all three have finished. One request log contains the whole rename.
+```ts
+// packages/identity/public.ts
+export async function assertCanEdit(userId: string, pageId: string): Promise<void> {
+  // ownership + role checks; throws ForbiddenError
+}
 
-**Benefits**
+// packages/documents/internal — OK
+import { assertCanEdit } from "@repo/identity/public";
 
-- One pipeline, one database connection pool, and a stack trace that crosses modules without a network timeout.
-- Search tests import `search/public.ts` and a fake index store. They do not boot the documents router.
-- A later split into services is a move of `packages/search` only while `public.ts` stayed the contract.
+// ❌ documents importing identity internal session store
+import { sessionStore } from "@repo/identity/internal/session-store";
+```
 
-**Cost**
-
-- The boundary is an import rule. Anyone can bypass it, and the app still compiles.
-- One schema tempts a query that joins `documents.pages` to `search.entries`.
-- A bad documents migration ships inside the same deploy as identity and search.
-
-### React
-
-**Why this tree.** The screen is also one deployable, so the cut is feature modules with a public entry, composed by a shell. The editor may ask identity for the session. It reaches search only through `search/public.ts`. Shared chrome (router, layout) lives in the shell, which is the composition root.
+### React mirror (optional)
 
 ```text
-apps/web/src/
-  shell/
-    main.tsx                           # router and layout; composes module public APIs
-    app-layout.tsx
-  modules/
-    identity/
-      public.ts                        # useSession, <SignInButton>
-      internal/session-client.ts
-    documents/
-      public.ts                        # <PageEditor>
-      internal/page-editor.tsx
-      internal/use-rename-page.ts
-    search/
-      public.ts                        # <SearchBox>
-      internal/search-box.tsx
-      internal/search-client.ts
+apps/web/src/modules/
+  documents/                           # screens + hooks for pages
+  search/
+  shell/                               # composes modules
 ```
 
-**Example.** The workspace route renders `<PageEditor pageId="p1" />` and `<SearchBox />` from the shell. The editor calls `useSession` from `identity/public.ts` and disables Save when the role is viewer. On save it calls the documents API. The search box calls the search API through `search-client.ts`. Typing in the editor does not import `search/internal`.
+Modules import each other’s **public** UI kits only when necessary; prefer API calls to Hono module routes.
 
-**Benefits**
+---
 
-- A search-box redesign stays in `modules/search`.
-- Storybook mounts `<PageEditor>` with a fake `useSession` and never starts the search client.
-- One build shares the layout, the router, and the auth header.
+## 4. Rich — seams, failures, tests
 
-**Cost**
+### Table ownership
 
-- `public.ts` grows into a barrel that re-exports internals, and the module wall disappears while the folders remain.
-- A `modules/shared` folder becomes the next junk drawer.
-- The single bundle still ships search code to a reader who never opens search, unless the shell lazy-loads each module.
+| Module | Owns | Must not |
+|--------|------|----------|
+| identity | users, memberships | read `documents.pages` freely |
+| documents | pages, blocks | update search index tables directly |
+| search | index documents | rewrite page bodies |
+
+If documents need a permission, call `identity.public`. If search must refresh, documents calls `search.public.indexPage` or publishes `PageRenamed`.
+
+### Failure modes
+
+| Failure | Approach |
+|---------|----------|
+| Module cycle A↔B | Introduce a third policy module or domain event |
+| “Just one join” across modules | Forbidden — use public API or a read model owned by one module |
+| Shared `utils` god package | Split by module or a tiny `packages/contracts` |
+
+### Testing
+
+- Unit-test module public functions with fakes for other modules’ public APIs
+- Integration-test one module’s DB schema in isolation
+- Contract-test `public.ts` as you would an HTTP API
+
+### Anti-patterns
+
+- Modules that are just layer folders renamed (`modules/services`)
+- Distributed monolith later: network + shared DB + no public API discipline
+
+---
+
+## 5. Professional / CTO
+
+### Cost vs microservices
+
+| Dimension | Modular monolith | Microservices |
+|-----------|------------------|---------------|
+| Deploy | One | Many |
+| Failure isolation | Process-wide | Per service |
+| Latency | Function call | Network + serialization |
+| Consistency | Single DB transaction possible **within** module; cross-module still careful | Distributed transactions / sagas |
+| Team scale | Good until org boundaries force split | Good when teams own deploy cadence |
+
+**Default CTO call for this blueprint:** stay modular monolith until a module has independent scale, compliance, or team cadence that pays for the network.
+
+### Evolution
+
+1. Modules + public APIs + owned tables.
+2. Async events for side effects.
+3. Logical CQRS read models inside the monolith.
+4. Extract a service with [strangler fig](strangler-fig.md) only after the module boundary is already real.
+
+### ADR triggers
+
+New business module · allowing a cross-module join exception · extracting a module to a service · shared database user across modules.
+
+### Automate
+
+- ESLint boundaries: `packages/documents/internal/**` cannot be imported from outside
+- CI: fail on imports that skip `public.ts`
+- Optional: dependency-cruiser / Nx/Turborepo tags
+
+---
+
+## Common mistakes
+
+1. `public.ts` that re-exports the entire internal tree.
+2. One shared schema “for convenience.”
+3. Splitting services before modules are clean.
+
+## Migration
+
+- **From layered blob:** identify business capabilities; move tables and routes together; add `public.ts`; ban deep imports.
+- **To microservices:** replace in-process `public` calls with HTTP/events **one module at a time**; keep the same names.
 
 ## Related concepts
 
-Microservices, Monorepo Structure
+[Microservices](microservices.md) · [Vertical slice](vertical-slice.md) · [DDD](domain-driven-design.md) · [Monorepo](monorepo.md) · [Architecture rules](architecture-rules.md)
 
 ## Where in this repo
 
-Default packaging story: one API deployable, multiple packages.
+**Default teaching stance.** See [`../../tech-space/project-blueprint.md`](../../tech-space/project-blueprint.md) and [`architecture-rules.md`](architecture-rules.md) module boundary section.

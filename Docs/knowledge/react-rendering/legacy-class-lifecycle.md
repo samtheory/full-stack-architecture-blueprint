@@ -3,6 +3,8 @@
 > **LEGACY / COMPARISON SECTION**  
 > Not the default for this repository. Included so interviews can map old names to modern equivalents.
 
+For the teaching ladder (Dummy → Working → Rich → CTO), use [modern-lifecycle.md](modern-lifecycle.md). This file is **comparison-only** — it does not include a Dummy/CTO pass because new code must not start here.
+
 ## What it is
 
 Class components used methods like `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`, and older unsafe APIs (`componentWillMount`, etc.).

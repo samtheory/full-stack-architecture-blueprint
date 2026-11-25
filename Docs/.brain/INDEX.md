@@ -12,6 +12,9 @@ WHY: Agents and humans should enter through a small index instead of loading eve
 | Shared vocabulary | [GLOSSARY.md](GLOSSARY.md) |
 | Graphify query recipes | [QUERY-GUIDE.md](QUERY-GUIDE.md) |
 | Full project blueprint | [../tech-space/project-blueprint.md](../tech-space/project-blueprint.md) |
+| Career course (plans → CTO) | [../course/README.md](../course/README.md) |
+| Course implementation phases | [../course/PLAN.md](../course/PLAN.md) |
+| Architecture knowledge tracks | [../knowledge/COURSE.md](../knowledge/COURSE.md) |
 | Step-by-step build | [../walkthrough/README.md](../walkthrough/README.md) |
 | First build step (monorepo) | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
 | Graphify setup status | [GRAPHIFY-SETUP.md](GRAPHIFY-SETUP.md) |
@@ -20,6 +23,7 @@ WHY: Agents and humans should enter through a small index instead of loading eve
 
 ```text
 .brain          → indexing, vocabulary, query recipes
+course          → curriculum plans (stack, infra, soft skills, CTO)
 tech-space      → blueprint, monorepo, API, DB, ADRs
 walkthrough     → ordered implementation steps (commands + why)
 knowledge       → SOLID, architecture styles, patterns, React
