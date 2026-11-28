@@ -17,6 +17,22 @@ Shared vocabulary. Prefer these terms in docs and future code.
 | **Legacy section** | Clearly marked comparison material (e.g. React class lifecycles) |
 | **God node** | Highly connected concept in the Graphify graph; start queries there |
 | **ADR** | Architecture Decision Record — short decision + context + consequences |
+| **FSD** | Feature-Sliced Design — frontend layers with downward-only imports |
+| **Feature folder** | UI module owned by one user scenario with a public `index` API |
+| **CWV** | Core Web Vitals (LCP, INP, CLS) — primary web UX performance metrics |
+| **Waterfall** | Sequential awaits that delay paint (RSC or client fetch chains) |
+| **a11y** | Accessibility — usable with keyboard, AT, and sensory constraints |
+| **i18n** | Internationalization — locales, catalogs, `lang`, RTL-aware layout |
+| **BFF** | Backend for Frontend — client-shaped façade; must not own domain invariants |
+| **Auth UX** | Login/logout/redirect/error experience — not the security boundary |
+| **Delivery shell** | Vite SPA, Next.js, or Capacitor host around shared React/contracts |
+| **Capability flag** | Documented per-driver persistence feature (`returning`, `json`, `upsert`, `boolean`) |
+| **Dialect** | Vendor-specific SQL — lives in adapters, not use cases |
+| **Parameterized query** | Bound placeholders (`$1` / `?`) — never string-built user input |
+| **libSQL** | SQLite-compatible client/engine used as the local-first adapter driver |
+| **Expand/contract** | Additive schema change, then later removal — keeps old+new apps compatible |
+| **EXPLAIN** | Database plan output showing how a query will (or did) run |
+| **Composite index** | Multi-column index; leftmost equality columns first for typical filters |
 
 ## Naming conventions (planned TypeScript)
 

@@ -18,16 +18,14 @@ Judgment layer: choose structures, document trade-offs, evolve systems.
 | SA-11 | Evolutionary architecture & fitness functions | planned | — |
 | SA-12 | Architecture rules & boundary enforcement | link | [architecture-rules](../../knowledge/architecture-styles/architecture-rules.md) |
 | SA-13 | Combination guide & stack recommendations | link | knowledge guides |
-| SA-14 | Capstone: C4 + ADR set for this blueprint | planned | Phase 1.3 |
+| SA-14 | Capstone: C4 + ADR set for this blueprint | complete | [SA-14-capstone-c4-adr.md](SA-14-capstone-c4-adr.md) |
 
 **Index:** [knowledge-tracks.md](knowledge-tracks.md)
 
-## Study order (wave 1.2)
+## Study order
 
-1. [SA-01](SA-01-what-architecture-is.md)  
-2. [SA-02](SA-02-nfrs.md)  
-3. [SA-03](SA-03-c4.md)  
-4. [SA-10](SA-10-capacity.md)  
-5. [knowledge-tracks.md](knowledge-tracks.md) sprint  
+**Wave 1.2:** [SA-01](SA-01-what-architecture-is.md) → [SA-02](SA-02-nfrs.md) → [SA-03](SA-03-c4.md) → [SA-10](SA-10-capacity.md) → [knowledge-tracks](knowledge-tracks.md)
 
-**Phase:** 1.2 ✅ · **Next:** Phase 1.3 — SA-14 capstone outline  
+**Wave 1.3 (capstone):** [SA-14](SA-14-capstone-c4-adr.md) — pass rubric ≥ 10/12 to close Phase 1
+
+**Phase 1:** ✅ (1.1–1.3 lessons shipped) · **Next course wave:** Phase 2.1 — [`../02-backend-hono-bun/README.md`](../02-backend-hono-bun/README.md)

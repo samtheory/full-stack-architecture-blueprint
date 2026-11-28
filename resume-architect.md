@@ -15,8 +15,19 @@ Update the **Progress** section whenever you finish a wave (before you push).
 | Phase 0 — course scaffold | done | `Docs/course/` categories + PLAN |
 | Phase 1.1 — foundations | done | FD-02 HTTP · FD-03 TypeScript · FD-05 Git · FD-06 Debugging |
 | Phase 1.2 — system architecture | done | SA-01 · SA-02 · SA-03 · SA-10 · `knowledge-tracks.md` |
-| **Phase 1.3 — SA-14 C4 + ADR capstone outline** | **next** | Say: `implement Phase 1 wave 1.3` |
-| Phase 2+ | pending | See [`Docs/course/PLAN.md`](Docs/course/PLAN.md) |
+| Phase 1.3 — SA-14 C4 + ADR capstone | done | [`Docs/course/01-system-architecture/SA-14-capstone-c4-adr.md`](Docs/course/01-system-architecture/SA-14-capstone-c4-adr.md) |
+| Phase 2.1 — Backend Hono/Bun | done | BE-01 · BE-02 · BE-03 |
+| Phase 2.2 — validation / errors / auth | done | BE-04 · BE-05 · BE-06 |
+| Phase 2.3 — composition / workers / versioning | done | BE-07 · BE-08 · BE-09 |
+| Phase 2.4 — uploads / idempotency / tests / obs / Bun CTO | done | BE-10 … BE-14 — Phase 2 **complete** |
+| Phase 3.1 — Frontend React foundations | done | FE-01 · FE-02 · FE-03 |
+| Phase 3.2 — Next / RSC / forms | done | FE-04 · FE-05 · FE-06 |
+| Phase 3.3 — FSD / performance / a11y | done | FE-07 · FE-08 · FE-09 |
+| Phase 3.4 — BFF / auth UX / CTO SPA | done | FE-10 · FE-11 — Phase 3 ✅ [`Docs/course/03-frontend-react-next/`](Docs/course/03-frontend-react-next/README.md) |
+| Phase 4.1 — SQL / Postgres / MariaDB | done | DB-01 · DB-02 · DB-03 |
+| Phase 4.2 — libSQL / migrations / indexes | done | DB-04 · DB-05 · DB-06 — [`Docs/course/04-data-stores/`](Docs/course/04-data-stores/README.md) |
+| **Phase 4.3 — transactions / port+adapters** | **next** | Say: `implement Phase 4 wave 4.3` (DB-07 · DB-08) |
+| Phase 4.4+ | pending | See [`Docs/course/PLAN.md`](Docs/course/PLAN.md) |
 
 **Knowledge (architecture styles/patterns):** largely upgraded Dummy→CTO under `Docs/knowledge/` — study via [`Docs/knowledge/COURSE.md`](Docs/knowledge/COURSE.md) and [`Docs/course/01-system-architecture/knowledge-tracks.md`](Docs/course/01-system-architecture/knowledge-tracks.md).
 
@@ -87,15 +98,14 @@ Paste one of these:
 
 ```text
 Act as software architect. Read resume-architect.md and Docs/course/PLAN.md.
-Implement Phase 1 wave 1.3.
+Implement Phase 4 wave 4.3.
 ```
 
-Or jump ahead:
+Optional study:
 
 ```text
-/software-architect implement Phase 2 wave 2.1
+Read Docs/course/04-data-stores/DB-04 through DB-06 (libSQL, migrations, indexes/EXPLAIN).
 ```
-
 ---
 
 ## Canonical docs (don’t invent a second plan)

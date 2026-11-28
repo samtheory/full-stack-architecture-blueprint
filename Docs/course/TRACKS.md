@@ -6,9 +6,12 @@ Pick a path. Categories can be studied in parallel after Foundations, but **arch
 
 1. [00-foundations](00-foundations/README.md) — start with wave 1.1: [HTTP](00-foundations/FD-02-http.md) · [TypeScript](00-foundations/FD-03-typescript.md) · [Git](00-foundations/FD-05-git.md) · [Debugging](00-foundations/FD-06-debugging.md)  
 
-2. [02-backend-hono-bun](02-backend-hono-bun/README.md) — through auth + composition root  
-3. [03-frontend-react-next](03-frontend-react-next/README.md) — through RSC + data fetching  
-4. [04-data-stores](04-data-stores/README.md) — SQL + one engine deep + adapters  
+2. [02-backend-hono-bun](02-backend-hono-bun/README.md) — **complete** (BE-01–BE-14); study waves 2.1→2.4  
+
+3. [03-frontend-react-next](03-frontend-react-next/README.md) — Phase 3 **complete** ([FE-01](03-frontend-react-next/FE-01-react-mental-model.md)→[FE-11](03-frontend-react-next/FE-11-cto-spa-next-mobile.md)); optional FE-12/FE-13  
+
+
+4. [04-data-stores](04-data-stores/README.md) — waves 4.1–4.2 **done** ([DB-01](04-data-stores/DB-01-sql-core.md)→[DB-06](04-data-stores/DB-06-indexes-explain.md)); next 4.3 DB-07–DB-08  
 5. [09-quality-testing](09-quality-testing/README.md) — pyramid + contracts  
 6. [06-cicd](06-cicd/README.md) — lint/test/deploy basics  
 7. Hands-on: [`../walkthrough/`](../walkthrough/README.md)
@@ -20,7 +23,7 @@ Pick a path. Categories can be studied in parallel after Foundations, but **arch
 3. [05-platform-infra](05-platform-infra/README.md) — Compose → K8s → Terraform literacy  
 4. [07-security](07-security/README.md) + [08-observability](08-observability/README.md)  
 5. [10-product-delivery](10-product-delivery/README.md) — ADRs, RFCs  
-6. Capstone: ADR set + C4 for this blueprint (Phase 1.3 / SA-14)
+6. Capstone: [SA-14 C4 + ADR](01-system-architecture/SA-14-capstone-c4-adr.md) (Phase 1.3 ✅)
 
 ## Track C — CTO-ready (add after A)
 

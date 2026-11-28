@@ -26,11 +26,39 @@ Status: `doc` = documented only; `planned` = will appear in code; `code` = imple
 | C4 Model | doc | [../course/01-system-architecture/SA-03-c4.md](../course/01-system-architecture/SA-03-c4.md) |
 | Capacity Planning | doc | [../course/01-system-architecture/SA-10-capacity.md](../course/01-system-architecture/SA-10-capacity.md) |
 | Knowledge Tracks Index | doc | [../course/01-system-architecture/knowledge-tracks.md](../course/01-system-architecture/knowledge-tracks.md) |
-| What Architecture Is | doc | [../course/01-system-architecture/SA-01-what-architecture-is.md](../course/01-system-architecture/SA-01-what-architecture-is.md) |
-| Quality Attributes NFRs | doc | [../course/01-system-architecture/SA-02-nfrs.md](../course/01-system-architecture/SA-02-nfrs.md) |
-| C4 Model | doc | [../course/01-system-architecture/SA-03-c4.md](../course/01-system-architecture/SA-03-c4.md) |
-| Capacity Planning | doc | [../course/01-system-architecture/SA-10-capacity.md](../course/01-system-architecture/SA-10-capacity.md) |
-| Knowledge Tracks Index | doc | [../course/01-system-architecture/knowledge-tracks.md](../course/01-system-architecture/knowledge-tracks.md) |
+| Architecture Capstone C4 ADR | doc | [../course/01-system-architecture/SA-14-capstone-c4-adr.md](../course/01-system-architecture/SA-14-capstone-c4-adr.md) |
+| Bun Runtime Course | doc | [../course/02-backend-hono-bun/BE-01-bun-runtime.md](../course/02-backend-hono-bun/BE-01-bun-runtime.md) |
+| Hono Hello Course | doc | [../course/02-backend-hono-bun/BE-02-hono-hello.md](../course/02-backend-hono-bun/BE-02-hono-hello.md) |
+| Hono Routing Middleware Course | doc | [../course/02-backend-hono-bun/BE-03-routing-middleware.md](../course/02-backend-hono-bun/BE-03-routing-middleware.md) |
+| Zod Validation Course | doc | [../course/02-backend-hono-bun/BE-04-zod-validation.md](../course/02-backend-hono-bun/BE-04-zod-validation.md) |
+| Hono Error Model Course | doc | [../course/02-backend-hono-bun/BE-05-error-model.md](../course/02-backend-hono-bun/BE-05-error-model.md) |
+| Auth Session JWT Course | doc | [../course/02-backend-hono-bun/BE-06-auth-session-jwt.md](../course/02-backend-hono-bun/BE-06-auth-session-jwt.md) |
+| Composition Root DI Course | doc | [../course/02-backend-hono-bun/BE-07-composition-root-di.md](../course/02-backend-hono-bun/BE-07-composition-root-di.md) |
+| Workers Queues Course | doc | [../course/02-backend-hono-bun/BE-08-workers-queues.md](../course/02-backend-hono-bun/BE-08-workers-queues.md) |
+| API Versioning Course | doc | [../course/02-backend-hono-bun/BE-09-api-versioning.md](../course/02-backend-hono-bun/BE-09-api-versioning.md) |
+| Uploads Webhooks Course | doc | [../course/02-backend-hono-bun/BE-10-uploads-webhooks.md](../course/02-backend-hono-bun/BE-10-uploads-webhooks.md) |
+| Rate Limits Idempotency Course | doc | [../course/02-backend-hono-bun/BE-11-rate-limits-idempotency.md](../course/02-backend-hono-bun/BE-11-rate-limits-idempotency.md) |
+| Testing Hono Course | doc | [../course/02-backend-hono-bun/BE-12-testing-hono.md](../course/02-backend-hono-bun/BE-12-testing-hono.md) |
+| Hono Observability Course | doc | [../course/02-backend-hono-bun/BE-13-observability.md](../course/02-backend-hono-bun/BE-13-observability.md) |
+| Bun CTO Course | doc | [../course/02-backend-hono-bun/BE-14-bun-cto.md](../course/02-backend-hono-bun/BE-14-bun-cto.md) |
+| React Mental Model Course | doc | [../course/03-frontend-react-next/FE-01-react-mental-model.md](../course/03-frontend-react-next/FE-01-react-mental-model.md) |
+| React Hooks State Course | doc | [../course/03-frontend-react-next/FE-02-hooks-state.md](../course/03-frontend-react-next/FE-02-hooks-state.md) |
+| React Data Fetching Course | doc | [../course/03-frontend-react-next/FE-03-data-fetching.md](../course/03-frontend-react-next/FE-03-data-fetching.md) |
+| Next App Router Course | doc | [../course/03-frontend-react-next/FE-04-next-app-router.md](../course/03-frontend-react-next/FE-04-next-app-router.md) |
+| RSC Client Components Course | doc | [../course/03-frontend-react-next/FE-05-rsc-client.md](../course/03-frontend-react-next/FE-05-rsc-client.md) |
+| Forms Mutations Course | doc | [../course/03-frontend-react-next/FE-06-forms-mutations.md](../course/03-frontend-react-next/FE-06-forms-mutations.md) |
+| FSD Feature Folders Course | doc | [../course/03-frontend-react-next/FE-07-fsd-feature-folders.md](../course/03-frontend-react-next/FE-07-fsd-feature-folders.md) |
+| Frontend Performance Course | doc | [../course/03-frontend-react-next/FE-08-performance.md](../course/03-frontend-react-next/FE-08-performance.md) |
+| A11y i18n Course | doc | [../course/03-frontend-react-next/FE-09-a11y-i18n.md](../course/03-frontend-react-next/FE-09-a11y-i18n.md) |
+| Auth UX BFF Course | doc | [../course/03-frontend-react-next/FE-10-auth-ux-bff.md](../course/03-frontend-react-next/FE-10-auth-ux-bff.md) |
+| CTO SPA Next Mobile Course | doc | [../course/03-frontend-react-next/FE-11-cto-spa-next-mobile.md](../course/03-frontend-react-next/FE-11-cto-spa-next-mobile.md) |
+| BFF Knowledge | doc | [../knowledge/architecture-styles/bff.md](../knowledge/architecture-styles/bff.md) |
+| SQL Core Course | doc | [../course/04-data-stores/DB-01-sql-core.md](../course/04-data-stores/DB-01-sql-core.md) |
+| Postgres Essentials Course | doc | [../course/04-data-stores/DB-02-postgres-essentials.md](../course/04-data-stores/DB-02-postgres-essentials.md) |
+| MariaDB Differences Course | doc | [../course/04-data-stores/DB-03-mariadb-differences.md](../course/04-data-stores/DB-03-mariadb-differences.md) |
+| SQLite libSQL Course | doc | [../course/04-data-stores/DB-04-sqlite-libsql.md](../course/04-data-stores/DB-04-sqlite-libsql.md) |
+| Migrations Course | doc | [../course/04-data-stores/DB-05-migrations.md](../course/04-data-stores/DB-05-migrations.md) |
+| Indexes EXPLAIN Course | doc | [../course/04-data-stores/DB-06-indexes-explain.md](../course/04-data-stores/DB-06-indexes-explain.md) |
 | Walkthrough | doc | [../walkthrough/README.md](../walkthrough/README.md) |
 | Monorepo Setup Step | doc | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
 | Vertical Slice | doc | [../examples/vertical-slice-todo/README.md](../examples/vertical-slice-todo/README.md) |

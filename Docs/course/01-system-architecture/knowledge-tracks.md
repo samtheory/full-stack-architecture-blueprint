@@ -54,7 +54,7 @@ flowchart LR
 | Capacity / bottlenecks | SA-10 |
 | Integration patterns | SA-09 — planned |
 | Evolutionary architecture | SA-11 — planned |
-| Capstone C4 + ADRs | SA-14 — Phase 1.3 |
+| Capstone C4 + ADRs | [SA-14](SA-14-capstone-c4-adr.md) — **complete** (Phase 1.3) |
 
 ## Related
 

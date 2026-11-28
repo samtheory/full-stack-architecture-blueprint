@@ -1,0 +1,436 @@
+{
+  "communities": {
+    "0": [
+      "docs_knowledge_design_patterns_repository_adapter_pattern",
+      "docs_knowledge_design_patterns_repository_repository_pattern",
+      "docs_knowledge_design_patterns_strategy_strategy_pattern",
+      "docs_knowledge_solid_01_s_single_responsibility_principle",
+      "docs_knowledge_solid_01_s_todorepository",
+      "docs_knowledge_solid_02_o_open_closed_principle",
+      "docs_knowledge_solid_02_o_todorepository_port",
+      "docs_knowledge_solid_03_l_liskov_substitution_principle",
+      "docs_knowledge_solid_03_l_todorepository_contract",
+      "docs_knowledge_solid_04_i_interface_segregation_principle",
+      "docs_knowledge_solid_04_i_todoreader",
+      "docs_knowledge_solid_05_d_dependency_inversion_principle",
+      "docs_knowledge_solid_readme_solid_principles",
+      "docs_tech_space_backend_architecture_hono_backend_architecture",
+      "docs_tech_space_backend_architecture_request_pipeline",
+      "docs_tech_space_database_abstraction_database_abstraction",
+      "docs_tech_space_database_abstraction_libsql",
+      "docs_tech_space_database_abstraction_mariadb",
+      "docs_tech_space_database_abstraction_notesrepository",
+      "docs_tech_space_database_abstraction_postgresql",
+      "docs_tech_space_decisions_0001_monorepo_tooling_adr_0001",
+      "docs_tech_space_decisions_0002_database_adapters_adr_0002",
+      "docs_tech_space_decisions_0003_package_scope_and_boundaries_adr_0003",
+      "docs_tech_space_decisions_readme_architecture_decision_records",
+      "docs_tech_space_mobile_architecture_mobile_architecture",
+      "docs_tech_space_monorepo_structure_monorepo_structure",
+      "docs_tech_space_readme_tech_space"
+    ],
+    "1": [
+      "docs_tech_space_project_blueprint",
+      "docs_tech_space_project_blueprint_apps_api",
+      "docs_tech_space_project_blueprint_database_abstraction",
+      "docs_tech_space_project_blueprint_hono_backend_architecture",
+      "docs_tech_space_project_blueprint_manual_composition_root",
+      "docs_tech_space_project_blueprint_packages_application",
+      "docs_tech_space_project_blueprint_packages_db",
+      "docs_tech_space_project_blueprint_todo_vertical_slice",
+      "docs_tech_space_security_observability_observability",
+      "docs_tech_space_security_observability_security_baseline",
+      "docs_walkthrough_04_application_layer_readme_todo_repository_port",
+      "docs_walkthrough_04_application_layer_readme_use_cases_ports",
+      "docs_walkthrough_05_config_and_contracts_readme_zod_contracts",
+      "docs_walkthrough_06_hono_api_readme_create_app",
+      "docs_walkthrough_07_database_port_and_libsql_readme_libsql_adapter",
+      "docs_walkthrough_08_nextjs_web_app_readme_nextjs_edge",
+      "docs_walkthrough_09_vertical_slice_wiring_readme_e2e_todo_milestone",
+      "docs_walkthrough_11_postgres_adapter_readme_postgresql_adapter",
+      "docs_walkthrough_12_mariadb_adapter_readme_mariadb_adapter",
+      "docs_walkthrough_13_capacitor_mobile_readme_capacitor_mobile",
+      "docs_walkthrough_14_auth_session_readme_session_auth",
+      "docs_walkthrough_15_optimistic_ui_sync_readme_optimistic_ui",
+      "docs_walkthrough_readme_construction_manual",
+      "readme_full_stack_architecture_blueprint"
+    ],
+    "2": [
+      "docs_brain_concepts_adapter",
+      "docs_brain_concepts_clean_architecture",
+      "docs_brain_concepts_database_adapter_package",
+      "docs_brain_concepts_dependency_injection",
+      "docs_brain_concepts_dependency_inversion",
+      "docs_brain_concepts_factory",
+      "docs_brain_concepts_hexagonal_architecture",
+      "docs_brain_concepts_layered_architecture",
+      "docs_brain_concepts_liskov_substitution",
+      "docs_brain_concepts_multi_db_notes_example",
+      "docs_brain_concepts_port_and_adapter_boundary",
+      "docs_brain_glossary_adapter",
+      "docs_brain_glossary_composition_root",
+      "docs_brain_glossary_port",
+      "docs_examples_multi_db_notes_example",
+      "docs_knowledge_architecture_styles_clean_concept",
+      "docs_knowledge_architecture_styles_hexagonal_concept",
+      "docs_knowledge_architecture_styles_layered_concept",
+      "docs_knowledge_design_patterns_adapter_concept",
+      "docs_knowledge_design_patterns_dependency_injection_concept",
+      "docs_knowledge_design_patterns_factory_concept"
+    ],
+    "3": [
+      "docs_brain_concepts_api_validation",
+      "docs_brain_concepts_error_handling",
+      "docs_brain_concepts_hono_backend_api",
+      "docs_brain_concepts_interface_segregation",
+      "docs_brain_concepts_learning_path",
+      "docs_brain_concepts_monorepo_setup_step",
+      "docs_brain_concepts_monorepo_structure",
+      "docs_brain_concepts_project_blueprint",
+      "docs_brain_concepts_repository",
+      "docs_brain_concepts_single_responsibility",
+      "docs_brain_concepts_tooling_stack",
+      "docs_brain_concepts_vertical_slice",
+      "docs_brain_concepts_walkthrough",
+      "docs_brain_glossary_vertical_slice",
+      "docs_brain_query_guide_graphify",
+      "docs_examples_vertical_slice_todo_example"
+    ],
+    "4": [
+      "docs_brain_concepts_auth_session_example",
+      "docs_brain_concepts_concept_registry",
+      "docs_brain_concepts_open_closed",
+      "docs_brain_concepts_security_observability",
+      "docs_brain_concepts_strategy",
+      "docs_brain_glossary_glossary",
+      "docs_brain_glossary_god_node",
+      "docs_brain_index_brain_documentation_index",
+      "docs_brain_links_explicit_concept_links",
+      "docs_brain_query_guide_graphify_query_guide",
+      "docs_examples_auth_session_example",
+      "docs_examples_examples_example",
+      "docs_knowledge_design_patterns_readme_design_patterns",
+      "docs_knowledge_readme_knowledge",
+      "docs_readme_docs"
+    ],
+    "5": [
+      "docs_knowledge_design_patterns_observer_observer_pattern",
+      "docs_knowledge_design_patterns_observer_optimistic_ui_sync",
+      "docs_knowledge_react_rendering_legacy_class_lifecycle_legacy_class_lifecycle",
+      "docs_knowledge_react_rendering_modern_lifecycle_client_components",
+      "docs_knowledge_react_rendering_modern_lifecycle_react_modern_rendering_model",
+      "docs_knowledge_react_rendering_modern_lifecycle_separation_of_ui_and_domain",
+      "docs_knowledge_react_rendering_modern_lifecycle_server_components",
+      "docs_knowledge_react_rendering_readme_react_rendering_model",
+      "docs_tech_space_frontend_architecture_frontend_architecture"
+    ],
+    "6": [
+      "docs_tech_space_project_blueprint_monorepo_structure",
+      "docs_tech_space_project_blueprint_packages_domain",
+      "docs_tech_space_tooling_pnpm",
+      "docs_tech_space_tooling_turborepo",
+      "docs_walkthrough_01_monorepo_setup_readme_pnpm_turborepo_skeleton",
+      "docs_walkthrough_02_typescript_tooling_readme_shared_tooling_baselines",
+      "docs_walkthrough_03_domain_package_readme_pure_domain"
+    ],
+    "7": [
+      "docs_brain_concepts_legacy_class_lifecycle",
+      "docs_brain_concepts_observer",
+      "docs_brain_concepts_optimistic_ui_sync_example",
+      "docs_brain_concepts_react_modern_rendering_model",
+      "docs_brain_concepts_separation_of_ui_and_domain",
+      "docs_examples_optimistic_ui_sync_example"
+    ],
+    "8": [
+      "docs_brain_concepts_microservices",
+      "docs_brain_concepts_modular_monolith",
+      "docs_knowledge_architecture_styles_microservices_concept",
+      "docs_knowledge_architecture_styles_modular_monolith_concept",
+      "docs_knowledge_architecture_styles_readme_architecture_styles"
+    ],
+    "9": [
+      "docs_brain_concepts_capacitor_mobile_app",
+      "docs_brain_concepts_next_js_web_app",
+      "docs_brain_concepts_shared_domain_package"
+    ],
+    "10": [
+      "docs_brain_concepts_libsql_adapter",
+      "docs_brain_concepts_mariadb_adapter",
+      "docs_brain_concepts_postgresql_adapter"
+    ],
+    "11": [
+      "docs_tech_space_project_blueprint_testing_strategy",
+      "docs_walkthrough_10_testing_strategy_readme_test_pyramid"
+    ],
+    "12": [
+      "docs_walkthrough_16_ci_and_graphify_readme_ci_graphify",
+      "readme_graphify"
+    ],
+    "13": [
+      "docs_brain_concepts_configuration"
+    ],
+    "14": [
+      "docs_brain_concepts_full_stack_architecture_blueprint"
+    ],
+    "15": [
+      "docs_brain_concepts_structured_logging"
+    ],
+    "16": [
+      "docs_brain_glossary_adr"
+    ],
+    "17": [
+      "docs_brain_glossary_boundary"
+    ],
+    "18": [
+      "docs_brain_glossary_domain"
+    ],
+    "19": [
+      "docs_brain_glossary_driver"
+    ],
+    "20": [
+      "docs_brain_glossary_interview_ready"
+    ],
+    "21": [
+      "docs_brain_glossary_legacy_section"
+    ],
+    "22": [
+      "docs_brain_glossary_meaningful_difference"
+    ],
+    "23": [
+      "docs_brain_glossary_use_case_application_service"
+    ],
+    "24": [
+      "docs_knowledge_react_rendering_legacy_class_lifecycle_componentdidmount_mapping"
+    ],
+    "25": [
+      "docs_knowledge_solid_03_l_todostore"
+    ],
+    "26": [
+      "docs_knowledge_solid_04_i_todoadmin"
+    ],
+    "27": [
+      "docs_knowledge_solid_04_i_todowriter"
+    ],
+    "28": [
+      "docs_knowledge_solid_05_d_keyvaluestore_port"
+    ],
+    "29": [
+      "docs_knowledge_solid_05_d_todoapi_port"
+    ],
+    "30": [
+      "docs_tech_space_project_blueprint_phase_1_vertical_slice"
+    ]
+  },
+  "cohesion": {
+    "0": 0.14245014245014245,
+    "1": 0.09057971014492754,
+    "2": 0.14761904761904762,
+    "3": 0.14166666666666666,
+    "4": 0.17142857142857143,
+    "5": 0.2777777777777778,
+    "6": 0.2857142857142857,
+    "7": 0.4666666666666667,
+    "8": 0.4,
+    "9": 0.6666666666666666,
+    "10": 0.6666666666666666,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0
+  },
+  "gods": [
+    {
+      "id": "docs_knowledge_design_patterns_repository_repository_pattern",
+      "label": "Repository pattern",
+      "degree": 9
+    },
+    {
+      "id": "docs_knowledge_solid_05_d_dependency_inversion_principle",
+      "label": "Dependency Inversion Principle (DIP)",
+      "degree": 9
+    },
+    {
+      "id": "docs_tech_space_database_abstraction_database_abstraction",
+      "label": "Database abstraction (port + adapters)",
+      "degree": 9
+    },
+    {
+      "id": "docs_brain_concepts_dependency_inversion",
+      "label": "Dependency Inversion",
+      "degree": 8
+    },
+    {
+      "id": "docs_brain_concepts_adapter",
+      "label": "Adapter",
+      "degree": 8
+    },
+    {
+      "id": "docs_brain_concepts_vertical_slice",
+      "label": "Vertical Slice",
+      "degree": 7
+    },
+    {
+      "id": "docs_knowledge_react_rendering_modern_lifecycle_react_modern_rendering_model",
+      "label": "React modern rendering model",
+      "degree": 7
+    },
+    {
+      "id": "docs_tech_space_backend_architecture_hono_backend_architecture",
+      "label": "Hono backend architecture",
+      "degree": 7
+    },
+    {
+      "id": "docs_brain_concepts_hono_backend_api",
+      "label": "Hono Backend API",
+      "degree": 6
+    },
+    {
+      "id": "docs_brain_concepts_hexagonal_architecture",
+      "label": "Hexagonal Architecture",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Vertical slice",
+      "target": "Vertical Slice",
+      "source_files": [
+        "Docs/.brain/GLOSSARY.md",
+        "Docs/.brain/CONCEPTS.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link; peripheral node `Vertical slice` unexpectedly reaches hub `Vertical Slice`"
+    },
+    {
+      "source": "Adapter",
+      "target": "Adapter",
+      "source_files": [
+        "Docs/.brain/GLOSSARY.md",
+        "Docs/.brain/CONCEPTS.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link; peripheral node `Adapter` unexpectedly reaches hub `Adapter`"
+    },
+    {
+      "source": "TodoReader port",
+      "target": "Repository pattern",
+      "source_files": [
+        "Docs/knowledge/solid/04-I.md",
+        "Docs/knowledge/design-patterns/repository.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link; peripheral node `TodoReader port` unexpectedly reaches hub `Repository pattern`"
+    },
+    {
+      "source": "Graphify knowledge graph workflow",
+      "target": "Step 16 GitHub Actions CI and Graphify",
+      "source_files": [
+        "README.md",
+        "Docs/walkthrough/16-ci-and-graphify/README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "Graphify",
+      "target": "Vertical Slice",
+      "source_files": [
+        "Docs/.brain/QUERY-GUIDE.md",
+        "Docs/.brain/CONCEPTS.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; peripheral node `Graphify` unexpectedly reaches hub `Vertical Slice`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Examples` connect `Auth security and OCP` to `Architecture concepts registry`, `Hono API and learning path`, `UI domain separation`?",
+      "why": "High betweenness centrality (0.069) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 4 inferred relationships involving `Repository pattern` (e.g. with `TodoRepository (SRP teaching port)` and `TodoRepository port (OCP)`) actually correct?",
+      "why": "`Repository pattern` has 4 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Glossary`, `Full-Stack Architecture Blueprint`, `Tooling Stack` to the rest of the system?",
+      "why": "65 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `SOLID and design patterns` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.14245014245014245 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Vertical slice — Todo` connect `Hono API and learning path` to `Architecture concepts registry`, `Auth security and OCP`?",
+      "why": "High betweenness centrality (0.038) - this node is a cross-community bridge."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Blueprint backend and DB` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09057971014492754 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Architecture concepts registry` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.14761904761904762 - nodes in this community are weakly interconnected."
+    }
+  ],
+  "labels": {
+    "0": "SOLID and design patterns",
+    "1": "Blueprint backend and DB",
+    "2": "Architecture concepts registry",
+    "3": "Hono API and learning path",
+    "4": "Auth security and OCP",
+    "5": "React rendering and sync",
+    "6": "Monorepo tooling walkthrough",
+    "7": "UI domain separation",
+    "8": "Modular monolith vs microservices",
+    "9": "Web and mobile apps",
+    "10": "Database vendor adapters",
+    "11": "Testing strategy",
+    "12": "CI and Graphify",
+    "13": "Configuration",
+    "14": "Project hub",
+    "15": "Structured logging",
+    "16": "ADR glossary",
+    "17": "Boundary glossary",
+    "18": "Domain glossary",
+    "19": "Driver glossary",
+    "20": "Interview-ready glossary",
+    "21": "Legacy section glossary",
+    "22": "Meaningful difference glossary",
+    "23": "Use case glossary",
+    "24": "Legacy lifecycle mapping",
+    "25": "TodoStore port",
+    "26": "TodoAdmin port",
+    "27": "TodoWriter port",
+    "28": "KeyValueStore port",
+    "29": "TodoApi port",
+    "30": "Phase 1 vertical slice"
+  }
+}

@@ -1,23 +1,26 @@
 # 04 — Data: Postgres / MariaDB / SQLite
 
-Multi-engine literacy + port/adapter design. Links: [`../../tech-space/database-abstraction.md`](../../tech-space/database-abstraction.md), ADR 0002.
+Multi-engine literacy + port/adapter design. Links: [`../../tech-space/database-abstraction.md`](../../tech-space/database-abstraction.md), [ADR 0002](../../tech-space/decisions/0002-database-adapters.md).
 
-| ID | Topic | Status | Notes |
-|----|--------|--------|-------|
-| DB-01 | Relational model & SQL core | planned | |
-| DB-02 | Modeling: keys, norms, when to denormalize | planned | |
-| DB-03 | PostgreSQL essentials | planned | |
-| DB-04 | MariaDB / MySQL differences | planned | |
-| DB-05 | SQLite & libSQL (local / edge) | planned | |
-| DB-06 | Migrations (expand/contract) | planned | |
-| DB-07 | Indexes & reading EXPLAIN | planned | |
-| DB-08 | Transactions & isolation | planned | |
-| DB-09 | Port + adapters pattern in this repo | link | hexagonal + ADR |
-| DB-10 | Repository vs raw SQL vs ORM trade-offs | planned | Link repository pattern |
-| DB-11 | Connection pools & timeouts | planned | |
-| DB-12 | Backups, PITR, restore drills | planned | |
-| DB-13 | Read replicas & logical CQRS | planned | |
-| DB-14 | CTO: pick engine per env & cost | planned | |
+Topic IDs follow [`../PLAN.md`](../PLAN.md) Phase 4 waves.
 
-**Phase:** PLAN Phase 4  
-**Next implement:** DB-01, DB-03, DB-05, DB-06, DB-09
+| ID | Topic | Status | Lesson |
+|----|--------|--------|--------|
+| DB-01 | Relational model & SQL core | complete | [DB-01-sql-core.md](DB-01-sql-core.md) |
+| DB-02 | PostgreSQL essentials | complete | [DB-02-postgres-essentials.md](DB-02-postgres-essentials.md) |
+| DB-03 | MariaDB / MySQL differences | complete | [DB-03-mariadb-differences.md](DB-03-mariadb-differences.md) |
+| DB-04 | SQLite & libSQL (local / edge) | complete | [DB-04-sqlite-libsql.md](DB-04-sqlite-libsql.md) |
+| DB-05 | Migrations (expand/contract) | complete | [DB-05-migrations.md](DB-05-migrations.md) |
+| DB-06 | Indexes & reading EXPLAIN | complete | [DB-06-indexes-explain.md](DB-06-indexes-explain.md) |
+| DB-07 | Transactions & isolation | planned | Wave 4.3 |
+| DB-08 | Port + adapters (ADR 0002) | planned | Wave 4.3 |
+| DB-09 | Backups, PITR, HA | planned | Wave 4.4 |
+| DB-10 | CTO: pick engine per environment | planned | Wave 4.4 |
+
+## Study order
+
+**Wave 4.1:** [DB-01](DB-01-sql-core.md) → [DB-02](DB-02-postgres-essentials.md) → [DB-03](DB-03-mariadb-differences.md)
+
+**Wave 4.2:** [DB-04](DB-04-sqlite-libsql.md) → [DB-05](DB-05-migrations.md) → [DB-06](DB-06-indexes-explain.md)
+
+**Phase:** 4.2 ✅ · **Next:** Phase 4.3 — DB-07 · DB-08  
