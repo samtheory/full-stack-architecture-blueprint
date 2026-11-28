@@ -1,17 +1,17 @@
 # Graph Report - full-stack-architecture-blueprint  (2026-11-28)
 
 ## Corpus Check
-- 196 files · ~122,929 words
+- 198 files · ~125,035 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 10 file(s) not represented in the graph (top: (none) 6, .mdc 2, .example 2)
 
 ## Summary
-- 2190 nodes · 2660 edges · 139 communities (115 shown, 24 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.9)
+- 2232 nodes · 2719 edges · 139 communities (115 shown, 24 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 53 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `349d836d`
+- Built from commit: `9b8759ba`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -94,7 +94,7 @@
 - compilerOptions
 - 04 — Listing vertical slice
 - Software Architect Agent
-- Architecture course — dummy → CTO
+- COURSE.md
 - Software Architect — skill pack reference
 - Software Architect — example prompts
 - SA-02 — Quality attributes / NFRs
@@ -144,15 +144,15 @@
 - FE-11 — CTO: SPA vs Next vs mobile shell
 - Page template (dummy → CTO)
 - 3. Working
+- DB-07 — Transactions & isolation
 - 3. Working
+- Tech space documentation
+- Project blueprint
+- Optimistic UI sync example
+- Graphify setup status
+- Auth Session Example
 - 3. Working
-- 3. Working — decision record sketch
-- create-app.ts
-- Modular Monolith
-- 3. Working — Hono worst/best + React worst/best TypeScript examples
-- 2. When / when not · Good · Bad
-- 2. When / when not · Good · Bad
-- 4. Rich
+- index.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `Design patterns` - 25 edges
@@ -167,16 +167,16 @@
 10. `Course implementation plan` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Exercises` --references--> `createListingModule()`  [INFERRED]
-  Docs/course/02-backend-hono-bun/BE-03-routing-middleware.md → clouds/market-place-server/src/modules/listing/public.ts
-- `Failure modes` --references--> `createListingModule()`  [INFERRED]
-  Docs/course/02-backend-hono-bun/BE-03-routing-middleware.md → clouds/market-place-server/src/modules/listing/public.ts
 - `Test seams` --references--> `listListings()`  [INFERRED]
   Docs/course/03-frontend-react-next/FE-03-data-fetching.md → clouds/market-place-server/src/modules/listing/list-listings/list-listings.ts
-- `Entrypoint pattern (runtime-specific)` --references--> `createApp()`  [INFERRED]
-  Docs/course/02-backend-hono-bun/BE-01-bun-runtime.md → clouds/market-place-server/src/create-app.ts
-- `Node alternative (awareness)` --references--> `createApp()`  [INFERRED]
-  Docs/course/02-backend-hono-bun/BE-01-bun-runtime.md → clouds/market-place-server/src/create-app.ts
+- `Exercises` --references--> `createApp()`  [INFERRED]
+  Docs/course/02-backend-hono-bun/BE-02-hono-hello.md → clouds/market-place-server/src/create-app.ts
+- `DIP vs DI reminder` --references--> `createApp()`  [INFERRED]
+  Docs/course/02-backend-hono-bun/BE-07-composition-root-di.md → clouds/market-place-server/src/create-app.ts
+- `Exercises` --references--> `createApp()`  [INFERRED]
+  Docs/course/02-backend-hono-bun/BE-12-testing-hono.md → clouds/market-place-server/src/create-app.ts
+- `Current facts (this repo)` --references--> `createApp()`  [INFERRED]
+  Docs/course/02-backend-hono-bun/BE-14-bun-cto.md → clouds/market-place-server/src/create-app.ts
 
 ## Import Cycles
 - None detected.
@@ -315,8 +315,8 @@ Cohesion: 0.10
 Nodes (20): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice (+12 more)
 
 ### Community 50 - "Decorator pattern"
-Cohesion: 0.13
-Nodes (15): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Bad / worst practice, Decorator pattern, Good practice (+7 more)
+Cohesion: 0.10
+Nodes (20): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice (+12 more)
 
 ### Community 51 - "Facade pattern"
 Cohesion: 0.10
@@ -347,8 +347,8 @@ Cohesion: 0.10
 Nodes (20): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice (+12 more)
 
 ### Community 58 - "Proxy pattern"
-Cohesion: 0.13
-Nodes (15): 1. Dummy — Mermaid diagram + one sentence why, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice, Frontend (React) — best practice (+7 more)
+Cohesion: 0.10
+Nodes (20): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice (+12 more)
 
 ### Community 59 - "Singleton pattern"
 Cohesion: 0.10
@@ -367,8 +367,8 @@ Cohesion: 0.10
 Nodes (20): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono), Bad / worst practice (+12 more)
 
 ### Community 63 - "COURSE.md"
-Cohesion: 0.05
-Nodes (48): How to use, Map to code, market-place-server — build guide, Path, Status legend, Why Postgres lives in `infra/`, not under `clouds/`, Clouds docs, 00 — Foundations (+40 more)
+Cohesion: 0.08
+Nodes (28): 00 — Foundations, Study order (wave 1.1), 01 — System architecture, Study order, 02 — Backend: Hono / Bun, Study order, 03 — Frontend: React / Next.js, Study order (+20 more)
 
 ### Community 64 - "Marketplace (FA + EN) — React + Hono Monorepo Suggestion"
 Cohesion: 0.09
@@ -426,9 +426,9 @@ Nodes (11): 04 — Listing vertical slice, Acceptance, After this, Bad practice,
 Cohesion: 0.20
 Nodes (9): Anti-patterns, Before you write anything, Companion skills (load when relevant), Doc quality bar, Modes (pick one per request), Response shape for architecture work, Software Architect Agent, Stack defaults (do not silently replace) (+1 more)
 
-### Community 79 - "Architecture course — dummy → CTO"
-Cohesion: 0.20
-Nodes (10): Architecture course — dummy → CTO, Capstone exercises, How to study each page, Track A — Foundations (start here), Track B — Core architecture styles, Track C — Domain & communication, Track D — Frontend organization, Track E — Edges, scale, migration (+2 more)
+### Community 79 - "COURSE.md"
+Cohesion: 0.07
+Nodes (30): Microservices, Modular Monolith, How to use, Map to code, market-place-server — build guide, Path, Status legend, Why Postgres lives in `infra/`, not under `clouds/` (+22 more)
 
 ### Community 80 - "Software Architect — skill pack reference"
 Cohesion: 0.29
@@ -447,8 +447,8 @@ Cohesion: 0.15
 Nodes (13): Course implementation plan, Phase 0 — Scaffold (done when this folder exists), Phase 1 — Foundations + System architecture wiring, Phase 2 — Backend (Hono / Bun), Phase 3 — Frontend (React / Next.js), Phase 4 — Data stores, Phase 5 — Platform (Docker → K8s → Terraform), Phase 6 — CI/CD (+5 more)
 
 ### Community 85 - "SOLID principles"
-Cohesion: 0.06
-Nodes (58): Auth Session Example, Concept registry, Legacy Class Lifecycle, Observer, Open-Closed, Optimistic UI Sync Example, React Modern Rendering Model, Security & observability (+50 more)
+Cohesion: 0.19
+Nodes (18): Adapter pattern, Repository pattern, Strategy pattern, Single Responsibility Principle (SRP), TodoRepository (SRP teaching port), Open-Closed Principle (OCP), TodoRepository port (OCP), Liskov Substitution Principle (LSP) (+10 more)
 
 ### Community 86 - "FD-02 — Networks & HTTP"
 Cohesion: 0.11
@@ -459,8 +459,8 @@ Cohesion: 0.12
 Nodes (17): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, Exercises, Failure modes, L1 — Context (this blueprint) (+9 more)
 
 ### Community 88 - "createApp"
-Cohesion: 0.15
-Nodes (15): createApp(), app, port, 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, BE-01 — Bun runtime (+7 more)
+Cohesion: 0.13
+Nodes (19): createApp(), 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, BE-01 — Bun runtime, Entrypoint pattern (runtime-specific) (+11 more)
 
 ### Community 89 - "BE-02 — Hono hello & project layout"
 Cohesion: 0.11
@@ -515,12 +515,12 @@ Cohesion: 0.11
 Nodes (19): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, Checklist (ship bar for FE forms), Color & motion, Exercises (+11 more)
 
 ### Community 102 - "BE-14 — CTO: Bun adoption risks & lock-in"
-Cohesion: 0.18
-Nodes (11): 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, BE-14 — CTO: Bun adoption risks & lock-in, Exercises, Failure modes, Fitness checks (+3 more)
+Cohesion: 0.12
+Nodes (16): 1. Dummy, 2. When to use / when not, 3. Working — decision record sketch, 4. Rich, 5. Professional / CTO, BE-14 — CTO: Bun adoption risks & lock-in, Current facts (this repo), Exercises (+8 more)
 
 ### Community 103 - "Flyweight pattern"
-Cohesion: 0.13
-Nodes (15): 1. Dummy — Mermaid diagram + one sentence why, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice, Flyweight pattern (+7 more)
+Cohesion: 0.10
+Nodes (20): 1. Dummy — Mermaid diagram + one sentence why, 2. When / when not · Good · Bad, 3. Working — Hono worst/best + React worst/best TypeScript examples, 4. Rich — edge cases · testing seams, 5. CTO — overuse signals · monorepo placement, Alternatives, Backend (Hono) — best practice, Backend (Hono) — worst practice (+12 more)
 
 ### Community 104 - "BE-06 — Auth: session cookies vs JWT"
 Cohesion: 0.11
@@ -543,8 +543,8 @@ Cohesion: 0.11
 Nodes (18): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, BE-08 — Background work: queues / cron, Cron, Exercises (+10 more)
 
 ### Community 109 - "BE-07 — Composition root & DI"
-Cohesion: 0.15
-Nodes (14): CreateAppDeps, 1. Dummy, 2. When to use / when not, 3. Working, 5. Professional / CTO, BE-07 — Composition root & DI, Exercises, Grown shape (target) (+6 more)
+Cohesion: 0.18
+Nodes (12): CreateAppDeps, 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, BE-07 — Composition root & DI, DIP vs DI reminder, Exercises (+4 more)
 
 ### Community 110 - "FE-01 — React mental model (modern)"
 Cohesion: 0.13
@@ -555,8 +555,8 @@ Cohesion: 0.17
 Nodes (12): 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, DB-01 — Relational model & SQL core, Exercises, Failure modes, Learning outcomes (+4 more)
 
 ### Community 112 - "BE-03 — Routing, groups & middleware pipeline"
-Cohesion: 0.18
-Nodes (11): 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, BE-03 — Routing, groups & middleware pipeline, Exercises, Failure modes, Learning outcomes (+3 more)
+Cohesion: 0.17
+Nodes (12): createListingModule(), 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, BE-03 — Routing, groups & middleware pipeline, Exercises, Failure modes (+4 more)
 
 ### Community 113 - "{Topic title}"
 Cohesion: 0.20
@@ -583,8 +583,8 @@ Cohesion: 0.13
 Nodes (15): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, Exercises, Failure modes, FE-05 — RSC vs Client Components (+7 more)
 
 ### Community 120 - "list-listings.handler.ts"
-Cohesion: 0.43
-Nodes (4): listListingsHandler(), listListings(), ListListingsResult, listListingsRoute
+Cohesion: 0.28
+Nodes (7): createListingHandler(), createListingRoute, listListingsHandler(), listListings(), ListListingsResult, listListingsRoute, hono
 
 ### Community 121 - "DB-03 — MariaDB / MySQL differences"
 Cohesion: 0.12
@@ -603,12 +603,12 @@ Cohesion: 0.11
 Nodes (18): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, Composite order, DB-06 — Indexes & reading EXPLAIN, Exercises (+10 more)
 
 ### Community 125 - "3. Working"
-Cohesion: 0.20
-Nodes (9): createListing(), CreateListingInput, Exercises, 3. Working, CRUD (parameterized), Joins (read model), Keys, Where SQL lives in this monorepo (+1 more)
+Cohesion: 0.18
+Nodes (10): createListing(), CreateListingInput, Exercises, 3. Working, CRUD (parameterized), Joins (read model), Keys, Where SQL lives in this monorepo (+2 more)
 
 ### Community 126 - "BE-05 — Error model & HTTP mapping"
-Cohesion: 0.20
-Nodes (10): 1. Dummy, 2. When to use / when not, 4. Rich, 5. Professional / CTO, BE-05 — Error model & HTTP mapping, Failure modes, Learning outcomes, Related (+2 more)
+Cohesion: 0.12
+Nodes (16): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, BE-05 — Error model & HTTP mapping, Domain error (portable), Error taxonomy (teaching default) (+8 more)
 
 ### Community 127 - "FE-11 — CTO: SPA vs Next vs mobile shell"
 Cohesion: 0.11
@@ -619,60 +619,60 @@ Cohesion: 0.25
 Nodes (6): Lesson ladder — Dummy → CTO, Rules, Architecture style pages, Depth ladder, Design pattern / SOLID pages, Page template (dummy → CTO)
 
 ### Community 129 - "3. Working"
-Cohesion: 0.33
-Nodes (6): 3. Working, Entrypoint pattern (runtime-specific), Install (once per machine), Node alternative (awareness), This repo’s scripts, Worst vs best
+Cohesion: 0.10
+Nodes (20): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, ADR 0002 decision (recap), Capability flags, Composition root (+12 more)
 
-### Community 130 - "3. Working"
-Cohesion: 0.33
-Nodes (6): 3. Working, Domain error (portable), Error taxonomy (teaching default), Handler style, Hono mapper, Worst vs best envelopes
+### Community 130 - "DB-07 — Transactions & isolation"
+Cohesion: 0.11
+Nodes (19): 1. Dummy, 2. When to use / when not, 3. Working, 4. Rich, 5. Professional / CTO, DB-07 — Transactions & isolation, Engine notes, Exercises (+11 more)
 
 ### Community 131 - "3. Working"
 Cohesion: 0.40
 Nodes (5): 3. Working, Add request id (pattern for later code), Middleware registration, Mounting a module (this repo), Worst vs best
 
-### Community 132 - "3. Working — decision record sketch"
+### Community 132 - "Tech space documentation"
+Cohesion: 0.19
+Nodes (15): Observer pattern, Optimistic UI Sync Example, Legacy class lifecycle, Client Components, React modern rendering model, Separation of UI and Domain, Server Components, React rendering model (+7 more)
+
+### Community 133 - "Project blueprint"
+Cohesion: 0.37
+Nodes (12): Concept registry, Glossary, God node, .brain — documentation index, Explicit concept links, Graphify query guide, Examples, Knowledge (+4 more)
+
+### Community 134 - "Optimistic UI sync example"
+Cohesion: 0.47
+Nodes (5): Legacy Class Lifecycle, Observer, Optimistic UI Sync Example, React Modern Rendering Model, Separation of UI and Domain
+
+### Community 135 - "Graphify setup status"
+Cohesion: 0.33
+Nodes (6): Commands (from repo root), Graphify setup status, Optional: git hooks, Optional: hosted Graphify MCP, Outputs, What is configured
+
+### Community 136 - "Auth Session Example"
+Cohesion: 0.50
+Nodes (4): Auth Session Example, Open-Closed, Security & observability, Strategy
+
+### Community 137 - "3. Working"
 Cohesion: 0.40
-Nodes (5): 3. Working — decision record sketch, Current facts (this repo), Recommendation template, Risk register, Worst vs best
-
-### Community 133 - "create-app.ts"
-Cohesion: 0.46
-Nodes (4): createListingHandler(), createListingRoute, createListingModule(), hono
-
-### Community 135 - "3. Working — Hono worst/best + React worst/best TypeScript examples"
-Cohesion: 0.40
-Nodes (5): 3. Working — Hono worst/best + React worst/best TypeScript examples, Backend (Hono) — best practice, Backend (Hono) — worst practice, Frontend (React) — best practice, Frontend (React) — worst practice
-
-### Community 136 - "2. When / when not · Good · Bad"
-Cohesion: 0.40
-Nodes (5): 2. When / when not · Good · Bad, Bad / worst practice, Good practice, When not to use, When to use
-
-### Community 137 - "2. When / when not · Good · Bad"
-Cohesion: 0.40
-Nodes (5): 2. When / when not · Good · Bad, Bad / worst practice, Good practice, When not to use, When to use
-
-### Community 138 - "4. Rich"
-Cohesion: 0.67
-Nodes (3): 4. Rich, DIP vs DI reminder, Failure modes
+Nodes (5): 3. Working, Grown shape (target), Test without Bun listen, Today in this repo, Worst vs best
 
 ## Knowledge Gaps
 - **63 isolated node(s):** `apps/api Hono`, `Manual DI createApp(deps)`, `packages/application`, `packages/db`, `packages/domain` (+58 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1587 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1618 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Design patterns` connect `Design patterns` to `Singleton pattern`, `SOLID principles`, `COURSE.md`?**
-  _High betweenness centrality (0.251) - this node is a cross-community bridge._
+- **Why does `Design patterns` connect `Design patterns` to `Singleton pattern`, `Project blueprint`, `COURSE.md`?**
+  _High betweenness centrality (0.293) - this node is a cross-community bridge._
 - **What connects `apps/api Hono`, `Manual DI createApp(deps)`, `packages/application` to the rest of the system?**
   _63 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `SA-10 — Capacity, back-of-envelope, bottlenecks` be split into smaller, more focused modules?**
   _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
-- **Why does `Strangler Fig Migration Pattern` connect `Strangler Fig Migration Pattern` to `COURSE.md`?**
-  _High betweenness centrality (0.050) - this node is a cross-community bridge._
+- **Why does `Project blueprint` connect `Project blueprint` to `Tech space documentation`, `COURSE.md`, `Design patterns`, `SOLID principles`, `COURSE.md`?**
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Should `Blueprint backend and DB` be split into smaller, more focused modules?**
   _Cohesion score 0.07671957671957672 - nodes in this community are weakly interconnected._
-- **Why does `Vertical Slice Architecture` connect `Vertical Slice Architecture` to `COURSE.md`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+- **Why does `Self-Contained Systems (SCS)` connect `Self-Contained Systems (SCS)` to `COURSE.md`?**
+  _High betweenness centrality (0.050) - this node is a cross-community bridge._
 - **Should `Architecture concepts registry` be split into smaller, more focused modules?**
   _Cohesion score 0.08108108108108109 - nodes in this community are weakly interconnected._

@@ -33,6 +33,10 @@ Shared vocabulary. Prefer these terms in docs and future code.
 | **Expand/contract** | Additive schema change, then later removal — keeps old+new apps compatible |
 | **EXPLAIN** | Database plan output showing how a query will (or did) run |
 | **Composite index** | Multi-column index; leftmost equality columns first for typical filters |
+| **Transaction** | All-or-nothing unit of work (`BEGIN` / `COMMIT` / `ROLLBACK`) |
+| **Isolation level** | How much concurrent txs can see of each other’s uncommitted/committed work |
+| **Unit of work** | Application boundary that commits/rolls back multiple repository ops together |
+| **Contract test** | Same behavioral suite run against every persistence adapter |
 
 ## Naming conventions (planned TypeScript)
 

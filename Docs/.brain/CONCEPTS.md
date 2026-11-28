@@ -59,6 +59,8 @@ Status: `doc` = documented only; `planned` = will appear in code; `code` = imple
 | SQLite libSQL Course | doc | [../course/04-data-stores/DB-04-sqlite-libsql.md](../course/04-data-stores/DB-04-sqlite-libsql.md) |
 | Migrations Course | doc | [../course/04-data-stores/DB-05-migrations.md](../course/04-data-stores/DB-05-migrations.md) |
 | Indexes EXPLAIN Course | doc | [../course/04-data-stores/DB-06-indexes-explain.md](../course/04-data-stores/DB-06-indexes-explain.md) |
+| Transactions Isolation Course | doc | [../course/04-data-stores/DB-07-transactions-isolation.md](../course/04-data-stores/DB-07-transactions-isolation.md) |
+| Port Adapters DB Course | doc | [../course/04-data-stores/DB-08-port-adapters.md](../course/04-data-stores/DB-08-port-adapters.md) |
 | Walkthrough | doc | [../walkthrough/README.md](../walkthrough/README.md) |
 | Monorepo Setup Step | doc | [../walkthrough/01-monorepo-setup/README.md](../walkthrough/01-monorepo-setup/README.md) |
 | Vertical Slice | doc | [../examples/vertical-slice-todo/README.md](../examples/vertical-slice-todo/README.md) |

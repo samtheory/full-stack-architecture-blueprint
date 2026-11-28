@@ -25,9 +25,10 @@ Update the **Progress** section whenever you finish a wave (before you push).
 | Phase 3.3 — FSD / performance / a11y | done | FE-07 · FE-08 · FE-09 |
 | Phase 3.4 — BFF / auth UX / CTO SPA | done | FE-10 · FE-11 — Phase 3 ✅ [`Docs/course/03-frontend-react-next/`](Docs/course/03-frontend-react-next/README.md) |
 | Phase 4.1 — SQL / Postgres / MariaDB | done | DB-01 · DB-02 · DB-03 |
-| Phase 4.2 — libSQL / migrations / indexes | done | DB-04 · DB-05 · DB-06 — [`Docs/course/04-data-stores/`](Docs/course/04-data-stores/README.md) |
-| **Phase 4.3 — transactions / port+adapters** | **next** | Say: `implement Phase 4 wave 4.3` (DB-07 · DB-08) |
-| Phase 4.4+ | pending | See [`Docs/course/PLAN.md`](Docs/course/PLAN.md) |
+| Phase 4.2 — libSQL / migrations / indexes | done | DB-04 · DB-05 · DB-06 |
+| Phase 4.3 — transactions / port+adapters | done | DB-07 · DB-08 — [`Docs/course/04-data-stores/`](Docs/course/04-data-stores/README.md) |
+| **Phase 4.4 — backups/HA / CTO engine pick** | **next** | Say: `implement Phase 4 wave 4.4` (DB-09 · DB-10) |
+| Phase 5+ | pending | See [`Docs/course/PLAN.md`](Docs/course/PLAN.md) |
 
 **Knowledge (architecture styles/patterns):** largely upgraded Dummy→CTO under `Docs/knowledge/` — study via [`Docs/knowledge/COURSE.md`](Docs/knowledge/COURSE.md) and [`Docs/course/01-system-architecture/knowledge-tracks.md`](Docs/course/01-system-architecture/knowledge-tracks.md).
 
@@ -98,13 +99,13 @@ Paste one of these:
 
 ```text
 Act as software architect. Read resume-architect.md and Docs/course/PLAN.md.
-Implement Phase 4 wave 4.3.
+Implement Phase 4 wave 4.4.
 ```
 
 Optional study:
 
 ```text
-Read Docs/course/04-data-stores/DB-04 through DB-06 (libSQL, migrations, indexes/EXPLAIN).
+Read Docs/course/04-data-stores/DB-07 and DB-08 (transactions, port+adapters / ADR 0002).
 ```
 ---
 

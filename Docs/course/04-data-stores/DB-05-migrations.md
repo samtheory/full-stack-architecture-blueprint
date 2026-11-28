@@ -187,5 +187,5 @@ Schema expand pairs with API expand ([BE-09](../02-backend-hono-bun/BE-09-api-ve
 
 ## Related
 
-- [DB-04 libSQL](DB-04-sqlite-libsql.md) · [DB-06 Indexes & EXPLAIN](DB-06-indexes-explain.md) · [DB-08 Port+adapters](README.md) (wave 4.3)
+- [DB-04 libSQL](DB-04-sqlite-libsql.md) · [DB-06 Indexes & EXPLAIN](DB-06-indexes-explain.md) · [DB-08 Port+adapters](DB-08-port-adapters.md)
 - [ADR 0002](../../tech-space/decisions/0002-database-adapters.md)

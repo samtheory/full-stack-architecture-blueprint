@@ -11,7 +11,7 @@ Pick a path. Categories can be studied in parallel after Foundations, but **arch
 3. [03-frontend-react-next](03-frontend-react-next/README.md) — Phase 3 **complete** ([FE-01](03-frontend-react-next/FE-01-react-mental-model.md)→[FE-11](03-frontend-react-next/FE-11-cto-spa-next-mobile.md)); optional FE-12/FE-13  
 
 
-4. [04-data-stores](04-data-stores/README.md) — waves 4.1–4.2 **done** ([DB-01](04-data-stores/DB-01-sql-core.md)→[DB-06](04-data-stores/DB-06-indexes-explain.md)); next 4.3 DB-07–DB-08  
+4. [04-data-stores](04-data-stores/README.md) — waves 4.1–4.3 **done** ([DB-01](04-data-stores/DB-01-sql-core.md)→[DB-08](04-data-stores/DB-08-port-adapters.md)); next 4.4 DB-09–DB-10  
 5. [09-quality-testing](09-quality-testing/README.md) — pyramid + contracts  
 6. [06-cicd](06-cicd/README.md) — lint/test/deploy basics  
 7. Hands-on: [`../walkthrough/`](../walkthrough/README.md)

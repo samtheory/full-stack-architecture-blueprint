@@ -12,8 +12,8 @@ Topic IDs follow [`../PLAN.md`](../PLAN.md) Phase 4 waves.
 | DB-04 | SQLite & libSQL (local / edge) | complete | [DB-04-sqlite-libsql.md](DB-04-sqlite-libsql.md) |
 | DB-05 | Migrations (expand/contract) | complete | [DB-05-migrations.md](DB-05-migrations.md) |
 | DB-06 | Indexes & reading EXPLAIN | complete | [DB-06-indexes-explain.md](DB-06-indexes-explain.md) |
-| DB-07 | Transactions & isolation | planned | Wave 4.3 |
-| DB-08 | Port + adapters (ADR 0002) | planned | Wave 4.3 |
+| DB-07 | Transactions & isolation | complete | [DB-07-transactions-isolation.md](DB-07-transactions-isolation.md) |
+| DB-08 | Port + adapters (ADR 0002) | complete | [DB-08-port-adapters.md](DB-08-port-adapters.md) |
 | DB-09 | Backups, PITR, HA | planned | Wave 4.4 |
 | DB-10 | CTO: pick engine per environment | planned | Wave 4.4 |
 
@@ -23,4 +23,6 @@ Topic IDs follow [`../PLAN.md`](../PLAN.md) Phase 4 waves.
 
 **Wave 4.2:** [DB-04](DB-04-sqlite-libsql.md) → [DB-05](DB-05-migrations.md) → [DB-06](DB-06-indexes-explain.md)
 
-**Phase:** 4.2 ✅ · **Next:** Phase 4.3 — DB-07 · DB-08  
+**Wave 4.3:** [DB-07](DB-07-transactions-isolation.md) → [DB-08](DB-08-port-adapters.md)
+
+**Phase:** 4.3 ✅ · **Next:** Phase 4.4 — DB-09 · DB-10  

@@ -110,6 +110,12 @@ Relation types: `teaches`, `uses`, `implements`, `contrasts`, `contains`, `depen
 | Migrations Course | depends-on | Postgres Essentials Course | Server DDL |
 | Indexes EXPLAIN Course | depends-on | Migrations Course | Indexes as migrations |
 | Indexes EXPLAIN Course | related-to | Capacity Planning | Realistic cardinality |
+| Career Course | teaches | Transactions Isolation Course | Phase 4.3 |
+| Career Course | teaches | Port Adapters DB Course | Phase 4.3 |
+| Transactions Isolation Course | depends-on | SQL Core Course | Multi-write integrity |
+| Port Adapters DB Course | depends-on | Transactions Isolation Course | UoW on ports |
+| Port Adapters DB Course | related-to | Database Adapter Package | ADR 0002 |
+| Port Adapters DB Course | related-to | Dependency Inversion | Ports inward |
 | Walkthrough | contains | Monorepo Setup Step | Step 01 |
 | Walkthrough | demonstrates | Monorepo Structure | Built in steps 01–02 |
 | Vertical Slice | demonstrates | Dependency Inversion | Domain independent of Hono/UI/DB |

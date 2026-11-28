@@ -187,5 +187,5 @@ sequenceDiagram
 
 ## Related
 
-- [DB-05 Migrations](DB-05-migrations.md) · [DB-04 libSQL](DB-04-sqlite-libsql.md) · next [DB-07 Transactions](README.md) (wave 4.3)
+- [DB-05 Migrations](DB-05-migrations.md) · [DB-04 libSQL](DB-04-sqlite-libsql.md) · next [DB-07 Transactions](DB-07-transactions-isolation.md)
 - [DB-02 Postgres](DB-02-postgres-essentials.md) · [SA-10 Capacity](../01-system-architecture/SA-10-capacity.md)

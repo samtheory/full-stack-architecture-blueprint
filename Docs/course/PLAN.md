@@ -67,7 +67,7 @@
 |------|--------|--------|
 | 4.1 | `DB-01` SQL core · `DB-02` Postgres essentials · `DB-03` MariaDB differences | **done** — [DB-01](04-data-stores/DB-01-sql-core.md), [DB-02](04-data-stores/DB-02-postgres-essentials.md), [DB-03](04-data-stores/DB-03-mariadb-differences.md) |
 | 4.2 | `DB-04` SQLite/libSQL · `DB-05` migrations · `DB-06` indexing & EXPLAIN | **done** — [DB-04](04-data-stores/DB-04-sqlite-libsql.md), [DB-05](04-data-stores/DB-05-migrations.md), [DB-06](04-data-stores/DB-06-indexes-explain.md) |
-| 4.3 | `DB-07` transactions · `DB-08` port+adapters (link ADR 0002) | pending |
+| 4.3 | `DB-07` transactions · `DB-08` port+adapters (link ADR 0002) | **done** — [DB-07](04-data-stores/DB-07-transactions-isolation.md), [DB-08](04-data-stores/DB-08-port-adapters.md) |
 | 4.4 | `DB-09` backups/HA · `DB-10` CTO: pick engine per environment | pending |
 
 ---
@@ -132,7 +132,7 @@
 | A | Complete Phase 1.1 (4 foundation lessons) |
 | B | Phase 2.1–2.2 backend |
 | C | Phase 3 frontend (FE-01–FE-11) ✅ |
-| D | Phase 4.1–4.2 data ✅ · 4.3 next |
+| D | Phase 4.1–4.3 data ✅ · 4.4 next |
 | E | Phase 5.1–5.2 platform |
 | F | Phase 6 CI/CD |
 | G | Phase 7 cross-cutting |

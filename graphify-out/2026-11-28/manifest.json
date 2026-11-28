@@ -1,14 +1,14 @@
 {
   "Docs/.brain/CONCEPTS.md": {
-    "mtime": 1795877580.4010608,
-    "seen": 1795877593.2524645,
-    "ast_hash": "3c69c2c3269c6784808a51467af09708",
+    "mtime": 1795877925.1599429,
+    "seen": 1795877941.0539227,
+    "ast_hash": "da9a62a825688cd8a74d651bbe41e742",
     "semantic_hash": ""
   },
   "Docs/.brain/GLOSSARY.md": {
-    "mtime": 1795877585.4945557,
-    "seen": 1795877593.2524657,
-    "ast_hash": "433489d3c94dd8e76b093bfb24824e4f",
+    "mtime": 1795877932.1264243,
+    "seen": 1795877941.0539238,
+    "ast_hash": "6504965b25e08cea08de97d08109e090",
     "semantic_hash": ""
   },
   "Docs/.brain/GRAPHIFY-SETUP.md": {
@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "Docs/.brain/LINKS.md": {
-    "mtime": 1795877588.9333081,
-    "seen": 1795877593.2524688,
-    "ast_hash": "4bafcb4d42c57e54c0d458a08415ca60",
+    "mtime": 1795877928.3362663,
+    "seen": 1795877941.0539267,
+    "ast_hash": "710e19fa6d477aafc3fbc5607934630c",
     "semantic_hash": ""
   },
   "Docs/.brain/QUERY-GUIDE.md": {
@@ -840,9 +840,9 @@
     "semantic_hash": ""
   },
   "Docs/course/04-data-stores/README.md": {
-    "mtime": 1795877567.8447692,
-    "seen": 1795877593.2525136,
-    "ast_hash": "8373294bbf7b8cb310fd97f6af18d6ff",
+    "mtime": 1795877911.5414646,
+    "seen": 1795877941.0539749,
+    "ast_hash": "a1c29d71998370c61f4e9294eba5a784",
     "semantic_hash": ""
   },
   "Docs/course/05-platform-infra/README.md": {
@@ -900,9 +900,9 @@
     "semantic_hash": ""
   },
   "Docs/course/PLAN.md": {
-    "mtime": 1795877583.4606721,
-    "seen": 1795877593.252522,
-    "ast_hash": "150f27886b721cda0c75ffa7be733663",
+    "mtime": 1795877915.2551112,
+    "seen": 1795877941.0539837,
+    "ast_hash": "250e8817b0de668d3a5c7c2b47734e9f",
     "semantic_hash": ""
   },
   "Docs/course/README.md": {
@@ -912,9 +912,9 @@
     "semantic_hash": ""
   },
   "Docs/course/TRACKS.md": {
-    "mtime": 1795877572.383082,
-    "seen": 1795877593.2525237,
-    "ast_hash": "89f2dd7ae88a5ee82fd06d61c5f9939c",
+    "mtime": 1795877917.356317,
+    "seen": 1795877941.0539854,
+    "ast_hash": "8d189469b6787752029fdef35d08c444",
     "semantic_hash": ""
   },
   "Docs/course/_TOPIC-TEMPLATE.md": {
@@ -984,9 +984,9 @@
     "semantic_hash": ""
   },
   "resume-architect.md": {
-    "mtime": 1795877575.7069688,
-    "seen": 1795877593.2526162,
-    "ast_hash": "bb589264b80777d784004a31f6d9e2b6",
+    "mtime": 1795877921.8168428,
+    "seen": 1795877941.0540793,
+    "ast_hash": "a617e513a40e85d9eee57ed84a7f6ac8",
     "semantic_hash": ""
   },
   "Docs/course/02-backend-hono-bun/BE-01-bun-runtime.md": {
@@ -1146,15 +1146,33 @@
     "semantic_hash": ""
   },
   "Docs/course/04-data-stores/DB-02-postgres-essentials.md": {
-    "mtime": 1795877521.0674794,
-    "seen": 1795877593.2525117,
-    "ast_hash": "11caa5a4e760a27b77a73c9599673310",
+    "mtime": 1795877933.1287334,
+    "seen": 1795877941.05397,
+    "ast_hash": "e9df4256caab271a4d3e63126ee25a6a",
     "semantic_hash": ""
   },
   "Docs/course/04-data-stores/DB-03-mariadb-differences.md": {
-    "mtime": 1795877560.9287963,
-    "seen": 1795877593.2525125,
-    "ast_hash": "fca5d1bdb7425e73c919a246473a8bf0",
+    "mtime": 1795877934.7609873,
+    "seen": 1795877941.0539713,
+    "ast_hash": "1465dbc2a99db0f4861af0c56b53b622",
+    "semantic_hash": ""
+  },
+  "Docs/course/04-data-stores/DB-04-sqlite-libsql.md": {
+    "mtime": 1795877812.6432388,
+    "seen": 1795877941.0539722,
+    "ast_hash": "db1d0a208485dea94a108590cf55ac69",
+    "semantic_hash": ""
+  },
+  "Docs/course/04-data-stores/DB-05-migrations.md": {
+    "mtime": 1795877857.3679202,
+    "seen": 1795877941.053973,
+    "ast_hash": "1233b30b8ef9fc2cdd5f11229657cc71",
+    "semantic_hash": ""
+  },
+  "Docs/course/04-data-stores/DB-06-indexes-explain.md": {
+    "mtime": 1795877903.941896,
+    "seen": 1795877941.053974,
+    "ast_hash": "46ac03db0830235069af1daf34059bdc",
     "semantic_hash": ""
   },
   "pnpm-lock.yaml": {
