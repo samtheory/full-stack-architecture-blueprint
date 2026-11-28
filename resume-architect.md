@@ -2,7 +2,10 @@
 
 **Purpose:** continue this work on **another PC** without losing context.  
 **Repo:** `https://github.com/samtheory/full-stack-architecture-blueprint.git`  
-**Branch:** `main`
+**Branch:** `main`  
+**Last synced:** 2026-11-28 — Phase 4.3 complete (DB-07 · DB-08)
+
+**Next action:** `implement Phase 4 wave 4.4` (DB-09 backups/HA · DB-10 CTO engine pick)
 
 Update the **Progress** section whenever you finish a wave (before you push).
 
@@ -26,7 +29,7 @@ Update the **Progress** section whenever you finish a wave (before you push).
 | Phase 3.4 — BFF / auth UX / CTO SPA | done | FE-10 · FE-11 — Phase 3 ✅ [`Docs/course/03-frontend-react-next/`](Docs/course/03-frontend-react-next/README.md) |
 | Phase 4.1 — SQL / Postgres / MariaDB | done | DB-01 · DB-02 · DB-03 |
 | Phase 4.2 — libSQL / migrations / indexes | done | DB-04 · DB-05 · DB-06 |
-| Phase 4.3 — transactions / port+adapters | done | DB-07 · DB-08 — [`Docs/course/04-data-stores/`](Docs/course/04-data-stores/README.md) |
+| Phase 4.3 — transactions / port+adapters | done | DB-07 · DB-08 — Phase 4.1–4.3 ✅ [`Docs/course/04-data-stores/`](Docs/course/04-data-stores/README.md) |
 | **Phase 4.4 — backups/HA / CTO engine pick** | **next** | Say: `implement Phase 4 wave 4.4` (DB-09 · DB-10) |
 | Phase 5+ | pending | See [`Docs/course/PLAN.md`](Docs/course/PLAN.md) |
 
@@ -107,6 +110,7 @@ Optional study:
 ```text
 Read Docs/course/04-data-stores/DB-07 and DB-08 (transactions, port+adapters / ADR 0002).
 ```
+
 ---
 
 ## Canonical docs (don’t invent a second plan)
